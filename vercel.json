@@ -1,3 +1,4 @@
+// RESOLVE PROBLEMA DO ERRO 404 NA VERCEL
 {
     "rewrites": [
         {
