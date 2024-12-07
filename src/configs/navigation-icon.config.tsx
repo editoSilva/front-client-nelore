@@ -86,8 +86,16 @@ import {
     PiShareNetworkDuotone,
     PiToolboxDuotone,
     PiCodeDuotone,
-    PiPasswordDuotone,
+   
 } from 'react-icons/pi'
+
+import { FaHome, FaNetworkWired} from "react-icons/fa";
+import { FaMoneyBillTrendUp, FaBoxesStacked, FaFileContract} from "react-icons/fa6";
+import { GiGraduateCap } from "react-icons/gi";
+
+
+
+
 
 export type NavigationIcons = Record<string, JSX.Element>
 
@@ -107,6 +115,11 @@ const navigationIcon: NavigationIcons = {
     uiFeedbackSpinner: <PiSpinnerBallDuotone />,
     uiFeedbackToast: <PiBreadDuotone />,
     dataDisplay: <PiDesktopDuotone />,
+    home: <FaHome/>,
+    FaFileContract: <FaFileContract/>,
+    GiGraduateCap: <GiGraduateCap/>,
+    lots: <FaBoxesStacked/>,
+    finatial: <FaMoneyBillTrendUp />,
     uiDataDisplayAvatar: <PiUserCircleDuotone />,
     uiDataDisplayBadge: <PiMedalDuotone />,
     uiDataDisplayCalendar: <PiCalendarDuotone />,
@@ -116,6 +129,7 @@ const navigationIcon: NavigationIcons = {
     uiDataDisplayTimeline: <PiClockCountdownDuotone />,
     uiDataDisplayTooltip: <PiChatCenteredDuotone />,
     forms: <PiFileTextDuotone />,
+    FaNetworkWired: <FaNetworkWired/>,
     uiFormsCheckbox: <PiCheckSquareDuotone />,
     uiFormsDatepicker: <PiCalendarCheckDuotone />,
     uiFormsFormControl: <PiClipboardTextDuotone />,
@@ -179,7 +193,7 @@ const navigationIcon: NavigationIcons = {
     signUp: <PiUserPlusDuotone />,
     forgotPassword: <PiLockKeyOpenDuotone />,
     resetPassword: <PiKeyholeDuotone />,
-    otpVerification: <PiPasswordDuotone />,
+    // otpVerification: <PiPasswordDuotone />,
     dashboard: <PiSpeedometerDuotone />,
     dashboardEcommerce: <PiShoppingCartSimpleDuotone />,
     dashboardProject: <PiRocketDuotone />,
