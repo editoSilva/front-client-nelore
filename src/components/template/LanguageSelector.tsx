@@ -6,6 +6,8 @@ import withHeaderItem from '@/utils/hoc/withHeaderItem'
 import { useLocaleStore } from '@/store/localeStore'
 import { HiCheck } from 'react-icons/hi'
 import type { CommonProps } from '@/@types/common'
+import ModeSwitcher from '@/components/template/ThemeConfigurator/ModeSwitcher'
+
 
 const languageList = [
    
@@ -34,6 +36,9 @@ const _LanguageSelector = ({ className }: CommonProps) => {
     )
 
     return (
+        <>
+    
+        <ModeSwitcher/>
         <Dropdown renderTitle={selectedLanguage} placement="bottom-end">
             {languageList.map((lang) => (
                 <Dropdown.Item
@@ -56,6 +61,8 @@ const _LanguageSelector = ({ className }: CommonProps) => {
                 </Dropdown.Item>
             ))}
         </Dropdown>
+        </>
+       
     )
 }
 

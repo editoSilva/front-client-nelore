@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import {
     PiUserDuotone,
     PiGearDuotone,
-    PiPulseDuotone,
+    // PiPulseDuotone,
     PiSignOutDuotone,
 } from 'react-icons/pi'
 import { useAuth } from '@/auth'
@@ -19,20 +19,20 @@ type DropdownList = {
 
 const dropdownItemList: DropdownList[] = [
     {
-        label: 'Profile',
+        label: 'Perfil',
         path: '/concepts/account/settings',
         icon: <PiUserDuotone />,
     },
     {
-        label: 'Account Setting',
+        label: 'Editar Conta',
         path: '/concepts/account/settings',
         icon: <PiGearDuotone />,
     },
-    {
-        label: 'Activity Log',
-        path: '/concepts/account/activity-log',
-        icon: <PiPulseDuotone />,
-    },
+    // {
+    //     label: 'Activity Log',
+    //     path: '/concepts/account/activity-log',
+    //     icon: <PiPulseDuotone />,
+    // },
 ]
 
 const _UserDropdown = () => {
@@ -89,14 +89,14 @@ const _UserDropdown = () => {
             ))}
             <Dropdown.Item variant="divider" />
             <Dropdown.Item
-                eventKey="Sign Out"
+                eventKey="Sair"
                 className="gap-2"
                 onClick={handleSignOut}
             >
                 <span className="text-xl">
                     <PiSignOutDuotone />
                 </span>
-                <span>Sign Out</span>
+                <span>Sair</span>
             </Dropdown.Item>
         </Dropdown>
     )
