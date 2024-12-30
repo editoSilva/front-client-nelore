@@ -33,9 +33,9 @@ const Settings = () => {
                     <Suspense fallback={<></>}>
                         {currentView === 'profile' && <Profile />}
                         {currentView === 'security' && <Security />}
-                        {currentView === 'notification' && <Notification />}
+                        {/* {currentView === 'notification' && <Notification />} */}
                         {currentView === 'billing' && <Billing />}
-                        {currentView === 'integration' && <Integration />}
+                        {/* {currentView === 'integration' && <Integration />} */}
                     </Suspense>
                 </div>
             </div>

@@ -47,11 +47,19 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     const navigatorRef = useRef<IsolatedNavigatorRef>(null)
 
+    console.log('role', user.role)
+
+    const path = '';
+
     const redirect = () => {
         const search = window.location.search
         const params = new URLSearchParams(search)
         const redirectUrl = params.get(REDIRECT_URL_KEY)
 
+        // if(user.role === 'costumer') {
+        //     navigatorRef.current?.navigate(
+        //         redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath,
+        // )
         navigatorRef.current?.navigate(
             redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath,
         )
@@ -76,7 +84,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         try {
             const resp = await apiSignIn(values)
             if (resp) {
-                handleSignIn({ accessToken: resp.token }, resp.user)
+                handleSignIn({ accessToken: resp.data.token }, resp.data.user)
                 redirect()
                 return {
                     status: 'success',
@@ -91,7 +99,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         } catch (errors: any) {
             return {
                 status: 'failed',
-                message: errors?.response?.data?.message || errors.toString(),
+                message: errors?.response?.data?.data?.message || errors.toString(),
             }
         }
     }
@@ -99,8 +107,10 @@ function AuthProvider({ children }: AuthProviderProps) {
     const signUp = async (values: SignUpCredential): AuthResult => {
         try {
             const resp = await apiSignUp(values)
+            console.log('res', resp)
+       
             if (resp) {
-                handleSignIn({ accessToken: resp.token }, resp.user)
+                handleSignIn({ accessToken: resp.data.token }, resp.data.user)
                 redirect()
                 return {
                     status: 'success',
@@ -115,7 +125,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         } catch (errors: any) {
             return {
                 status: 'failed',
-                message: errors?.response?.data?.message || errors.toString(),
+                message: errors?.response?.data?.data?.message || errors.toString(),
             }
         }
     }

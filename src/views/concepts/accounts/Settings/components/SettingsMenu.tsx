@@ -5,9 +5,9 @@ import useQuery from '@/utils/hooks/useQuery'
 import {
     TbUserSquare,
     TbLock,
-    TbBell,
-    TbFileDollar,
-    TbRefreshDot,
+    // TbBell,
+    TbFileTypeDocx,
+    // TbRefreshDot,
 } from 'react-icons/tb'
 import type { View } from '../types'
 import type { ReactNode } from 'react'
@@ -15,11 +15,11 @@ import type { ReactNode } from 'react'
 const { MenuItem } = Menu
 
 const menuList: { label: string; value: View; icon: ReactNode }[] = [
-    { label: 'Profile', value: 'profile', icon: <TbUserSquare /> },
-    { label: 'Security', value: 'security', icon: <TbLock /> },
-    { label: 'Notification', value: 'notification', icon: <TbBell /> },
-    { label: 'Billing', value: 'billing', icon: <TbFileDollar /> },
-    { label: 'Integration', value: 'integration', icon: <TbRefreshDot /> },
+    { label: 'Perfil', value: 'profile', icon: <TbUserSquare /> },
+    { label: 'Segurança', value: 'security', icon: <TbLock /> },
+    // { label: 'Notification', value: 'notification', icon: <TbBell /> },
+    { label: 'Documentos', value: 'billing', icon: <TbFileTypeDocx /> },
+    // { label: 'Integration', value: 'integration', icon: <TbRefreshDot /> },
 ]
 
 export const SettingsMenu = ({ onChange }: { onChange?: () => void }) => {

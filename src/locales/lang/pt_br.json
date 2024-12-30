@@ -7,8 +7,9 @@
             "project": "Project",
             "marketing": "Marketing",
             "farms": "Fazendas",
-            "lots": "Lotes",
+            "investiments": "Investimentos",
             "financial": "Financeiro",
+            "transactions": "Transações",
             "affiliates": "Afiliados",
             "Knowledge_center": "Central de Conhecimento",
             "legal": "Jurídico", 
@@ -50,7 +51,7 @@
         },
         "conceptsAccount": {
             "account": "Account",
-            "settings": "Settings",
+            "settings": "Configurações",
             "activityLog": "Activity log",
             "rolesPermissions": "Roles & Permissions"
         },
@@ -109,7 +110,7 @@
             "upload": "Upload"
         },
         "uiComponentsNavigation": {
-            "navigation": "Navigation",
+            "navigation": "Navegação",
             "dropdown": "Dropdown",
             "menu": "Menu",
             "pagination": "Pagination",

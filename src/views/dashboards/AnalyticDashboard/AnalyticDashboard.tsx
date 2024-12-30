@@ -24,6 +24,7 @@ const AnalyticDashboard = () => {
         },
     )
 
+   
     return (
         <Loading loading={isLoading}>
             {data && (

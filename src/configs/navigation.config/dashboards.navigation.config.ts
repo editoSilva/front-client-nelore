@@ -2,6 +2,7 @@ import { DASHBOARDS_PREFIX_PATH } from '@/constants/route.constant'
 import {
     NAV_ITEM_TYPE_TITLE,
     NAV_ITEM_TYPE_ITEM,
+    NAV_ITEM_TYPE_COLLAPSE
 } from '@/constants/navigation.constant'
 import { ADMIN, USER } from '@/constants/roles.constant'
 import type { NavigationTree } from '@/@types/navigation'
@@ -14,7 +15,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.dashboard.dashboard',
         icon: 'dashboard',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [ADMIN, USER],
+        authority: [ USER],
         meta: {
             horizontalMenu: {
                 layout: 'default',
@@ -22,14 +23,16 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         },
         subMenu: [
             {
-                key: 'dashboard.home',
-                path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
+                key: 'dashboard',
+                path: 'dashboard',
                 title: 'Home',
                 translateKey: 'nav.dashboard.home',
                 icon: 'home',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN, USER],
-                subMenu: [],
+                subMenu: [
+                    
+                ],
             },
             {
                 key: 'dashboard.ecommerce',
@@ -42,24 +45,45 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 subMenu: [],
             },
             {
-                key: 'dashboard.lots',
+                key: 'dashboard.investiments',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
                 title: 'Lotes',
-                translateKey: 'nav.dashboard.lots',
+                translateKey: 'nav.dashboard.investiments',
                 icon: 'lots',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 subMenu: [],
             },
             {
-                key: 'dashboard.financial',
+                key: 'dashboard.transactions',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'Financeiro',
-                translateKey: 'nav.dashboard.financial',
+                title: 'Transações',
+                translateKey: 'nav.dashboard.transacions',
                 icon: 'finatial',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
-                subMenu: [],
+                subMenu: [
+                    {
+                        key: 'deposits',
+                        path: 'deposits',
+                        title: 'Depósitos',
+                        translateKey: 'Depósitos',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'withdral',
+                        path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
+                        title: 'Saques',
+                        translateKey: 'Saques',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN, USER],
+                        subMenu: [],
+                    },
+                ],
             },
             {
                 key: 'dashboard.affiliates',
@@ -77,7 +101,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 title: 'Ecommerce',
                 translateKey: 'nav.dashboard.Knowledge_center',
                 icon: 'GiGraduateCap',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 subMenu: [],
             },
@@ -87,7 +111,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 title: 'Ecommerce',
                 translateKey: 'nav.dashboard.legal',
                 icon: 'documentation',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 subMenu: [],
             },
@@ -97,7 +121,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 title: 'Ecommerce',
                 translateKey: 'nav.dashboard.contracts',
                 icon: 'FaFileContract',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 subMenu: [],
             },

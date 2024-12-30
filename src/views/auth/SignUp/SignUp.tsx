@@ -29,9 +29,9 @@ export const SignUpBase = ({
                 />
             </div>
             <div className="mb-8">
-                <h3 className="mb-1">Sign Up</h3>
+                <h3 className="mb-1">Cadastre-se</h3>
                 <p className="font-semibold heading-text">
-                    And lets get started with your free trial
+                    Bem vindo ao futuro do investimento brasileiro
                 </p>
             </div>
             {message && (
@@ -42,13 +42,13 @@ export const SignUpBase = ({
             <SignUpForm disableSubmit={disableSubmit} setMessage={setMessage} />
             <div>
                 <div className="mt-6 text-center">
-                    <span>Already have an account? </span>
+                    <span>Já tem uma conta? </span>
                     <ActionLink
                         to={signInUrl}
                         className="heading-text font-bold"
                         themeColor={false}
                     >
-                        Sign in
+                        Entrar
                     </ActionLink>
                 </div>
             </div>

@@ -119,20 +119,20 @@ const SettingsProfile = () => {
         })
     }, [])
 
-    const beforeUpload = (files: FileList | null) => {
-        let valid: string | boolean = true
+    // const beforeUpload = (files: FileList | null) => {
+    //     let valid: string | boolean = true
 
-        const allowedFileType = ['image/jpeg', 'image/png']
-        if (files) {
-            for (const file of files) {
-                if (!allowedFileType.includes(file.type)) {
-                    valid = 'Please upload a .jpeg or .png file!'
-                }
-            }
-        }
+    //     const allowedFileType = ['image/jpeg', 'image/png']
+    //     if (files) {
+    //         for (const file of files) {
+    //             if (!allowedFileType.includes(file.type)) {
+    //                 valid = 'Please upload a .jpeg or .png file!'
+    //             }
+    //         }
+    //     }
 
-        return valid
-    }
+    //     return valid
+    // }
 
     const {
         handleSubmit,
@@ -159,10 +159,10 @@ const SettingsProfile = () => {
 
     return (
         <>
-            <h4 className="mb-8">Personal information</h4>
+            <h4 className="mb-8">Informações Pessoais</h4>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-8">
-                    <Controller
+                    {/* <Controller
                         name="img"
                         control={control}
                         render={({ field }) => (
@@ -209,7 +209,7 @@ const SettingsProfile = () => {
                                 </div>
                             </div>
                         )}
-                    />
+                    /> */}
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                     <FormItem

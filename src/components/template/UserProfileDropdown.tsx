@@ -5,7 +5,7 @@ import { useSessionUser } from '@/store/authStore'
 import { Link } from 'react-router-dom'
 import {
     PiUserDuotone,
-    PiGearDuotone,
+    // PiGearDuotone,
     // PiPulseDuotone,
     PiSignOutDuotone,
 } from 'react-icons/pi'
@@ -23,11 +23,11 @@ const dropdownItemList: DropdownList[] = [
         path: '/concepts/account/settings',
         icon: <PiUserDuotone />,
     },
-    {
-        label: 'Editar Conta',
-        path: '/concepts/account/settings',
-        icon: <PiGearDuotone />,
-    },
+    // {
+    //     label: 'Editar Conta',
+    //     path: '/concepts/account/settings',
+    //     icon: <PiGearDuotone />,
+    // },
     // {
     //     label: 'Activity Log',
     //     path: '/concepts/account/activity-log',
@@ -36,7 +36,7 @@ const dropdownItemList: DropdownList[] = [
 ]
 
 const _UserDropdown = () => {
-    const { avatar, userName, email } = useSessionUser((state) => state.user)
+    const { avatar, name, email } = useSessionUser((state) => state.user)
 
     const { signOut } = useAuth()
 
@@ -64,7 +64,7 @@ const _UserDropdown = () => {
                     <Avatar {...avatarProps} />
                     <div>
                         <div className="font-bold text-gray-900 dark:text-gray-100">
-                            {userName || 'Anonymous'}
+                            {name || 'Anonymous'}
                         </div>
                         <div className="text-xs">
                             {email || 'No email available'}

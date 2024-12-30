@@ -1,3 +1,5 @@
+import base from '@/configs/base'
+
 export type AppConfig = {
     apiPrefix: string
     authenticatedEntryPath: string
@@ -8,8 +10,8 @@ export type AppConfig = {
 }
 
 const appConfig: AppConfig = {
-    apiPrefix: '/api',
-    authenticatedEntryPath: '/dashboards/ecommerce',
+    apiPrefix: base.baseUrl,
+    authenticatedEntryPath: '/dashboard',
     unAuthenticatedEntryPath: '/sign-in',
     locale: 'pt_br',
     accessTokenPersistStrategy: 'localStorage',

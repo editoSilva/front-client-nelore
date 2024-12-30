@@ -21,20 +21,25 @@ interface SignInFormProps extends CommonProps {
 type SignInFormSchema = {
     email: string
     password: string
+    domain: string
+  
 }
 
 const validationSchema: ZodType<SignInFormSchema> = z.object({
     email: z
-        .string({ required_error: 'Please enter your email' })
-        .min(1, { message: 'Please enter your email' }),
+        .string({ required_error: 'Por favor insira seu e-mail' })
+        .min(1, { message: 'Por favor insira seu e-mail' }),
     password: z
+        .string({ required_error: 'Por favor digite sua senha' })
+        .min(1, { message: 'Por favor digite sua senha' }),
+    domain: z
         .string({ required_error: 'Please enter your password' })
         .min(1, { message: 'Please enter your password' }),
 })
 
 const SignInForm = (props: SignInFormProps) => {
     const [isSubmitting, setSubmitting] = useState<boolean>(false)
-
+  
     const { disableSubmit = false, className, setMessage, passwordHint } = props
 
     const {
@@ -43,22 +48,28 @@ const SignInForm = (props: SignInFormProps) => {
         control,
     } = useForm<SignInFormSchema>({
         defaultValues: {
-            email: 'admin-01@ecme.com',
-            password: '123Qwe',
+            email: '',
+            password: '',
+            domain: 'neloreinvest.com'
+
         },
+        mode: 'onChange',
         resolver: zodResolver(validationSchema),
     })
 
     const { signIn } = useAuth()
 
+
     const onSignIn = async (values: SignInFormSchema) => {
-        const { email, password } = values
+        console.log('values', values)
+        const { email, password, domain } = values
 
         if (!disableSubmit) {
             setSubmitting(true)
 
-            const result = await signIn({ email, password })
+            const result = await signIn({ email, password, domain })
 
+            
             if (result?.status === 'failed') {
                 setMessage?.(result.message)
             }
@@ -106,6 +117,7 @@ const SignInForm = (props: SignInFormProps) => {
                                 type="text"
                                 placeholder="Senha"
                                 autoComplete="off"
+                            
                                 {...field}
                             />
                         )}

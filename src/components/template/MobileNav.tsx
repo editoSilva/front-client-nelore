@@ -44,9 +44,11 @@ const MobileNav = () => {
         <>
             <div className="text-2xl" onClick={handleOpenDrawer}>
                 <MobileNavToggle toggled={isOpen} />
+               
             </div>
+          
             <Drawer
-                title="Navigation"
+                title="Menu"
                 isOpen={isOpen}
                 bodyClass={classNames('p-0')}
                 width={330}

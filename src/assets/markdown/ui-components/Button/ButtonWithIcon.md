@@ -21,7 +21,7 @@ const ButtonWithIcon = () => {
             </Button>
             <Button className="mr-2" icon={<HiOutlineCog />}>
                 <span>
-                    <span>Settings</span>
+                    <span>Configurações</span>
                 </span>
             </Button>
             <Button

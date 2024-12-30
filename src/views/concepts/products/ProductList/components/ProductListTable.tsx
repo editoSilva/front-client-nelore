@@ -62,6 +62,7 @@ const ActionColumn = ({
     )
 }
 
+
 const ProductListTable = () => {
     const navigate = useNavigate()
 

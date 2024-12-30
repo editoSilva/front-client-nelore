@@ -37,8 +37,11 @@ const initialState: AuthState = {
     },
     user: {
         avatar: '',
-        userName: '',
+        name: '',
         email: '',
+        cpf: '',
+        phone: '',
+        code: '',
         authority: [],
     },
 }
@@ -48,6 +51,7 @@ export const useSessionUser = create<AuthState & AuthAction>()(
         (set) => ({
             ...initialState,
             setSessionSignedIn: (payload) =>
+                
                 set((state) => ({
                     session: {
                         ...state.session,
@@ -65,6 +69,7 @@ export const useSessionUser = create<AuthState & AuthAction>()(
         { name: 'sessionUser', storage: createJSONStorage(() => localStorage) },
     ),
 )
+
 
 export const useToken = () => {
     const storage = getPersistStorage()
