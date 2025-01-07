@@ -13,9 +13,28 @@ export type TransactionsTypes = {
     paymented_at: string
 
 }
+export type  DepositResponse = {
+    data: {
+        transaction_id: string,
+        success: boolean,
+        content: string,
+        base_64: string
+    }
+}
 
+export type DepositType = {
+    amount: string
+}
+
+export type StatusDepositType = {
+    transaction_id: string
+}
+
+export type StatusDepositResponse = {
+    status: string
+}
 export type TransactionsResponse = {
-    data: number[]
+    data: []
     links: string
     meta: {
         current_page: number

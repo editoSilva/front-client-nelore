@@ -28,7 +28,7 @@ const OrderListActionTools = () => {
                 icon={<TbPlus className="text-xl" />}
                 onClick={() => navigate('/concepts/orders/order-create')}
             >
-                Add new
+                Depositar
             </Button>
         </div>
     )

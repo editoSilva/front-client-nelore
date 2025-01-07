@@ -2,12 +2,11 @@ import { useState } from 'react'
 import Button from '@/components/ui/Button'
 import DatePicker from '@/components/ui/DatePicker'
 import Drawer from '@/components/ui/Drawer'
-import Checkbox from '@/components/ui/Checkbox'
 import Badge from '@/components/ui/Badge'
 import Select, { Option as DefaultOption } from '@/components/ui/Select'
 import { components } from 'react-select'
 import { Form, FormItem } from '@/components/ui/Form'
-import useOrderlist from '../hooks/useOrderlist'
+import { useTransactionStore } from "@/store/costumer/transactions";
 import { TbFilter } from 'react-icons/tb'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -19,7 +18,7 @@ import classNames from '@/utils/classNames'
 type FormSchema = {
     date: [Date, Date]
     status: string
-    paymentMethod: Array<string>
+
 }
 
 type Option = {
@@ -31,19 +30,13 @@ type Option = {
 const { Control } = components
 
 const statusOption: Option[] = [
-    { value: 'paid', label: 'Paid', className: 'bg-emerald-500' },
-    { value: 'failed', label: 'Failed', className: 'bg-red-500' },
-    { value: 'pending', label: 'Pending', className: 'bg-amber-500' },
-    { value: 'all', label: 'All', className: 'bg-gray-400' },
+    { value: 'paid', label: 'Pago', className: 'bg-emerald-500' },
+    { value: 'refused', label: 'Recusado', className: 'bg-red-500' },
+    { value: 'pending', label: 'Pendente', className: 'bg-amber-500' },
+    { value: 'all', label: 'Todos', className: 'bg-gray-400' },
 ]
 
-const paymentMethodList = [
-    'Credit card',
-    'Debit card',
-    'Paypal',
-    'Stripe',
-    'Cash',
-]
+
 
 const CustomSelectOption = (props: OptionProps<Option>) => {
     return (
@@ -74,21 +67,22 @@ const CustomControl = ({ children, ...props }: ControlProps<Option>) => {
 const validationSchema: ZodType<FormSchema> = z.object({
     date: z.tuple([z.date(), z.date()]),
     status: z.string(),
-    paymentMethod: z.array(z.string()),
+
 })
 
-const OrderListTableFilter = () => {
+const TransactionTableFilter = () => {
     const [filterIsOpen, setFilterIsOpen] = useState(false)
 
-    const { filterData, setFilterData } = useOrderlist()
+    const { filterData, setFilterData } = useTransactionStore()
 
     const { handleSubmit, control } = useForm<FormSchema>({
         defaultValues: filterData,
         resolver: zodResolver(validationSchema),
     })
 
-    const onSubmit = (values: FormSchema) => {
+    const onSubmit = (values: FormSchema) => {     
         setFilterData(values)
+        console.log('filter', values)
         setFilterIsOpen(false)
     }
 
@@ -109,7 +103,7 @@ const OrderListTableFilter = () => {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <div>
-                        <FormItem label="Product price">
+                        <FormItem label="Data Transação">
                             <div className="flex items-center gap-2">
                                 <Controller
                                     name="date"
@@ -123,7 +117,7 @@ const OrderListTableFilter = () => {
                                 />
                             </div>
                         </FormItem>
-                        <FormItem label="Product status">
+                        <FormItem label="Status Depósito">
                             <Controller
                                 name="status"
                                 control={control}
@@ -146,34 +140,7 @@ const OrderListTableFilter = () => {
                                 )}
                             />
                         </FormItem>
-                        <FormItem label="Product type">
-                            <div className="mt-4">
-                                <Controller
-                                    name="paymentMethod"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <Checkbox.Group
-                                            vertical
-                                            className="flex"
-                                            {...field}
-                                        >
-                                            {paymentMethodList.map(
-                                                (type, index) => (
-                                                    <Checkbox
-                                                        key={type + index}
-                                                        name={field.name}
-                                                        value={type}
-                                                        className="justify-between flex-row-reverse heading-text"
-                                                    >
-                                                        {type}
-                                                    </Checkbox>
-                                                ),
-                                            )}
-                                        </Checkbox.Group>
-                                    )}
-                                />
-                            </div>
-                        </FormItem>
+                     
                     </div>
                     <Button variant="solid" type="submit">
                         Pesquisar
@@ -184,4 +151,4 @@ const OrderListTableFilter = () => {
     )
 }
 
-export default OrderListTableFilter
+export default TransactionTableFilter

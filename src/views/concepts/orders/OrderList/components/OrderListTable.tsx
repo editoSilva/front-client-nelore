@@ -149,6 +149,7 @@ const OrderListTable = () => {
             {
                 header: 'Status',
                 accessorKey: 'status',
+
                 cell: (props) => {
                     const { status } = props.row.original
                     return (

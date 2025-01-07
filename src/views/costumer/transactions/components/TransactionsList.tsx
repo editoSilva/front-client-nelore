@@ -1,22 +1,56 @@
 
 import { useState, useMemo, useEffect } from 'react'
-import { useTransactionStore } from "@/store/costumer/transactions";
-import Table from '@/components/ui/Table'
-import Pagination from '@/components/ui/Pagination'
-import Select from '@/components/ui/Select'
-import {
-    useReactTable,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    flexRender,
-} from '@tanstack/react-table'
+import { Filter, useTransactionStore } from "@/store/costumer/transactions";
+
+import cloneDeep from 'lodash/cloneDeep'
+
+
 import type { ColumnDef } from '@tanstack/react-table'
 import { TransactionsTypes } from '@/@types/costumer/transaction/TransactionTypes'
 import { NumericFormat } from 'react-number-format';
-import { Progress } from '@/components/ui';
-import classNames from '@/utils/classNames';
+import { Tag } from '@/components/ui';
+
 import {  DataTable } from '@/components/shared';
+import { TableQueries } from '@/@types/common';
+import { OnSortParam } from '@/components/shared/DataTable';
+
+
+
+const orderStatusColor: Record<
+    number,
+    {
+        label: string
+        bgClass: string
+        textClass: string
+    }
+> = {
+    0: {
+        label: 'Pago',
+        bgClass: 'bg-success-subtle',
+        textClass: 'text-success',
+    },
+    1: {
+        label: 'Pendente',
+        bgClass: 'bg-warning-subtle',
+        textClass: 'text-warning',
+    },
+    2: { label: 'Falhou', bgClass: 'bg-error-subtle', textClass: 'text-error' },
+}
+
+
+
+
+const handleClassStatus = (data: string | null): 1 | 0 => {
+
+    if(data == 'paid') {
+        return 0;
+    }
+    if(data === 'pending') {
+        return 1;
+    }
+    return 0;
+   
+}
 
 
 
@@ -29,32 +63,35 @@ type Transaction = {
     paymented_at: string
 }
 
-
-
 const TransactionsList = () => {
-
     
-    const {transactions, isLoading, featchTransactions} = useTransactionStore();
+    const { transactions, isLoading, featchTransactions, tableData, setTableData, filterData, setFilterData} = useTransactionStore();
 
-      useEffect( () => {
-        featchTransactions()
-    },[transactions])
+    const [transactionsList, setTransactionsList] = useState<Array<TransactionsTypes>>([]);
+  
+    // Função para atualizar a lista de transações
+    const handleTransactionsUpdate = () => {
+      if (transactions?.data) {
 
+        setTransactionsList(transactions.data);
+      }
+    };
+  
+    // Buscar transações na montagem do componente
+    useEffect(() => {
+      featchTransactions(tableData, filterData);
+    }, [filterData, tableData, featchTransactions]);
+  
+    // Atualizar a lista de transações quando o estado `transactions` mudar
+    useEffect(() => {
+      handleTransactionsUpdate();
+    }, [transactions]);
 
-    useEffect( () => {
-        featchTransactions()
-    },[])
-
-    console.log('transs', transactions.data)
-
-    
-
+    console.log('isLoading', isLoading)
+   
     const columns = useMemo<ColumnDef<Transaction>[]>(
         () => [
-            {
-                header: 'ID',
-                accessorKey: 'id',
-            },
+           
             {
                 header: 'ID_Transação',
                 accessorKey: 'transaction_id',
@@ -62,6 +99,21 @@ const TransactionsList = () => {
             {
                 header: 'Valor',
                 accessorKey: 'amount',
+                cell: (props) => {
+                    const { amount } = props.row.original
+                    return (
+                        <span className="heading-text">
+                            <NumericFormat
+                                fixedDecimalScale
+                                prefix="R$ "
+                                displayType="text"
+                                value={amount}
+                                decimalScale={2}
+                                thousandSeparator={true}
+                            />
+                        </span>
+                    )
+                },
             },
             {
                 header: 'Criado',
@@ -74,71 +126,75 @@ const TransactionsList = () => {
             {
                 header: 'Status',
                 accessorKey: 'status',
+
+        cell: (props) => {
+            const { status } = props.row.original
+            return (
+                <Tag className={orderStatusColor[handleClassStatus(status)].bgClass}>
+                    <span
+                        className={`capitalize font-semibold ${orderStatusColor[handleClassStatus(status)].textClass}`}
+                    >
+                        {orderStatusColor[handleClassStatus(status)].label}
+                    </span>
+                </Tag>
+            )
+        },
             },
         ],
         []
     )
-
    
-    const handleSetTableData = (data: TableQueries) => {
+    const handleSetTableData = (data: TableQueries, filter: Filter) => {
         setTableData(data)
-        if (selectedProduct.length > 0) {
-            setSelectAllProduct([])
-        }
+        setFilterData(filter)
+        featchTransactions(data, filter)
     }
 
     const handlePaginationChange = (page: number) => {
+        console.log('page', page)
         const newTableData = cloneDeep(tableData)
         newTableData.pageIndex = page
-        handleSetTableData(newTableData)
+        handleSetTableData(newTableData, filterData)
+        console.log('pageTable', newTableData)
     }
 
     const handleSelectChange = (value: number) => {
         const newTableData = cloneDeep(tableData)
         newTableData.pageSize = Number(value)
         newTableData.pageIndex = 1
-        handleSetTableData(newTableData)
+        handleSetTableData(newTableData, filterData)
     }
 
     const handleSort = (sort: OnSortParam) => {
         const newTableData = cloneDeep(tableData)
         newTableData.sort = sort
-        handleSetTableData(newTableData)
+        console.log('newTable', newTableData)
+        handleSetTableData(newTableData, filterData)
     }
 
-    const handleRowSelect = (checked: boolean, row: Product) => {
-        setSelectedProduct(checked, row)
-    }
 
-    const handleAllRowSelect = (checked: boolean, rows: Row<Product>[]) => {
-        if (checked) {
-            const originalRows = rows.map((row) => row.original)
-            setSelectAllProduct(originalRows)
-        } else {
-            setSelectAllProduct([])
-        }
-    }
+
     return (
         <>
         <DataTable
-             
                 columns={columns}
-                data={transactions.data}
-                noData={!isLoading && transactions.data.length === 0}
+                data={transactionsList}
+                noData={!isLoading && transactionsList.length === 0}
                 skeletonAvatarColumns={[0]}
                 skeletonAvatarProps={{ width: 28, height: 28 }}
                 loading={isLoading}
+          
                 pagingData={{
                     total: transactions.meta.total,
-                    pageIndex: transactions.meta.from,
-                    pageSize: transactions.meta.per_page ,
+                    pageIndex: tableData.pageIndex as number,
+                    pageSize: tableData.pageSize as number,
                 }}
                
                 onPaginationChange={handlePaginationChange}
                 onSelectChange={handleSelectChange}
                 onSort={handleSort}
-                onCheckBoxChange={handleRowSelect}
-                onIndeterminateCheckBoxChange={handleAllRowSelect}
+                
+              
             />
            
          

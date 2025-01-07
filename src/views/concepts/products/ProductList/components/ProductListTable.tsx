@@ -123,6 +123,9 @@ const ProductListTable = () => {
             {
                 header: 'Price',
                 accessorKey: 'price',
+            
+
+
                 cell: (props) => {
                     const { price } = props.row.original
                     return (
@@ -197,7 +200,7 @@ const ProductListTable = () => {
     )
 
     const handleSetTableData = (data: TableQueries) => {
-        setTableData(data)
+           setTableData(data)
         if (selectedProduct.length > 0) {
             setSelectAllProduct([])
         }

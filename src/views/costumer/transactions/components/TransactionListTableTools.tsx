@@ -1,12 +1,13 @@
-import useCustomerList from '../hooks/useOrderlist'
+
 import DebouceInput from '@/components/shared/DebouceInput'
-import OrderListTableFilter from './OrderListTableFilter'
 import { TbSearch } from 'react-icons/tb'
 import cloneDeep from 'lodash/cloneDeep'
 import type { ChangeEvent } from 'react'
+import { useTransactionStore } from "@/store/costumer/transactions";
+import TransactionTableFilter from './TransactionTableFilter'
 
-const OrderListTableTools = () => {
-    const { tableData, setTableData } = useCustomerList()
+const TransactionListTableTools = () => {
+    const { tableData, setTableData }  = useTransactionStore();
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const val = event.target.value
@@ -29,9 +30,9 @@ const OrderListTableTools = () => {
                 suffix={<TbSearch className="text-lg" />}
                 onChange={handleInputChange}
             />
-            <OrderListTableFilter />
+            <TransactionTableFilter />
         </div>
     )
 }
 
-export default OrderListTableTools
+export default TransactionListTableTools
