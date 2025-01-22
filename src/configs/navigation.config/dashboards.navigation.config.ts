@@ -95,10 +95,10 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         subMenu: [],
                     },
                     {
-                        key: 'withdral',
-                        path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
+                        key: 'withdrawals',
+                        path: 'withdrawals',
                         title: 'Saques',
-                        translateKey: 'Saques',
+                        translateKey: 'withdrawals',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],

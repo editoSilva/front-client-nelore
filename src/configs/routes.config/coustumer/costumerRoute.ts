@@ -21,6 +21,24 @@ const costumerRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+    {
+        key: 'withdrawals',
+        path: '/withdrawals',
+        component: lazy(() => import('@/views/costumer/transactions/withdrawal')),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+    {
+        key: 'invest-now',
+        path: '/invest-now',
+        component: lazy(() => import('@/views/costumer/cattle')),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
 ]
 
 export default costumerRoute;

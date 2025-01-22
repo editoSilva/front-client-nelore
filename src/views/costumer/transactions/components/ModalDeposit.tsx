@@ -29,6 +29,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     featchTransactions, 
     tableData, 
     resetDeposit, 
+    filterData,
     isLoading, 
     isDeposit, 
     featchStatusDeposit,
@@ -59,7 +60,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   useEffect(() => {
     if (!open) {
       resetDeposit();
-      featchTransactions(tableData)
+      featchTransactions(tableData, filterData)
 
       return () => {
         if (intervalRefs.current) {
@@ -67,7 +68,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
         }
       };
     }
-  }, [open, tableData, featchTransactions, resetDeposit]);
+  }, [open, tableData, featchTransactions, resetDeposit, filterData]);
 
   useEffect(()=> {
     if(isDeposit) {
@@ -78,9 +79,9 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   useEffect(() => {
     if (depositSuccess) {
         handleStatusDeposit(deposit)
-        featchTransactions(tableData)
+        featchTransactions(tableData, filterData)
     }
-  }, [depositSuccess, deposit, tableData, featchTransactions]);
+  }, [depositSuccess, deposit, tableData, featchTransactions, filterData]);
 
 
   const handleStatusDeposit = (data: DepositResponse) => {
@@ -96,7 +97,7 @@ useEffect(() => {
       try {
         if (statusDepoist.status === 'paid') {
           resetDeposit();
-          featchTransactions(tableData);
+          featchTransactions(tableData, filterData);
           onClose();
 
           toast.push(
@@ -127,7 +128,7 @@ useEffect(() => {
         clearInterval(intervalRefs.current);
       }
     };
-  }, [statusDepoist.status, deposit, featchTransactions, onClose, resetDeposit, tableData]);
+  }, [statusDepoist.status, deposit, featchTransactions, onClose, resetDeposit, tableData, filterData, handleStatusDeposit]);
 
 
 

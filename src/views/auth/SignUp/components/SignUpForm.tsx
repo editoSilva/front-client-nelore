@@ -131,14 +131,18 @@ const SignUpForm = (props: SignUpFormProps) => {
 
         const code = urlParams.get('aff')
 
+    
+
         setLinkAviliate(code)
         
     }
 
+    console.log('link afiliado', linkAfiliate)
+
 
     useEffect(() => {
         handleLink()
-    })
+    }, [linkAfiliate])
     return (
         <div className={className}>
             <Form onSubmit={handleSubmit(onSignUp)}>
@@ -295,7 +299,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                     variant="solid"
                     type="submit"
                 >
-                    {isSubmitting ? 'Creating Account...' : 'Cadastrar'}
+                    {isSubmitting ? 'Criando a sua conta...' : 'Cadastrar'}
                 </Button>
             </Form>
         </div>
