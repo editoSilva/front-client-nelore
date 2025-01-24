@@ -1,4 +1,4 @@
 
 export default {
-    baseUrl: 'http://localhost:8787/v1'
+    baseUrl: 'https://api.neloreinvest.com/v1/'
 }
