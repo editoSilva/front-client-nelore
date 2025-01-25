@@ -7,6 +7,7 @@ import {useTransactionStore } from "@/store/costumer/transactions";
 import { DepositResponse, DepositType} from '@/@types/costumer/transaction/TransactionTypes'
 import Notification from '@/components/ui/Notification';
 import toast from '@/components/ui/toast';
+import { number } from 'zod'
 
 
 interface ModalDepositProps {
@@ -14,14 +15,24 @@ interface ModalDepositProps {
   onClose: () => void;
 }
 
+interface Deposit  {
+  transaction_id: string,
+  success: boolean,
+  content: string,
+  base_64: string
+}
+
 const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   const [depositAmount, setDepositAmount] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [depositSuccess, setDepositSuccess] = useState<boolean>(false)
   const [expirationTime, setExpirationTime] = useState<number>(10 * 60) // 10 minutos em segundos
+  const [ transaction, setTransaction ] = useState<Deposit>()
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const intervalRefs = useRef<NodeJS.Timeout | null>(null);
+
+  const messageShown = useRef(false);
 
   const { 
     featchDeposit, 
@@ -72,63 +83,114 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
 
   useEffect(()=> {
     if(isDeposit) {
-        setDepositSuccess(isDeposit) 
+        // setDepositSuccess(isDeposit) 
     }
   },[isDeposit])
 
   useEffect(() => {
+      if(open) {
+        setDepositSuccess(false) 
+      }
+  }, [open, resetDeposit])
+
+  useEffect(() => {
     if (depositSuccess) {
-        handleStatusDeposit(deposit)
+        // handleStatusDeposit()
         featchTransactions(tableData, filterData)
     }
   }, [depositSuccess, deposit, tableData, featchTransactions, filterData]);
 
+  useEffect(() => {
+      if(deposit) {
+        setDepositSuccess(true);
+        setTransaction(deposit.data)
+        featchStatusDeposit(deposit.data)
+        setIntervalDesposit(deposit.data)
+      }
+  }, [deposit, transaction]);
 
-  const handleStatusDeposit = (data: DepositResponse) => {
-   
-    featchStatusDeposit(data.data)
-  }
 
-useEffect(() => {
+  useEffect(() => {
+    if (statusDepoist.status === 'paid' && !messageShown.current) {
 
-  
+        messageShown.current = true; 
+
+        onClose()
+        // resetDeposit()
+        toast.push(
+          <Notification title="Sucesso!" type="success">
+          {`Pagamento efetuado!`}
+          </Notification>
+        );
+
+        // return () => {
+        //   if (intervalRefs.current) {
+        //     clearInterval(intervalRefs.current);
+        //   }
+        // };
+        
+        return 
+    }
+  }, [statusDepoist.status, onClose])
+
+const setIntervalDesposit = (data: Deposit) => {
+ 
+  intervalRefs.current = setInterval(async () => {
+      await featchStatusDeposit(data)
+  }, 3000);
+
+
     // Apenas inicia o intervalo se o status ainda não for "paid"
-    intervalRefs.current = setInterval(async () => {
-      try {
-        if (statusDepoist.status === 'paid') {
-          resetDeposit();
-          featchTransactions(tableData, filterData);
-          onClose();
 
-          toast.push(
-            <Notification title="Sucesso!" type="success">
-                {`Pagamento efetuado!`}
-            </Notification>
-        )
+    // if()
+    // intervalRefs.current = setInterval(async () => {
+    //   try {
+    //     if (statusDepoist.status === 'paid') {
+
+    //       if (intervalRefs.current) {
+    //         clearInterval(intervalRefs.current); // Limpa o intervalo
+    //       }
+    //       return;
+    //     } else {
+        
+    //       await featchStatusDeposit(data) //handleStatusDeposit(transaction); // Atualiza o status na store
+     
+    //     }
+    //   } catch (error) {
+    //     console.error('Erro ao verificar o status do depósito:', error);
   
-          if (intervalRefs.current) {
-            clearInterval(intervalRefs.current); // Limpa o intervalo
-          }
-          return;
-        } else {
-          await handleStatusDeposit(deposit); // Atualiza o status na store
-        }
-      } catch (error) {
-        console.error('Erro ao verificar o status do depósito:', error);
+    //     if (intervalRefs.current) {
+    //       clearInterval(intervalRefs.current); // Limpa o intervalo em caso de erro
+    //     }
+    //   }
+    // }, 3000);
   
-        if (intervalRefs.current) {
-          clearInterval(intervalRefs.current); // Limpa o intervalo em caso de erro
-        }
-      }
-    }, 2000);
-  
-    // Limpa o intervalo ao desmontar o componente ou quando a dependência muda
-    return () => {
-      if (intervalRefs.current) {
-        clearInterval(intervalRefs.current);
-      }
-    };
-  }, [statusDepoist.status, deposit, featchTransactions, onClose, resetDeposit, tableData, filterData, handleStatusDeposit]);
+    // // Limpa o intervalo ao desmontar o componente ou quando a dependência muda
+    // return () => {
+    //   if (intervalRefs.current) {
+    //     clearInterval(intervalRefs.current);
+    //   }
+    // };
+}
+
+// useEffect(() => {
+//   console.log('deposito', statusDepoist);
+
+//   if (statusDepoist?.status === 'paid') {
+//     // Interrompe o intervalo (se houver)
+//     if (intervalRefs.current) {
+//       clearInterval(intervalRefs.current);
+//     }
+
+//     // Executa as ações necessárias
+//     featchTransactions(tableData, filterData);
+//     onClose();
+
+//     toast.push(
+//       <Notification title="Sucesso!" type="success">
+//         {`Pagamento efetuado!`}
+//       </Notification>
+//     );
 
 
 
@@ -142,6 +204,8 @@ useEffect(() => {
     }
 
     await featchDeposit(dataAmount) 
+
+    
 
     setDepositAmount('') 
     setLoading(isLoading) 
@@ -179,7 +243,7 @@ useEffect(() => {
     setDepositSuccess(false)
     setExpirationTime(10 * 60) // Resetando o tempo para 10 minutos
     onClose()
-    // resetDeposit()
+    resetDeposit()
 
     // console.log('deposit2', deposit)
   }

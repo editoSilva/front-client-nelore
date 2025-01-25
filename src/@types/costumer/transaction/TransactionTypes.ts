@@ -14,12 +14,14 @@ export type TransactionsTypes = {
 
 }
 export type  DepositResponse = {
-    data: {
-        transaction_id: string,
-        success: boolean,
-        content: string,
-        base_64: string
-    }
+        data: {
+            transaction_id: string,
+            success: boolean,
+            content: string,
+            base_64: string
+        }
+        
+    
 }
 
 export type DepositType = {
@@ -28,6 +30,10 @@ export type DepositType = {
 
 export type StatusDepositType = {
     transaction_id: string
+    success: boolean,
+    content: string,
+    base_64: string
+
 }
 
 export type StatusDepositResponse = {

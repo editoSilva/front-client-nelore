@@ -69,6 +69,8 @@ const initialState: TransactionListState = {
             content: '',
             base_64: ''
         }
+          
+      
     },
     transactions: {
         data: [],
@@ -95,8 +97,9 @@ export const useTransactionStore = create<TransactionListState & TransactionList
         set({transactions: response, isLoading:false})
     },
     featchDeposit: async(data) => {
-            const response = await ApiPostDeposit(data);            
-            set({deposit: response, isDeposit: response.data.success})
+            const response = await ApiPostDeposit(data);     
+            console.log('depositooo', response)       
+            set({deposit: response})
     },
     featchStatusDeposit: async (data) => {
         const response = await ApiPostStatusDeposit(data);
