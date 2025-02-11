@@ -12,6 +12,7 @@ import {
     TbPresentation,
     TbBell,
 } from 'react-icons/tb'
+import { FaTree } from 'react-icons/fa';
 import { LuPalmtree } from 'react-icons/lu'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -50,7 +51,7 @@ export const eventTypes: Record<
     },
     holiday: {
         label: 'Enjoy your holiday',
-        icon: <LuPalmtree />,
+        icon: <FaTree />,
         color: 'bg-amber-200 dark:bg-amber-200',
     },
     breaks: {
