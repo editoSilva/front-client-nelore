@@ -2,7 +2,7 @@
     "nav": {
         "dashboard": {
             "dashboard": "Dashboard",
-            "ecommerce": "Ecommerce",
+            "auctions": "Leilões",
             "analytic": "Analytic",
             "project": "Project",
             "marketing": "Marketing"

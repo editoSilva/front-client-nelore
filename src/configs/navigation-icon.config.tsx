@@ -91,7 +91,7 @@ import {
 
 import { FaHome, FaNetworkWired} from "react-icons/fa";
 import { FaMoneyBillTrendUp, FaBoxesStacked, FaFileContract} from "react-icons/fa6";
-import { GiGraduateCap } from "react-icons/gi";
+import { GiGraduateCap, GiThorHammer } from "react-icons/gi";
 
 
 
@@ -196,6 +196,8 @@ const navigationIcon: NavigationIcons = {
     // otpVerification: <PiPasswordDuotone />,
     dashboard: <PiSpeedometerDuotone />,
     dashboardEcommerce: <PiShoppingCartSimpleDuotone />,
+
+    GiThorHammer: <GiThorHammer />,
     dashboardProject: <PiRocketDuotone />,
     dashboardAnalytic: <PiChartBarDuotone />,
     dashboardMarketing: <PiMegaphoneDuotone />,
