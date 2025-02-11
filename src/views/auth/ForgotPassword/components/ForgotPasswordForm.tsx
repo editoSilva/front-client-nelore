@@ -19,6 +19,14 @@ type ForgotPasswordFormSchema = {
     email: string
 }
 
+type ResetPasswordResponse = {
+    data: {
+        message: string
+        success: boolean
+        code: string
+    }
+}
+
 const validationSchema: ZodType<ForgotPasswordFormSchema> = z.object({
     email: z.string().email().min(5),
 })
@@ -40,14 +48,18 @@ const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
         const { email } = values
 
         try {
-            const resp = await apiForgotPassword<boolean>({ email })
-            if (resp) {
+            const resp = await apiForgotPassword<ResetPasswordResponse>({ email })
+            if (resp.data.success) {
+
                 setSubmitting(false)
                 setEmailSent?.(true)
             }
         } catch (errors) {
+            
+            console.log('errors', errors)
+
             setMessage?.(
-                typeof errors === 'string' ? errors : 'Some error occured!',
+                typeof errors === 'string' ? errors : 'Email não encontrado!',
             )
             setSubmitting(false)
         }
@@ -83,7 +95,7 @@ const ForgotPasswordForm = (props: ForgotPasswordFormProps) => {
                         variant="solid"
                         type="submit"
                     >
-                        {isSubmitting ? 'Submiting...' : 'Submit'}
+                        {isSubmitting ? 'Enviando...' : 'Enviar'}
                     </Button>
                 </Form>
             ) : (

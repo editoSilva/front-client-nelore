@@ -22,6 +22,7 @@ export type SignInResponse = {
     
 }
 
+
 export type SignUpResponse = SignInResponse
 
 export type SignUpCredential = {
@@ -36,6 +37,8 @@ export type ForgotPassword = {
 
 export type ResetPassword = {
     password: string
+    code: string
+    email: string
 }
 
 export type AuthRequestStatus = 'success' | 'failed' | ''

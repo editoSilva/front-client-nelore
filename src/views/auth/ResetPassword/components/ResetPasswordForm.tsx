@@ -3,6 +3,7 @@ import Button from '@/components/ui/Button'
 import { FormItem, Form } from '@/components/ui/Form'
 import PasswordInput from '@/components/shared/PasswordInput'
 import { apiResetPassword } from '@/services/AuthService'
+import Input from '@/components/ui/Input'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -18,17 +19,21 @@ interface ResetPasswordFormProps extends CommonProps {
 type ResetPasswordFormSchema = {
     newPassword: string
     confirmPassword: string
+    email: string
+    code: string
 }
 
 const validationSchema: ZodType<ResetPasswordFormSchema> = z
     .object({
-        newPassword: z.string({ required_error: 'Please enter your password' }),
+        newPassword: z.string({ required_error: 'Por favor digite sua senha' }),
+        email: z.string({ required_error: 'Por favor digite seu email' }),
+        code: z.string({ required_error: 'Por favor digite o código' }),
         confirmPassword: z.string({
-            required_error: 'Confirm Password Required',
+            required_error: 'Confirmar senha obrigatória',
         }),
     })
     .refine((data) => data.newPassword === data.confirmPassword, {
-        message: 'Your passwords do not match',
+        message: 'Suas senhas não coincidem',
         path: ['confirmPassword'],
     })
 
@@ -47,11 +52,13 @@ const ResetPasswordForm = (props: ResetPasswordFormProps) => {
     })
 
     const onResetPassword = async (values: ResetPasswordFormSchema) => {
-        const { newPassword } = values
+        const { newPassword, email, code } = values
 
         try {
             const resp = await apiResetPassword<boolean>({
                 password: newPassword,
+                code: code,
+                email: email
             })
             if (resp) {
                 setSubmitting(false)
@@ -61,7 +68,7 @@ const ResetPasswordForm = (props: ResetPasswordFormProps) => {
             setMessage?.(
                 typeof errors === 'string'
                     ? errors
-                    : 'Failed to reset password',
+                    : 'Falha ao resetar a senha',
             )
             setSubmitting(false)
         }
@@ -73,8 +80,43 @@ const ResetPasswordForm = (props: ResetPasswordFormProps) => {
         <div className={className}>
             {!resetComplete ? (
                 <Form onSubmit={handleSubmit(onResetPassword)}>
+                       <FormItem
+                        label="Email"
+                        invalid={Boolean(errors.email)}
+                        errorMessage={errors.email?.message}
+                    >
+                        <Controller
+                            name="email"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                     type="email"
+                                    autoComplete="off"
+                                    placeholder="Digite o E-mail"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
                     <FormItem
-                        label="Password"
+                        label="Código"
+                        invalid={Boolean(errors.code)}
+                        errorMessage={errors.code?.message}
+                    >
+                        <Controller
+                            name="code"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    autoComplete="off"
+                                    placeholder="Digite o código"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        label="Senha"
                         invalid={Boolean(errors.newPassword)}
                         errorMessage={errors.newPassword?.message}
                     >
@@ -91,7 +133,7 @@ const ResetPasswordForm = (props: ResetPasswordFormProps) => {
                         />
                     </FormItem>
                     <FormItem
-                        label="Confirm Password"
+                        label="Confirme a Senha"
                         invalid={Boolean(errors.confirmPassword)}
                         errorMessage={errors.confirmPassword?.message}
                     >

@@ -28,16 +28,16 @@ export const ResetPasswordBase = ({
             <div className="mb-6">
                 {resetComplete ? (
                     <>
-                        <h3 className="mb-1">Reset done</h3>
+                        <h3 className="mb-1">Redefinição concluída</h3>
                         <p className="font-semibold heading-text">
-                            Your password has been successfully reset
+                            Sua senha foi redefinida com sucesso
                         </p>
                     </>
                 ) : (
                     <>
-                        <h3 className="mb-1">Set new password</h3>
+                        <h3 className="mb-1">Definir nova senha</h3>
                         <p className="font-semibold heading-text">
-                            Your new password must different to previos password
+                            Sua nova senha deve ser diferente da senha anterior
                         </p>
                     </>
                 )}

@@ -8,10 +8,13 @@ import { useNavigate } from 'react-router-dom'
 
 type ForgotPasswordProps = {
     signInUrl?: string
+    resetPassword?: string
+
 }
 
 export const ForgotPasswordBase = ({
     signInUrl = '/sign-in',
+    resetPassword = '/reset-password'
 }: ForgotPasswordProps) => {
     const [emailSent, setEmailSent] = useState(false)
     const [message, setMessage] = useTimeOutMessage()
@@ -19,7 +22,7 @@ export const ForgotPasswordBase = ({
     const navigate = useNavigate()
 
     const handleContinue = () => {
-        navigate(signInUrl)
+        navigate(resetPassword)
     }
 
     return (
@@ -27,17 +30,17 @@ export const ForgotPasswordBase = ({
             <div className="mb-6">
                 {emailSent ? (
                     <>
-                        <h3 className="mb-2">Check your email</h3>
+                        <h3 className="mb-2">Verifique seu e-mail</h3>
                         <p className="font-semibold heading-text">
-                            We have sent a password recovery to your email
+                            Enviamos uma recuperação de senha para seu e-mail
                         </p>
                     </>
                 ) : (
                     <>
-                        <h3 className="mb-2">Forgot Password</h3>
+                        <h3 className="mb-2">Esqueceu sua senha</h3>
                         <p className="font-semibold heading-text">
-                            Please enter your email to receive a verification
-                            code
+                        Por favor, insira seu e-mail para receber uma verificação
+                        código
                         </p>
                     </>
                 )}
@@ -62,13 +65,13 @@ export const ForgotPasswordBase = ({
                 </Button>
             </ForgotPasswordForm>
             <div className="mt-4 text-center">
-                <span>Back to </span>
+                <span>Voltar </span>
                 <ActionLink
                     to={signInUrl}
                     className="heading-text font-bold"
                     themeColor={false}
                 >
-                    Sign in
+                    Login
                 </ActionLink>
             </div>
         </div>
