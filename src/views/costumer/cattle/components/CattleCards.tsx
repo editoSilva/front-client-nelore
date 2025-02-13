@@ -48,7 +48,7 @@ const CattleCards = ({ cattle }: CattleCardProps) => {
           <InfoRow label="Raça" value={cattle.breed} />
           <InfoRow label="Nome" value={cattle.name} />
           <InfoRow
-            label="Preço @"
+            label="Preço @."
             value={new Intl.NumberFormat("pt-BR", {
               style: "currency",
               currency: "BRL",
