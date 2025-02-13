@@ -1,71 +1,71 @@
-import Card from '@/components/ui/Card'
-import Button from '@/components/ui/Button'
+import { useNavigate } from "react-router-dom";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import { Investment } from "@/@types/costumer/catte/CattleType";
 
-const CattleCards = () => {
-    const cardFooter = (
-        <div className="flex items-center">
-            
-            <Button variant="solid" block>
-                INVESTIR
-            </Button>
-         
-        </div>
-    )
-
-    const cardHeader = (
-        <div className="rounded-tl-lg rounded-tr-lg overflow-hidden">
-            <img src="https://www.lancerural.com.br/wp-content/uploads/2016/12/escneloreraca640.jpg" alt="card header" />
-        </div>
-    )
-
-    return (
-        <div className="max-w-xs float-left m-2">
-            <Card
-                clickable
-                className="hover:shadow-lg transition duration-150 ease-in-out dark:border dark:border-gray-600 dark:border-solid"
-                header={{
-                    content: cardHeader,
-                    bordered: false,
-                    className: 'p-0',
-                }}
-                footer={{
-                    content: cardFooter,
-                    bordered: false,
-                }}
-            >
-               
-
-                {/* Informações adicionais do boi */}
-                <div className="mt-4">
-                <div className="flex justify-between text-sm">
-                        <span className="font-semibold">Disponiveis:</span>
-                        <span>9</span>
-                    </div>
-                <div className="flex justify-between text-sm mb-2">
-                        <span className="font-semibold">Raça:</span>
-                        <span>Nelore</span>
-                    </div>
-                    <div className="flex justify-between text-sm mb-2">
-                        <span className="font-semibold">Nome:</span>
-                        <span>Boizão</span>
-                    </div>
-                    <div className="flex justify-between text-sm mb-2">
-                        <span className="font-semibold">Preço:</span>
-                        <span>R$ 8.000,00</span>
-                    </div>
-                    <div className="flex justify-between text-sm mb-2">
-                        <span className="font-semibold">Idade:</span>
-                        <span>24 meses</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                        <span className="font-semibold">Fazenda:</span>
-                        <span>Fazenda Boa Vista</span>
-                    </div>
-                    
-                </div>
-            </Card>
-        </div>
-    )
+interface CattleCardProps {
+  cattle: Investment;
 }
 
-export default CattleCards
+const CattleCards = ({ cattle }: CattleCardProps) => {
+  const navigate = useNavigate();
+
+  const handleInvestir = () => navigate(`/castle/${cattle.id}`);
+
+  return (
+    <div className="w-full sm:max-w-xs m-2">
+      <Card
+        clickable
+        className="hover:shadow-lg transition duration-150 ease-in-out dark:border dark:border-gray-600"
+        header={{
+          content: (
+            <div className="rounded-t-lg overflow-hidden">
+              <img
+                src={cattle.images?.[0]?.image || "https://via.placeholder.com/300"}
+                alt={cattle.name}
+                className="w-full h-40 sm:h-48 object-cover"
+                loading="lazy"
+              />
+            </div>
+          ),
+          bordered: false,
+          className: "p-0",
+        }}
+        footer={{
+          content: (
+            <div className="flex items-center">
+              <Button variant="solid" block onClick={handleInvestir}>
+                INVESTIR
+              </Button>
+            </div>
+          ),
+          bordered: false,
+        }}
+      >
+        <div className="mt-3 space-y-2 text-sm">
+          <InfoRow label="Disponíveis" value={cattle.total_shares} />
+          <InfoRow label="Vendidos" value={cattle.shares_sold} />
+          <InfoRow label="Raça" value={cattle.breed} />
+          <InfoRow label="Nome" value={cattle.name} />
+          <InfoRow
+            label="Preço @"
+            value={new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(parseFloat(cattle.price_per_share))}
+          />
+          <InfoRow label="Local" value={cattle.farm} />
+        </div>
+      </Card>
+    </div>
+  );
+};
+
+const InfoRow = ({ label, value }: { label: string; value: string | number }) => (
+  <div className="flex justify-between text-sm">
+    <span className="font-semibold">{label}:</span>
+    <span className="text-gray-700">{value}</span>
+  </div>
+);
+
+export default CattleCards;

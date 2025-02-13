@@ -39,6 +39,15 @@ const costumerRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+    {
+        key: 'invest-now',
+        path: '/castle/:id',
+        component: lazy(() => import('@/views/costumer/cattle_details')),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
 ]
 
 export default costumerRoute;

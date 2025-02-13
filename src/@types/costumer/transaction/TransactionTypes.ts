@@ -20,8 +20,6 @@ export type  DepositResponse = {
             content: string,
             base_64: string
         }
-        
-    
 }
 
 export type DepositType = {
