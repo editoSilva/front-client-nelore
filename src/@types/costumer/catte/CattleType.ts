@@ -33,6 +33,13 @@ export type Investment = {
         images: Image[];
 }
 
+
+export type InvestMentQotas = {
+    type: string
+    catte_id: string 
+    shares: number[]
+}
+
 export type CatteShow =  {
     data: {
         amount: string;
@@ -73,12 +80,25 @@ export type InvestmentDetails = {
   };
 
 
-// Tipo para os Links da paginação
-interface PaginationLinks {
-    first: string;
-    last: string;
-    prev: string | null;
-    next: string | null;
+export type InvestmentResponse = {
+    data: {
+        id: number
+        type: string,
+        investment_code: string,
+        shares_acquired: number,
+        total_invested: number,
+        return_percentage: number,
+        total_redeem: number,
+        redeem_date: number,
+        profit_total: number,
+        membership_fee: number,
+        rate: number,
+        days: string,
+        created_at: string,
+        update_at: string,
+        yieldHistories: number[]
+       
+    }
 }
 
 // Tipo para um Link de Navegação

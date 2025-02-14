@@ -3,11 +3,13 @@ import { Card } from "@/components/ui";
 import { useParams } from "react-router-dom";
 import { useCattleStore } from "@/store/costumer/cattle";
 import { useEffect, useState } from "react";
-import { InvestmentDetails} from "@/@types/costumer/catte/CattleType";
+import { InvestmentDetails, InvestMentQotas } from "@/@types/costumer/catte/CattleType";
+import Notification from '@/components/ui/Notification';
+import toast from '@/components/ui/toast';
 
 const Invest = () => {  
     const { id } = useParams<{ id: string }>(); // Captura o parâmetro da URL
-    const { featchCatteShow, catte_show } = useCattleStore();
+    const { featchCatteShow, catte_show, featchInvestCatte , statusInvest} = useCattleStore();
 
     const [investmentDetails, setInvestmentDetails] = useState<InvestmentDetails | null>(null);
     const [selectedQuotas, setSelectedQuotas] = useState<number[]>([]);
@@ -17,6 +19,20 @@ const Invest = () => {
             featchCatteShow(id); // Busca os dados ao carregar a página
         }
     }, [id, featchCatteShow]);
+
+    useEffect(() => {
+        if (statusInvest) {
+            featchCatteShow(String(id)); // Busca os dados ao carregar a página
+
+            toast.push(
+                <Notification title="Sucesso!" type="success">
+                {`Compra de cota com sucesso!`}
+                </Notification>
+              );
+           
+        }
+    }, [statusInvest])
+
 
     useEffect(() => {
         if (catte_show?.data) {
@@ -29,6 +45,20 @@ const Invest = () => {
             prev.includes(quotaId) ? prev.filter((q) => q !== quotaId) : [...prev, quotaId]
         );
     };
+
+    const submitInvestment  =   () => {
+       
+        const invest: InvestMentQotas =  {
+            type: 'cattle',
+            catte_id: String(id),
+            shares: selectedQuotas
+        }
+
+        featchInvestCatte(invest)
+
+        console.log('statusInvest', statusInvest)
+
+    } 
 
     if (!investmentDetails) return <p>Carregando...</p>;
 
@@ -65,7 +95,7 @@ const Invest = () => {
 
                     {/* Seleção de cotas */}
                     <div className="grid grid-cols-5 gap-2">
-                        {investmentDetails.quotas.map((quota: Quota) => (
+                        {investmentDetails.quotas.map((quota: Quotas) => (
                             <button
                                 key={quota.id}
                                 className={`p-2 rounded-lg text-center border ${
@@ -75,7 +105,7 @@ const Invest = () => {
                                 }`}
                                 onClick={() => toggleQuotaSelection(quota.id)}
                             >
-                                {quota.id}
+                                Cota - {quota.number}
                             </button>
                         ))}
                     </div>
@@ -84,6 +114,7 @@ const Invest = () => {
                     <button
                         className="mt-4 p-3 bg-blue-500 text-white rounded-lg w-full"
                         disabled={selectedQuotas.length === 0}
+                        onClick={submitInvestment}
                     >
                         Comprar {selectedQuotas.length} cota(s)
                     </button>

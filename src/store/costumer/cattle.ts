@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { apiGetCatte, apiGetCatteShow } from "@/services/costumer/catte/ApiCatte";
-import { CatteResponse, CatteShow } from "@/@types/costumer/catte/CattleType";
+import { apiGetCatte, apiGetCatteShow, ApiPostInvestCatte } from "@/services/costumer/catte/ApiCatte";
+import { CatteResponse, CatteShow, InvestMentQotas, InvestmentResponse } from "@/@types/costumer/catte/CattleType";
 
 // Tipo para um Quota
 interface Quota {
@@ -79,12 +79,16 @@ interface CattleActions {
     isLoading: boolean;
     fetchCattles: () => Promise<void>;
     featchCatteShow: (id: string) => void
+    featchInvestCatte: (data: InvestMentQotas) => void
+    
 }
 
 export type CatteListState = {
     isLoading: boolean
     cattes: CatteResponse
     catte_show: CatteShow 
+    invest: InvestmentResponse
+    statusInvest: boolean
 }
 
 const initialState: CatteListState = {
@@ -122,6 +126,28 @@ const initialState: CatteListState = {
             weight: '',
         }
     },
+    statusInvest: false,
+    invest: {
+        data: {
+            id: 0,
+            type: 'cattle',
+            investment_code: '',
+            shares_acquired: 0,
+            total_invested: 0,
+            return_percentage: 0,
+            total_redeem: 0,
+            redeem_date: 0,
+            profit_total: 0,
+            membership_fee: 0,
+            rate: 0.00,
+            days: '',
+            created_at: '',
+            update_at: '',
+            yieldHistories: [],
+           
+        }
+    },
+
     isLoading: true,
 }
 
@@ -161,4 +187,21 @@ export const useCattleStore = create<CatteListState & CattleActions>((set) => ({
             set({ isLoading: false });
         }
     },
+    featchInvestCatte: async (data) => {
+        set({ isLoading: true });
+        try {
+            const response = await ApiPostInvestCatte(data); // Correção: await para pegar os dados corretamente
+            
+
+            set({
+                statusInvest: true,
+                invest: response, // Corrigido
+                isLoading: false,
+            });
+        } catch (error) {
+            console.error("Erro ao buscar os dados dos gados:", error);
+            set({ isLoading: false,   statusInvest: false, });
+        }
+        
+    }
 }));
