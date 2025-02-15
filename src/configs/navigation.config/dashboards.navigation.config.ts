@@ -65,7 +65,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                     },
                     {
                         key: 'my-invest',
-                        path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
+                        path: 'my-invest',
                         title: 'Meus Investimentos',
                         translateKey: 'Meus Investimentos',
                         icon: 'FaNetworkWired',

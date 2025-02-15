@@ -101,6 +101,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   }, [depositSuccess, deposit, tableData, featchTransactions, filterData]);
 
   useEffect(() => {
+    
       if(deposit) {
         setDepositSuccess(true);
         setTransaction(deposit.data)

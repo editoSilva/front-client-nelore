@@ -8,6 +8,7 @@ export type EndpointConfig = {
     cattes: string
     catteshow: string
     investCatte: string
+    listInvestments: string
 }
 
 const endpointConfig: EndpointConfig = {
@@ -17,7 +18,8 @@ const endpointConfig: EndpointConfig = {
     depositStatus: base.baseUrl+'/costumer/show-transaction',
     cattes: base.baseUrl+'/costumer/suggested-investments?type=cattle',
     catteshow: base.baseUrl+'/costumer/cattle-suggest/',
-    investCatte: base.baseUrl+'/costumer/investments/'
+    investCatte: base.baseUrl+'/costumer/investments/',
+    listInvestments: base.baseUrl+'/costumer/investments/'
 }
 
 export default endpointConfig;

@@ -48,6 +48,16 @@ const costumerRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+
+    {
+        key: 'my-invest',
+        path: '/my-invest',
+        component: lazy(() => import('@/views/costumer/investments/index')),
+        authority: [ADMIN, USER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
 ]
 
 export default costumerRoute;
