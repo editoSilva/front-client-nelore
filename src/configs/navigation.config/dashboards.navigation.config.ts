@@ -4,7 +4,8 @@ import {
     NAV_ITEM_TYPE_ITEM,
     NAV_ITEM_TYPE_COLLAPSE
 } from '@/constants/navigation.constant'
-import { ADMIN, USER } from '@/constants/roles.constant'
+
+import { ADMIN, USER, COSTUMER } from '@/constants/roles.constant'
 import type { NavigationTree } from '@/@types/navigation'
 
 const dashboardsNavigationConfig: NavigationTree[] = [
@@ -15,7 +16,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.dashboard.dashboard',
         icon: 'dashboard',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [ USER],
+        authority: [COSTUMER],
         meta: {
             horizontalMenu: {
                 layout: 'default',
@@ -29,7 +30,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.home',
                 icon: 'home',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [
                     
                 ],
@@ -41,7 +42,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.auctions',
                 icon: 'GiThorHammer',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [],
             },
             {
@@ -51,7 +52,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.investiments',
                 icon: 'lots',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [
                     {
                         key: 'invest-now',
@@ -60,7 +61,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Invista Agora',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         subMenu: [],
                     },
                     {
@@ -70,7 +71,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Meus Investimentos',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         subMenu: [],
                     },
                 ],
@@ -82,7 +83,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.transacions',
                 icon: 'finatial',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [
                     {
                         key: 'deposits',
@@ -91,7 +92,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Depósitos',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         subMenu: [],
                     },
                     {
@@ -101,7 +102,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'withdrawals',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         subMenu: [],
                     },
                 ],
@@ -112,9 +113,30 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 title: 'nav.dashboard.affiliates',
                 translateKey: 'nav.dashboard.affiliates',
                 icon: 'FaNetworkWired',
-                type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
-                subMenu: [],
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [COSTUMER],
+                subMenu: [
+                    {
+                        key: 'deposits',
+                        path: 'deposits',
+                        title: 'Cadastros',
+                        translateKey: 'Cadastros',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [COSTUMER],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'withdrawals',
+                        path: 'withdrawals',
+                        title: 'Comissões',
+                        translateKey: 'withdrawals',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [COSTUMER],
+                        subMenu: [],
+                    },
+                ],
             },
             {
                 key: 'dashboard.Knowledge_center',
@@ -123,7 +145,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.Knowledge_center',
                 icon: 'GiGraduateCap',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [],
             },
             {
@@ -133,7 +155,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.legal',
                 icon: 'documentation',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [],
             },
             {
@@ -143,7 +165,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.contracts',
                 icon: 'FaFileContract',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 subMenu: [],
             },
            

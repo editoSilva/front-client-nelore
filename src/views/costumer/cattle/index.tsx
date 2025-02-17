@@ -24,20 +24,22 @@ const Invest = () => {
         <>
         <Loading loading={isLoading}>
         {cattes && (
-        <Container>
-            <AdaptiveCard>
+       
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                        <h3>Nosso Plantel</h3>
+                    <h3 className="text-1xl font-bold mb-4">Nosso Plantel</h3>
+                       
                     </div>
-                    <Card>
+                    <div className="flex flex-wrap gap-4 justify-start">
                     {catte.map((cattleItem) => (
                 <CattleCards key={cattleItem.id} cattle={cattleItem} />
+              
             ))}
-                    </Card>
+              </div>
+                    
                 </div>
-            </AdaptiveCard>
-        </Container>
+        
+    
           )}
           </Loading>
       </>

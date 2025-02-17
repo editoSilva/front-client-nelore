@@ -30,13 +30,6 @@ const InvestmentsScreen = () => {
         setIsOpen(false)
     }
 
-    const onDialogOk = (e: MouseEvent) => {
-        console.log('onDialogOk', e)
-        setIsOpen(false)
-    }
-
-
-    
 
   const cards = [
     {
@@ -100,7 +93,7 @@ const InvestmentsScreen = () => {
           
             content: 'Em Andamento',
             extra: headerExtraContent,
-        }}
+           }}
             key={index}
             clickable
             onClick={(e) => console.log('Card Clickable', e)}
@@ -155,7 +148,7 @@ const InvestmentsScreen = () => {
     </div>
     </div>
 
-    <Dialog
+            <Dialog
                 isOpen={dialogIsOpen}
                 onClose={onDialogClose}
                 onRequestClose={onDialogClose}

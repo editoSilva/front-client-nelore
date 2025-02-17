@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDashboardStore } from "@/store/costumer/dashboard";
+import { useSessionUser } from "@/store/authStore";
 import Loading from '@/components/shared/Loading'
 import Sumary from "./components/Sumary";
 import InvestimentChart from "./components/InvestimentChart";
@@ -11,7 +12,9 @@ import SharedLink from "./components/SharedLink";
 
 const Dashboard = () => {
   const { dashboard, fetchDashboard, isLoading} = useDashboardStore();
-  
+  const { user } = useSessionUser()
+
+  console.log('user', user)
   useEffect(() => {
     fetchDashboard()
 
