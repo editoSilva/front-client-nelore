@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { ADMIN, USER } from '@/constants/roles.constant'
+import { ADMIN, USER, COSTUMER } from '@/constants/roles.constant'
 import type { Routes } from '@/@types/routes'
 
 const costumerRoute: Routes = [
@@ -7,7 +7,7 @@ const costumerRoute: Routes = [
         key: 'dashboard',
         path: '/dashboard',
         component: lazy(() => import('@/views/costumer/dashboard')),
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             pageContainerType: 'contained',
         },
@@ -16,7 +16,7 @@ const costumerRoute: Routes = [
         key: 'deposits',
         path: '/deposits',
         component: lazy(() => import('@/views/costumer/transactions/deposit')),
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             pageContainerType: 'contained',
         },
@@ -25,7 +25,7 @@ const costumerRoute: Routes = [
         key: 'withdrawals',
         path: '/withdrawals',
         component: lazy(() => import('@/views/costumer/transactions/withdrawal')),
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             pageContainerType: 'contained',
         },
@@ -34,7 +34,7 @@ const costumerRoute: Routes = [
         key: 'invest-now',
         path: '/invest-now',
         component: lazy(() => import('@/views/costumer/cattle')),
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             pageContainerType: 'contained',
         },
@@ -43,7 +43,7 @@ const costumerRoute: Routes = [
         key: 'invest-now',
         path: '/castle/:id',
         component: lazy(() => import('@/views/costumer/cattle_details')),
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             pageContainerType: 'contained',
         },
@@ -53,7 +53,7 @@ const costumerRoute: Routes = [
         key: 'my-invest',
         path: '/my-invest',
         component: lazy(() => import('@/views/costumer/investments/index')),
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             pageContainerType: 'contained',
         },
