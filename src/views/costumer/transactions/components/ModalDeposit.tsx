@@ -265,7 +265,7 @@ const setIntervalDesposit = (data: Deposit) => {
             <Input
               value={deposit.data.content}
               disabled
-              className="w-full bg-gray-800 text-white border border-gray-600 rounded-md mb-4"
+              className="w-full bg-gray-800  border border-gray-600 rounded-md mb-4"
             />
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
@@ -296,7 +296,7 @@ const setIntervalDesposit = (data: Deposit) => {
                 type="number"
                 placeholder="Ex: 300.00"
                 value={depositAmount}
-                className="w-full bg-gray-800 text-white border border-gray-600 rounded-md"
+                className="w-full bg-gray-800  border border-gray-600 rounded-md"
                 onChange={handleInputChange}
               />
             </div>

@@ -20,7 +20,7 @@ export const SignUpBase = ({
 
     return (
         <>
-            <div className="mb-8 mt-20">
+            <div className="mb-8 pt-8 mt-20">
                 <Logo
                     type="streamline"
                     mode={mode}
@@ -41,7 +41,7 @@ export const SignUpBase = ({
             )}
             <SignUpForm disableSubmit={disableSubmit} setMessage={setMessage} />
             <div>
-                <div className="mt-6 text-center">
+                <div className="mt-6  pb-5 text-center">
                     <span>Já tem uma conta? </span>
                     <ActionLink
                         to={signInUrl}
