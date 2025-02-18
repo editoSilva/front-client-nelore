@@ -13,6 +13,8 @@ const Invest = () => {
 
     const [investmentDetails, setInvestmentDetails] = useState<InvestmentDetails | null>(null);
     const [selectedQuotas, setSelectedQuotas] = useState<number[]>([]);
+      // Função para extrair o ID do vídeo a partir da URL
+      const [videoEmbedUrl, setVideoEmbedUrl] = useState('');
 
     useEffect(() => {
         if (id) {
@@ -46,6 +48,25 @@ const Invest = () => {
         );
     };
 
+
+
+      // Função para extrair o ID do vídeo a partir da URL
+      const getVideoId = (url: string) => {
+        const match = url.match(/[?&]v=([^&]+)/);
+        return match ? match[1] : null;
+      };
+    
+    
+    
+      useEffect(() => {
+        if (investmentDetails?.videos?.[0]?.url) {
+          const videoId = getVideoId(investmentDetails.videos[0].url);
+          if (videoId) {
+            setVideoEmbedUrl(`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
+          }
+        }
+      }, [investmentDetails]);
+
     const submitInvestment  =   () => {
        
         const invest: InvestMentQotas =  {
@@ -56,7 +77,6 @@ const Invest = () => {
 
         featchInvestCatte(invest)
 
-        console.log('statusInvest', statusInvest)
 
     } 
 
@@ -68,24 +88,28 @@ const Invest = () => {
                 <div className="flex flex-col gap-4">
                     {/* Título */}
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                        <h3 className="text-xl font-semibold">{investmentDetails.name}</h3>
+                        <h3 className="text-xl font-semibold">Lote: {investmentDetails.batch}</h3>
                     </div>
-
-                    {/* Imagem - Centralizada e sem cortes */}
-                    {investmentDetails.images?.length > 0 && (
-                        <div className="flex justify-center">
-                            <img
-                                src={investmentDetails.images[0].image}
-                                alt={investmentDetails.name}
-                                className="w-full max-w-lg aspect-[4/3] object-contain rounded-lg"
-                            />
-                        </div>
-                    )}
-
+                 
+                      {/* Vídeo via Iframe - Centralizado */}
+                        {investmentDetails.videos?.length > 0 && (
+                            <div className="flex justify-center">
+                                <iframe
+                                    src={videoEmbedUrl}
+                                    className="w-full max-w-lg aspect-[16/9] rounded-lg"
+                                    frameBorder="0"
+                                    allow="autoplay; encrypted-media"
+                                    allowFullScreen
+                                />
+                            </div>
+                        )}
                     {/* Informações do boi */}
+                  
                     <Card className="p-4">
+                    <h4 className="text-xl font-semibold pb-3">Ficha Técnica</h4>
                         <p><strong>Raça:</strong> {investmentDetails.breed}</p>
                         <p><strong>Fazenda:</strong> {investmentDetails.farm}</p>
+                        <p><strong>Lote:</strong> {investmentDetails.batch}</p>
                         <p><strong>Peso:</strong> {investmentDetails.weight} kg</p>
                         <p><strong>Preço por cota:</strong> R$ {investmentDetails.price_per_share}</p>
                         <p><strong>Total de cotas:</strong> {investmentDetails.total_shares}</p>

@@ -117,8 +117,8 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 authority: [COSTUMER],
                 subMenu: [
                     {
-                        key: 'deposits',
-                        path: 'deposits',
+                        key: 'reffers',
+                        path: 'reffers',
                         title: 'Cadastros',
                         translateKey: 'Cadastros',
                         icon: 'FaNetworkWired',
@@ -127,10 +127,10 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         subMenu: [],
                     },
                     {
-                        key: 'withdrawals',
-                        path: 'withdrawals',
+                        key: 'commissions',
+                        path: 'commissions',
                         title: 'Comissões',
-                        translateKey: 'withdrawals',
+                        translateKey: 'commissions',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [COSTUMER],

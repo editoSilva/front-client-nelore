@@ -9,6 +9,7 @@ export type EndpointConfig = {
     catteshow: string
     investCatte: string
     listInvestments: string
+    referrers: string
 }
 
 const endpointConfig: EndpointConfig = {
@@ -19,7 +20,8 @@ const endpointConfig: EndpointConfig = {
     cattes: base.baseUrl+'/costumer/suggested-investments?type=cattle',
     catteshow: base.baseUrl+'/costumer/cattle-suggest/',
     investCatte: base.baseUrl+'/costumer/investments/',
-    listInvestments: base.baseUrl+'/costumer/investments/'
+    listInvestments: base.baseUrl+'/costumer/investments/',
+    referrers: base.baseUrl+'/costumer/referrals'
 }
 
 export default endpointConfig;

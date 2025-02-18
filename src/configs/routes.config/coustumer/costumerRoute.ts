@@ -58,6 +58,26 @@ const costumerRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+    {
+        key: 'reffers',
+        path: '/reffers',
+        component: lazy(() => import('@/views/costumer/referrer')),
+        authority: [COSTUMER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+    {
+        key: 'commissions',
+        path: '/commissions',
+        component: lazy(() => import('@/views/costumer/commission')),
+        authority: [COSTUMER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    
 ]
 
 export default costumerRoute;

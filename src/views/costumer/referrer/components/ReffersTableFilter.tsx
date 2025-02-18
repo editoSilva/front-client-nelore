@@ -6,7 +6,7 @@ import Badge from '@/components/ui/Badge'
 import Select, { Option as DefaultOption } from '@/components/ui/Select'
 import { components } from 'react-select'
 import { Form, FormItem } from '@/components/ui/Form'
-import { useTransactionStore } from "@/store/costumer/transactions";
+import { useReferrerStore } from "@/store/costumer/referrer";
 import { TbFilter } from 'react-icons/tb'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -73,7 +73,7 @@ const validationSchema: ZodType<FormSchema> = z.object({
 const TransactionTableFilter = () => {
     const [filterIsOpen, setFilterIsOpen] = useState(false)
 
-    const { filterData, setFilterData } = useTransactionStore()
+    const { filterData, setFilterData } = useReferrerStore()
 
     const { handleSubmit, control } = useForm<FormSchema>({
         defaultValues: filterData,
@@ -82,7 +82,7 @@ const TransactionTableFilter = () => {
 
     const onSubmit = (values: FormSchema) => {     
         setFilterData(values)
-        console.log('filter', values)
+ 
         setFilterIsOpen(false)
     }
 
@@ -103,7 +103,7 @@ const TransactionTableFilter = () => {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <div>
-                        <FormItem label="Data do Cadastro">
+                        <FormItem label="Data Transação">
                             <div className="flex items-center gap-2">
                                 <Controller
                                     name="date"
@@ -117,7 +117,29 @@ const TransactionTableFilter = () => {
                                 />
                             </div>
                         </FormItem>
-                      
+                        <FormItem label="Status Depósito">
+                            <Controller
+                                name="status"
+                                control={control}
+                                render={({ field }) => (
+                                    <Select<Option>
+                                        options={statusOption}
+                                        {...field}
+                                        value={statusOption.filter(
+                                            (option) =>
+                                                option.value === field.value,
+                                        )}
+                                        components={{
+                                            Option: CustomSelectOption,
+                                            Control: CustomControl,
+                                        }}
+                                        onChange={(option) =>
+                                            field.onChange(option?.value)
+                                        }
+                                    />
+                                )}
+                            />
+                        </FormItem>
                      
                     </div>
                     <Button variant="solid" type="submit">
