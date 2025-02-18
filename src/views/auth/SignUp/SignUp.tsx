@@ -20,7 +20,7 @@ export const SignUpBase = ({
 
     return (
         <>
-            <div className="mb-8">
+            <div className="mb-8 mt-20">
                 <Logo
                     type="streamline"
                     mode={mode}
