@@ -5,7 +5,7 @@ import {
     NAV_ITEM_TYPE_COLLAPSE
 } from '@/constants/navigation.constant'
 
-import { ADMIN, USER, COSTUMER } from '@/constants/roles.constant'
+import {COSTUMER } from '@/constants/roles.constant'
 import type { NavigationTree } from '@/@types/navigation'
 
 const dashboardsNavigationConfig: NavigationTree[] = [
@@ -141,7 +141,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             {
                 key: 'dashboard.Knowledge_center',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'Ecommerce',
+                title: 'Aulas',
                 translateKey: 'nav.dashboard.Knowledge_center',
                 icon: 'GiGraduateCap',
                 type: NAV_ITEM_TYPE_COLLAPSE,
@@ -151,7 +151,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             {
                 key: 'dashboard.legal',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'Ecommerce',
+                title: 'Jurídico',
                 translateKey: 'nav.dashboard.legal',
                 icon: 'documentation',
                 type: NAV_ITEM_TYPE_COLLAPSE,
@@ -161,7 +161,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             {
                 key: 'dashboard.contracts',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'Ecommerce',
+                title: 'Contratos',
                 translateKey: 'nav.dashboard.contracts',
                 icon: 'FaFileContract',
                 type: NAV_ITEM_TYPE_COLLAPSE,
