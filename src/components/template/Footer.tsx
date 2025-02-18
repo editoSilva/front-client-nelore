@@ -33,22 +33,22 @@ const FooterContent = () => {
             {mode === 'light' && (
 
                     <footer className="fixed bottom-0 left-0 w-full bg-slate-100 shadow-md p-4 flex justify-around items-center md:hidden">
-                    <Link to="/dashboard" className="flex flex-col items-center text-gray-700">
-                        <HiHome size={24} />
-                        <span className="text-xs">Início</span>
-                    </Link>
-                    <Link to="/deposits" className="flex flex-col items-center text-gray-700">
-                        <GiMoneyStack size={24} />
-                        <span className="text-xs">Depositar</span>
-                    </Link>
-                    <Link to="/invest-now" className="flex flex-col items-center text-gray-700">
-                        <BsCurrencyExchange size={24} />
-                        <span className="text-xs">Investir</span>
-                    </Link>
-                    <Link to="/concepts/account/settings" className="flex flex-col items-center text-gray-700">
-                        <HiUser size={24} />
-                        <span className="text-xs">Perfil</span>
-                    </Link>
+                        <Link to="/dashboard" className="flex flex-col items-center text-gray-700">
+                            <HiHome size={24} />
+                            <span className="text-xs">Início</span>
+                        </Link>
+                        <Link to="/deposits" className="flex flex-col items-center text-gray-700">
+                            <GiMoneyStack size={24} />
+                            <span className="text-xs">Depositar</span>
+                        </Link>
+                        <Link to="/invest-now" className="flex flex-col items-center text-gray-700">
+                            <BsCurrencyExchange size={24} />
+                            <span className="text-xs">Investir</span>
+                        </Link>
+                        <Link to="/concepts/account/settings" className="flex flex-col items-center text-gray-700">
+                            <HiUser size={24} />
+                            <span className="text-xs">Perfil</span>
+                        </Link>
                     </footer>
                
             )}
