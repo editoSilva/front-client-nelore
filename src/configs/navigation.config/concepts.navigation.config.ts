@@ -4,7 +4,7 @@ import {
     NAV_ITEM_TYPE_COLLAPSE,
     NAV_ITEM_TYPE_ITEM,
 } from '@/constants/navigation.constant'
-import { ADMIN, USER } from '@/constants/roles.constant'
+import {  COSTUMER } from '@/constants/roles.constant'
 import type { NavigationTree } from '@/@types/navigation'
 
 const conceptsNavigationConfig: NavigationTree[] = [
@@ -15,7 +15,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.concepts',
         icon: 'concepts',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [ADMIN, USER],
+        authority: [COSTUMER],
         meta: {
             horizontalMenu: {
                 layout: 'columns',
@@ -30,7 +30,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsAi.ai',
                 icon: 'ai',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsAi.aiDesc',
@@ -45,7 +45,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsAi.chat',
                         icon: 'aiChat',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey: 'nav.conceptsAi.chatDesc',
@@ -61,7 +61,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsAi.image',
                         icon: 'aiImage',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey: 'nav.conceptsAi.imageDesc',
@@ -79,7 +79,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsProjects.projects',
                 icon: 'projects',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsProjects.projectsDesc',
@@ -94,7 +94,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProjects.scrumBoard',
                         icon: 'projectScrumBoard',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -111,7 +111,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProjects.projectList',
                         icon: 'projectList',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -128,7 +128,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProjects.projectDetails',
                         icon: 'projectDetails',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -145,7 +145,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProjects.projectTasks',
                         icon: 'projectTask',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -162,7 +162,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProjects.projectIssue',
                         icon: 'projectIssue',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -181,7 +181,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsCustomers.customers',
                 icon: 'customers',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsCustomers.customersDesc',
@@ -196,7 +196,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsCustomers.customerList',
                         icon: 'customerList',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -213,7 +213,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsCustomers.customerEdit',
                         icon: 'customerEdit',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -230,7 +230,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsCustomers.customerCreate',
                         icon: 'customerCreate',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -247,7 +247,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsCustomers.customerDetails',
                         icon: 'customerDetails',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -266,7 +266,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsProducts.products',
                 icon: 'products',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsProducts.productsDesc',
@@ -281,7 +281,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProducts.productList',
                         icon: 'productList',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -298,7 +298,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProducts.productEdit',
                         icon: 'productEdit',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -315,7 +315,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsProducts.productCreate',
                         icon: 'productCreate',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -334,7 +334,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsOrders.orders',
                 icon: 'orders',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsOrders.ordersDesc',
@@ -349,7 +349,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsOrders.orderList',
                         icon: 'orderList',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -366,7 +366,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsOrders.orderEdit',
                         icon: 'orderEdit',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -383,7 +383,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsOrders.orderCreate',
                         icon: 'orderCreate',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -400,7 +400,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsOrders.orderDetails',
                         icon: 'ordeDetails',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -419,7 +419,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsAccount.account',
                 icon: 'account',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsAccount.accountDesc',
@@ -434,7 +434,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsAccount.settings',
                         icon: 'accountSettings',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -451,7 +451,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsAccount.activityLog',
                         icon: 'accountActivityLogs',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -468,7 +468,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsAccount.rolesPermissions',
                         icon: 'accountRoleAndPermission',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -485,7 +485,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsAccount.pricing',
                         icon: 'accountPricing',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey: 'nav.conceptsAccount.pricingDesc',
@@ -503,7 +503,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.conceptsHelpCenter.helpCenter',
                 icon: 'helpCenter',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.conceptsHelpCenter.helpCenterDesc',
@@ -518,7 +518,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsHelpCenter.supportHub',
                         icon: 'helpCeterSupportHub',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -535,7 +535,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsHelpCenter.article',
                         icon: 'helpCeterArticle',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -552,7 +552,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsHelpCenter.editArticle',
                         icon: 'helpCeterEditArticle',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -569,7 +569,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                         translateKey: 'nav.conceptsHelpCenter.manageArticle',
                         icon: 'helpCeterManageArticle',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [ADMIN, USER],
+                        authority: [COSTUMER],
                         meta: {
                             description: {
                                 translateKey:
@@ -588,7 +588,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.calendar',
                 icon: 'calendar',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.calendarDesc',
@@ -604,7 +604,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.fileManager',
                 icon: 'fileManager',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.fileManagerDesc',
@@ -620,7 +620,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.mail',
                 icon: 'mail',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.mailDesc',
@@ -636,7 +636,7 @@ const conceptsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.chat',
                 icon: 'chat',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [ADMIN, USER],
+                authority: [COSTUMER],
                 meta: {
                     description: {
                         translateKey: 'nav.chatDesc',

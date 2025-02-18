@@ -110,7 +110,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             {
                 key: 'dashboard.affiliates',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'nav.dashboard.affiliates',
+                title: 'Afiliados',
                 translateKey: 'nav.dashboard.affiliates',
                 icon: 'FaNetworkWired',
                 type: NAV_ITEM_TYPE_COLLAPSE,
