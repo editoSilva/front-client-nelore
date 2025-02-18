@@ -108,6 +108,7 @@ export type InvestmentResponse = {
         days: string
         created_at: string
         update_at: string
+        rate_withdrawl: number
         yieldHistories: number[]
        
     }

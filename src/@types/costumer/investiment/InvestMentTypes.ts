@@ -1,8 +1,9 @@
 // Interfaces para os dados
 export type YieldHistory = {
-    yield: string
-    total_investment: string
+    yield: number
+    total_investment: number
     yield_date: string
+    rate: number
   }
   
   export type  Investment =  {
@@ -19,7 +20,16 @@ export type YieldHistory = {
     days: string
     created_at: string
     update_at: string
+    rate_withdrawl: number
     yieldHistories: YieldHistory[]
+  }
+
+
+  export type YieldHistories = {
+      yield: number,
+      total_investment: number
+      yield_date: string
+      rate: number
   }
   
   export type  InvestmentsData = {

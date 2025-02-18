@@ -89,6 +89,7 @@ export type CatteListState = {
     catte_show: CatteShow 
     invest: InvestmentResponse
     statusInvest: boolean
+    erroInvest: boolean
 }
 
 const initialState: CatteListState = {
@@ -127,6 +128,7 @@ const initialState: CatteListState = {
         }
     },
     statusInvest: false,
+    erroInvest: false,
     invest: {
         data: {
             id: 0,
@@ -187,20 +189,24 @@ export const useCattleStore = create<CatteListState & CattleActions>((set) => ({
             set({ isLoading: false });
         }
     },
-    featchInvestCatte: async (data) => {
+    featchInvestCatte: async (data: InvestMentQotas) => {
         set({ isLoading: true });
         try {
             const response = await ApiPostInvestCatte(data); // Correção: await para pegar os dados corretamente
             
-
             set({
                 statusInvest: true,
                 invest: response, // Corrigido
                 isLoading: false,
+            
             });
         } catch (error) {
-            console.error("Erro ao buscar os dados dos gados:", error);
-            set({ isLoading: false,   statusInvest: false, });
+            console.error(error);
+            set({ isLoading: false, statusInvest: false, erroInvest: true });
+        
+            setTimeout(() => {
+                set({ erroInvest: false,  statusInvest: false, });
+            }, 2000);
         }
         
     }

@@ -7,13 +7,39 @@ import Button from '@/components/ui/Button'
 import Table from '@/components/ui/Table'
 import Tag from '@/components/ui/Tag'
 
+import { Investment, YieldHistory } from '@/@types/costumer/investiment/InvestMentTypes'
+
 
 import Dialog from '@/components/ui/Dialog'
 import type { MouseEvent } from 'react'
 
+
 const InvestmentsScreen = () => {
     const { Tr, Th, Td, THead, TBody } = Table
-    const { investment, fetchInvestments } = useInvestmentStore();
+    const { investments, fetchInvestments } = useInvestmentStore();
+    const [investmentList, setInvestmentList] = useState<Array<Investment>>([]);
+    const [yieldHistories, setYieldHistories] = useState<Array<YieldHistory>>([])
+
+
+    const handleInvestmentUpdate = () => {
+      if (investments?.data) {
+
+        setInvestmentList(investments.data);
+      }
+    };
+
+    const handleYieldHistories = (data: YieldHistory[]) => {
+      setYieldHistories(data)
+        console.log('YieldHistories', data)
+    }
+
+    console.log('yieldHistoriessss', yieldHistories)
+
+    useEffect(() => {
+      handleInvestmentUpdate();
+    }, [investments]);
+
+
 
     useEffect(()=> {
         fetchInvestments()
@@ -29,46 +55,6 @@ const InvestmentsScreen = () => {
         console.log('onDialogClose', e)
         setIsOpen(false)
     }
-
-
-  const cards = [
-    {
-      title: 'INVG58140220256',
-      description: 'Texto de exemplo para o card 1.\nQuebra de linha dentro do card.',
-    },
-    {
-      title: 'INVG49140220255',
-      description: 'Texto de exemplo para o card 2.\nOutra linha de exemplo.',
-    },
-    {
-      title: 'INVG56140220255',
-      description: 'Texto de exemplo para o card 3.\nMais uma linha aqui.',
-    },
-    {
-        title: 'INVG581402202',
-        description: 'Texto de exemplo para o card 1.\nQuebra de linha dentro do card.',
-      },
-      {
-        title: 'INVG4914022025',
-        description: 'Texto de exemplo para o card 2.\nOutra linha de exemplo.',
-      },
-      {
-        title: 'INVG5614022025',
-        description: 'Texto de exemplo para o card 3.\nMais uma linha aqui.',
-      },
-      {
-        title: 'INVG5814022025',
-        description: 'Texto de exemplo para o card 1.\nQuebra de linha dentro do card.',
-      },
-      {
-        title: 'INVG49140220',
-        description: 'Texto de exemplo para o card 2.\nOutra linha de exemplo.',
-      },
-      {
-        title: 'INVG56140220255518IAA5NTGPKK8S',
-        description: 'Texto de exemplo para o card 3.\nMais uma linha aqui.',
-      },
-  ]
 
   const headerExtraContent = (
     <span className="flex items-center">
@@ -86,12 +72,12 @@ const InvestmentsScreen = () => {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
      
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {cards.map((card, index) => (
+        {investmentList.map((card, index) => (
           <Card
           
           header={{
           
-            content: 'Em Andamento',
+            content: card.rate_withdrawl < 100 ? 'Em Andamento' : 'Concluído',
             extra: headerExtraContent,
            }}
             key={index}
@@ -100,46 +86,49 @@ const InvestmentsScreen = () => {
      
           >
             <h5 className="p-2 text-lg font-bold break-words mb-4 whitespace-pre-wrap">
-            {card.title}
+            {card.investment_code}
             </h5>
          
             <div className="grid grid-cols-2 gap-2">
                 <p className="p-2 break-words whitespace-pre-wrap">Cotas</p>
-                <p className="p-2 break-words whitespace-pre-wrap"><b>5</b></p>
+                <p className="p-2 break-words whitespace-pre-wrap"><b>{card.shares_acquired}</b></p>
             </div>
             <div className="grid grid-cols-2 gap-2">
                 <p className="p-2 break-words whitespace-pre-wrap">Investido</p>
-                <p className="p-2 break-words whitespace-pre-wrap">R$ 460,00</p>
+                <p className="p-2 break-words whitespace-pre-wrap">R$ {card.total_invested}</p>
             </div>
             <div className="grid grid-cols-2 gap-2">
                 <p className="p-2 break-words whitespace-pre-wrap">Retorno</p>
-                <p className="p-2 break-words whitespace-pre-wrap">R$ 854,00</p>
+                <p className="p-2 break-words whitespace-pre-wrap">R$ {card.total_redeem}</p>
             </div>
             <div className="grid grid-cols-2 gap-2">
                 <p className="p-2 break-words whitespace-pre-wrap">Margem ganho</p>
-                <p className="p-2 break-words whitespace-pre-wrap">20%</p>
+                <p className="p-2 break-words whitespace-pre-wrap">{card.return_percentage}%</p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-                <p className="p-2 break-words whitespace-pre-wrap">Retorno</p>
-                <p className="p-2 break-words whitespace-pre-wrap">R$ 854,00</p>
-            </div>
+           
             <div className="grid grid-cols-2 gap-2 mb-5">
                 <p className="p-2 break-words whitespace-pre-wrap">Criação</p>
-                <p className="p-2 break-words whitespace-pre-wrap">Criado há 18 hours ago</p>
+                <p className="p-2 break-words whitespace-pre-wrap">{card.days}</p>
             </div>
             
             <div>
-                <Progress percent={30} />
+                <Progress percent={card.rate_withdrawl} />
             </div>
             <div className='mt-5'>
-            <Button 
-            variant="solid" 
-            block 
-            icon={<HiFire />}
-            onClick={() => openDialog()}
-            >
-                Histórico Investimento
-            </Button>
+              { card.yieldHistories.length > 0
+                && (  <Button 
+                  variant="solid" 
+                  block 
+                  icon={<HiFire />}
+                  onClick={() => {
+                    openDialog();
+                    handleYieldHistories(card.yieldHistories);
+                }}
+                  >
+                      Histórico Investimento
+                  </Button>)
+              }
+          
             </div>
            
           </Card>
@@ -165,38 +154,18 @@ const InvestmentsScreen = () => {
                     </Tr>
                 </THead>
                 <TBody>
-                    <Tr>
-                        <Td>Alfreds </Td>
-                        <Td>Maria Anders</Td>
-                        <Td>Germany</Td>
-                        <Td>
-                            <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 p-2 dark:text-emerald-100 border-0 rounded">
-                                2%
-                            </Tag>
-                        </Td>
-                    </Tr>
-                    <Tr>
-                        <Td>Centro comerc</Td>
-                        <Td>Francisco Chang</Td>
-                        <Td>Mexico</Td>
-                        <Td>
-                            <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 p-2 dark:text-emerald-100 border-0 rounded">
-                                2%
-                            </Tag>
-                        </Td>
-                    </Tr>
-                    <Tr>
-                        <Td>Ernst Handel</Td>
-                        <Td>Roland Mendel</Td>
-                        <Td>
-                          teste
-                        </Td>
-                        <Td>
-                            <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 p-2 dark:text-emerald-100 border-0 rounded">
-                                2%
-                            </Tag>
-                        </Td>
-                    </Tr>
+                {yieldHistories.map((card, index) => (
+                  <Tr key={index}>
+                    <Td>{card.yield_date}</Td> {/* Substitua por propriedades reais de `card` */}
+                    <Td>R$ {card.total_investment}</Td> {/* Substitua por propriedades reais de `card` */}
+                    <Td>R$ {card.yield}</Td> {/* Substitua por propriedades reais de `card` */}
+                    <Td>
+                      <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 p-2 dark:text-emerald-100 border-0 rounded">
+                        {card.rate}%
+                      </Tag>
+                    </Td>
+                  </Tr>
+                ))}
                 </TBody>
             </Table>
           

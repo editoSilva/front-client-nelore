@@ -5,7 +5,7 @@ import { InvestmentResponse } from "@/@types/costumer/investiment/InvestMentType
 
 interface InvestmentState  {
     isLoading: boolean
-    investment: InvestmentResponse
+    investments: InvestmentResponse
   
 }
 
@@ -17,7 +17,7 @@ interface InvestmentActions {
 
 const initialState : InvestmentState = {
         isLoading: true,
-        investment: {
+        investments: {
             data: [],
             links: '',
             meta: {
@@ -47,7 +47,7 @@ export const useInvestmentStore = create<InvestmentState & InvestmentActions>((s
         
                     set({
                        
-                        investment: response, // Corrigido
+                        investments: response, // Corrigido
                         isLoading: false,
                     });
                 } catch (error) {

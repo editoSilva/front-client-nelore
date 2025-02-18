@@ -9,7 +9,7 @@ import toast from '@/components/ui/toast';
 
 const Invest = () => {  
     const { id } = useParams<{ id: string }>(); // Captura o parâmetro da URL
-    const { featchCatteShow, catte_show, featchInvestCatte , statusInvest} = useCattleStore();
+    const { featchCatteShow, catte_show, featchInvestCatte , statusInvest, erroInvest} = useCattleStore();
 
     const [investmentDetails, setInvestmentDetails] = useState<InvestmentDetails | null>(null);
     const [selectedQuotas, setSelectedQuotas] = useState<number[]>([]);
@@ -24,8 +24,9 @@ const Invest = () => {
 
     useEffect(() => {
         if (statusInvest) {
+            
             featchCatteShow(String(id)); // Busca os dados ao carregar a página
-
+           
             toast.push(
                 <Notification title="Sucesso!" type="success">
                 {`Compra de cota com sucesso!`}
@@ -35,6 +36,24 @@ const Invest = () => {
         }
     }, [statusInvest])
 
+    useEffect(()=> {
+        if(statusInvest) {
+            setSelectedQuotas([])
+        }
+    },[statusInvest])
+
+    useEffect(()=> {
+        if (erroInvest) {
+        toast.push(
+            <Notification title="Falha!" type="danger">
+            {`Você não tem saldo!`}
+            </Notification>
+          );
+        }
+    },[erroInvest])
+
+
+   
 
     useEffect(() => {
         if (catte_show?.data) {
