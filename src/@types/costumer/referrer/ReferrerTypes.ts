@@ -12,6 +12,9 @@ export type ReferrerResponse = {
     }
 }
 
+export type LinkTypes = {
+    code: string
+}
 
 export type ReferrerTypes = {
     name: string

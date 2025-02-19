@@ -1,13 +1,20 @@
 
 
 import ApiService from '@/services/ApiService';
-
 import endpointConfig from '@/configs/costumer/endpointConfig';
-
-import { ReferrerResponse } from '@/@types/costumer/referrer/ReferrerTypes';
+import { LinkTypes, ReferrerResponse } from '@/@types/costumer/referrer/ReferrerTypes';
 import { TableQueries } from '@/@types/common';
 import { Filter } from '@/store/costumer/transactions';
 
+
+export async function apiSetCountLink(data: LinkTypes)
+{
+    return ApiService.fetchDataWithAxios({
+        url: endpointConfig.countLink,
+        method: 'post',
+        data,
+    })
+}
 
 
 export async function apiGetReferrers(data: TableQueries, filter: Filter) {

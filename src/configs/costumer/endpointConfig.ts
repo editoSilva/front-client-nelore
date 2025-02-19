@@ -11,6 +11,7 @@ export type EndpointConfig = {
     listInvestments: string
     referrers: string
     commisions: string
+    countLink: string
 }
 
 const endpointConfig: EndpointConfig = {
@@ -23,7 +24,8 @@ const endpointConfig: EndpointConfig = {
     investCatte: base.baseUrl+'/costumer/investments/',
     listInvestments: base.baseUrl+'/costumer/investments/',
     referrers: base.baseUrl+'/costumer/referrals',
-    commisions: base.baseUrl+'/costumer/commissions'
+    commisions: base.baseUrl+'/costumer/commissions',
+    countLink: base.baseUrl+'/costumer/count-link'
 }
 
 export default endpointConfig;

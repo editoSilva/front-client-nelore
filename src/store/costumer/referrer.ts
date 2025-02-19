@@ -2,8 +2,8 @@ import { create } from 'zustand';
 
 import { TableQueries } from '@/@types/common';
 import dayjs from 'dayjs';
-import { ReferrerResponse } from '@/@types/costumer/referrer/ReferrerTypes';
-import { apiGetReferrers } from '@/services/costumer/referrer/ApiReferrer';
+import { LinkTypes, ReferrerResponse } from '@/@types/costumer/referrer/ReferrerTypes';
+import { apiGetReferrers, apiSetCountLink } from '@/services/costumer/referrer/ApiReferrer';
 
 
 export type Filter = {
@@ -43,6 +43,7 @@ type ReferrerListAction = {
     setFilterData: (payload: Filter) => void
     setTableData: (payload: TableQueries) => void
     featchReferrers: (payload: TableQueries, data: Filter) => void
+    setCountLink: (payload : LinkTypes) => void
   
 }
 
@@ -76,7 +77,10 @@ export const useReferrerStore = create<ReferrerListState & ReferrerListAction>((
         console.log('response', response)
         set({referres: response, isLoading:false})
     },
-    
+    setCountLink: async (data) => {
+        const response = await apiSetCountLink(data);
+        console.log(response)      
+    },
     setFilterData: (payload) => set(() => ({ filterData: payload })),
     setTableData: (payload) => set(() => ({ tableData: payload })),
   

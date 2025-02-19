@@ -13,6 +13,7 @@ import { string, z } from 'zod'
 import type { ZodType } from 'zod'
 import type { CommonProps } from '@/@types/common'
 import type { ReactNode } from 'react'
+import { useReferrerStore } from '@/store/costumer/referrer';
 
 interface SignUpFormProps extends CommonProps {
     disableSubmit?: boolean
@@ -50,11 +51,13 @@ const validationSchema: ZodType<SignUpFormSchema> = z
     })
 
 const SignUpForm = (props: SignUpFormProps) => {
+
+    const { setCountLink } = useReferrerStore();
     const { disableSubmit = false, className, setMessage, passwordHint, confirmPasswordHint } = props
 
     const [isSubmitting, setSubmitting] = useState<boolean>(false)
 
-    const [linkAfiliate, setLinkAviliate] = useState<string | null>('')
+    const [linkAfiliate, setLinkAviliate] = useState<string >('')
 
     const { signUp } = useAuth()
 
@@ -131,17 +134,24 @@ const SignUpForm = (props: SignUpFormProps) => {
 
         const code = urlParams.get('aff')
 
-    
+        if(code) {
+          
+      
+            setLinkAviliate(code)
+        }
 
-        setLinkAviliate(code)
-        
     }
-
-    console.log('link afiliado', linkAfiliate)
 
 
     useEffect(() => {
-        handleLink()
+        if(linkAfiliate) {
+            const obj = {code: linkAfiliate}
+            setCountLink(obj)
+        }
+    })
+
+    useEffect(() => {
+        handleLink()    
     }, [linkAfiliate])
     return (
         <div className={className}>
