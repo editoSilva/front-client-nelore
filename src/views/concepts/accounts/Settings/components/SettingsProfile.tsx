@@ -213,7 +213,7 @@ const SettingsProfile = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                     <FormItem
-                        label="First name"
+                        label="Nome"
                         invalid={Boolean(errors.firstName)}
                         errorMessage={errors.firstName?.message}
                     >
@@ -224,14 +224,14 @@ const SettingsProfile = () => {
                                 <Input
                                     type="text"
                                     autoComplete="off"
-                                    placeholder="First Name"
+                                    placeholder="Nome"
                                     {...field}
                                 />
                             )}
                         />
                     </FormItem>
                     <FormItem
-                        label="User name"
+                        label="Sobrenome"
                         invalid={Boolean(errors.lastName)}
                         errorMessage={errors.lastName?.message}
                     >
@@ -242,7 +242,7 @@ const SettingsProfile = () => {
                                 <Input
                                     type="text"
                                     autoComplete="off"
-                                    placeholder="Last Name"
+                                    placeholder="Sobrenome"
                                     {...field}
                                 />
                             )}
@@ -274,7 +274,7 @@ const SettingsProfile = () => {
                             Boolean(errors.dialCode)
                         }
                     >
-                        <label className="form-label mb-2">Phone number</label>
+                        <label className="form-label mb-2">Contato</label>
                         <Controller
                             name="dialCode"
                             control={control}
@@ -318,7 +318,7 @@ const SettingsProfile = () => {
                             render={({ field }) => (
                                 <NumericInput
                                     autoComplete="off"
-                                    placeholder="Phone Number"
+                                    placeholder="Número"
                                     value={field.value}
                                     onChange={field.onChange}
                                     onBlur={field.onBlur}
@@ -327,9 +327,9 @@ const SettingsProfile = () => {
                         />
                     </FormItem>
                 </div>
-                <h4 className="mb-6">Address information</h4>
+                <h4 className="mb-6">Endereço</h4>
                 <FormItem
-                    label="Country"
+                    label="Cidade"
                     invalid={Boolean(errors.country)}
                     errorMessage={errors.country?.message}
                 >
@@ -409,7 +409,7 @@ const SettingsProfile = () => {
                                 <Input
                                     type="text"
                                     autoComplete="off"
-                                    placeholder="Postal Code"
+                                    placeholder="CEP"
                                     {...field}
                                 />
                             )}

@@ -232,7 +232,7 @@ const conceptsRoute: Routes = [
         authority: [COSTUMER],
         meta: {
             header: {
-                title: 'Settings',
+                title: '',
             },
             pageContainerType: 'contained',
         },

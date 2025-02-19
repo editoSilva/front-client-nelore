@@ -89,10 +89,10 @@ const SettingsSecurity = () => {
     return (
         <div>
             <div className="mb-8">
-                <h4>Password</h4>
+                <h4>Senha</h4>
                 <p>
-                    Remember, your password is your digital key to your account.
-                    Keep it safe, keep it secure!
+                Lembre-se de que sua senha é a chave digital da sua conta.
+                Mantenha-o seguro, mantenha-o seguro!
                 </p>
             </div>
             <Form
@@ -101,7 +101,7 @@ const SettingsSecurity = () => {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <FormItem
-                    label="Current password"
+                    label="Senha Atual"
                     invalid={Boolean(errors.currentPassword)}
                     errorMessage={errors.currentPassword?.message}
                 >
@@ -119,7 +119,7 @@ const SettingsSecurity = () => {
                     />
                 </FormItem>
                 <FormItem
-                    label="New password"
+                    label="Nova Senha"
                     invalid={Boolean(errors.newPassword)}
                     errorMessage={errors.newPassword?.message}
                 >
@@ -137,7 +137,7 @@ const SettingsSecurity = () => {
                     />
                 </FormItem>
                 <FormItem
-                    label="Confirm new password"
+                    label="Confirme nova senha"
                     invalid={Boolean(errors.confirmNewPassword)}
                     errorMessage={errors.confirmNewPassword?.message}
                 >
@@ -156,7 +156,7 @@ const SettingsSecurity = () => {
                 </FormItem>
                 <div className="flex justify-end">
                     <Button variant="solid" type="submit">
-                        Update
+                        Atualizar
                     </Button>
                 </div>
             </Form>
@@ -174,7 +174,7 @@ const SettingsSecurity = () => {
             >
                 <p>Are you sure you want to change your password?</p>
             </ConfirmDialog>
-            <div className="mb-8">
+            {/* <div className="mb-8">
                 <h4>2-Step verification</h4>
                 <p>
                     Your account holds great value to hackers. Enable two-step
@@ -232,7 +232,7 @@ const SettingsSecurity = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
