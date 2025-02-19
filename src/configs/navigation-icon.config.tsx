@@ -92,6 +92,8 @@ import {
 import { FaHome, FaNetworkWired} from "react-icons/fa";
 import { FaMoneyBillTrendUp, FaBoxesStacked, FaFileContract} from "react-icons/fa6";
 import { GiGraduateCap, GiThorHammer } from "react-icons/gi";
+import { BsCurrencyExchange } from "react-icons/bs";
+import { GrTransaction } from "react-icons/gr";
 
 
 
@@ -101,7 +103,9 @@ export type NavigationIcons = Record<string, JSX.Element>
 
 const navigationIcon: NavigationIcons = {
     uiComponents: <PiPuzzlePieceDuotone />,
+    transactions: <GrTransaction/>,
     common: <PiSwatchesDuotone />,
+    bsCurrencyExchange: <BsCurrencyExchange/>,
     uiCommonButton: <PiCursorClickDuotone />,
     uiCommonGrid: <PiGridFourDuotone />,
     uiCommonTypography: <PiTextAaDuotone />,

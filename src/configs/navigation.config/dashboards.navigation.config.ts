@@ -50,7 +50,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
                 title: 'Lotes',
                 translateKey: 'nav.dashboard.investiments',
-                icon: 'lots',
+                icon: 'bsCurrencyExchange',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [COSTUMER],
                 subMenu: [
@@ -81,7 +81,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
                 title: 'Transações',
                 translateKey: 'nav.dashboard.transacions',
-                icon: 'finatial',
+                icon: 'transactions',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [COSTUMER],
                 subMenu: [
