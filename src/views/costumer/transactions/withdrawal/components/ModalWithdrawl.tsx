@@ -255,7 +255,7 @@ const setIntervalDesposit = (data: Deposit) => {
         {depositSuccess ? (
           // Exibe mensagem de agradecimento após o sucesso
           <div className="text-center">
-            <h3 className="text-lg font-bold mb-4">💰 Falta bem puco para investir!</h3>
+            <h3 className="text-lg font-bold mb-4">💰 Falta bem puco para seu saque!</h3>
 
             <div className="flex justify-center items-center mb-4">
               <ReactQRCode value={deposit.data.content} size={256} />
@@ -283,13 +283,13 @@ const setIntervalDesposit = (data: Deposit) => {
         ) : (
           <>
             {/* Exibe as informações de depósito antes do sucesso */}
-            <h3 className="text-lg font-bold mb-4 text-center">💰 Realizar Depósito</h3>
+            <h3 className="text-lg font-bold mb-4 text-center">💰 Realizar Saque</h3>
             <p className="text-sm text-gray-500 text-center mb-6">
-              Insira o valor desejado para realizar seu depósito. Certifique-se de que as informações estão corretas antes de confirmar.
+              Insira o valor desejado para realizar seu saque. Certifique-se de que as informações estão corretas antes de confirmar.
             </p>
             <div className="mb-6">
-              <label htmlFor="depositAmount" className="block text-sm font-bold  mb-2">
-                Valor do Depósito (R$)
+              <label htmlFor="depositAmount" className="block text-sm font-bold mb-2">
+                Valor do Saque(R$)
               </label>
               <Input
                 id="depositAmount"
@@ -323,7 +323,7 @@ const setIntervalDesposit = (data: Deposit) => {
                   onClick={handleDeposit}
                   disabled={!depositAmount || loading}
                 >
-                  Confirmar Depósito
+                  Confirmar Saque
                 </Button>
               </div>
             )}

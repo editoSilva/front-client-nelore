@@ -1,10 +1,11 @@
+import AdaptiveCard from "@/components/shared/AdaptiveCard";
+import TransactionListActionTools from "./components/TransactionListActionTools";
+import TransactionListTableTools from "./components/TransactionListTableTools";
+import TransactionsList from "./components/TransactionsList";
+import Container from "@/components/shared/Container";
 
 
-import TransactionsList from "../components/TransactionsList";
 
-import TransactionListActionTools from "../components/TransactionListActionTools";
-import { AdaptiveCard, Container } from "@/components/shared";
-import TransactionListTableTools from "../components/TransactionListTableTools";
 
 const WithdrawalTransaction= () => {  
 
