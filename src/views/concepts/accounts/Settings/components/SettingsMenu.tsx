@@ -16,7 +16,7 @@ const { MenuItem } = Menu
 
 const menuList: { label: string; value: View; icon: ReactNode }[] = [
     { label: 'Perfil', value: 'profile', icon: <TbUserSquare /> },
-    { label: 'Segurança', value: 'security', icon: <TbLock /> },
+    // { label: 'Segurança', value: 'security', icon: <TbLock /> },
     // { label: 'Notification', value: 'notification', icon: <TbBell /> },
     { label: 'Documentos', value: 'billing', icon: <TbFileTypeDocx /> },
     // { label: 'Integration', value: 'integration', icon: <TbRefreshDot /> },

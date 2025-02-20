@@ -1,6 +1,6 @@
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import Button from '@/components/ui/Button'
-
+import InputMask from "react-input-mask";
 import Input from '@/components/ui/Input'
 import Select, { Option as DefaultOption } from '@/components/ui/Select'
 import Avatar from '@/components/ui/Avatar'
@@ -10,6 +10,8 @@ import { countryList } from '@/constants/countries.constant'
 import { components } from 'react-select'
 import type { ControlProps, OptionProps } from 'react-select'
 import { apiGetSettingsProfile } from '@/services/AccontsService'
+import Alert from '@/components/ui/Alert'
+import { HiFire } from 'react-icons/hi'
 import sleep from '@/utils/sleep'
 import useSWR from 'swr'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,13 +20,14 @@ import { z } from 'zod'
 
 import type { ZodType } from 'zod'
 import type { GetSettingsProfileResponse } from '../types'
+import { useSessionUser } from '@/store/authStore'
 
 type ProfileSchema = {
-    firstName: string
-    lastName: string
+    name: string
+    cpf: string
     email: string
     dialCode: string
-    phoneNumber: string
+    phone: string
     img: string
     country: string
     address: string
@@ -38,24 +41,38 @@ type CountryOption = {
     value: string
 }
 
+type User = {
+    userId?: string | null
+    avatar?: string | null
+    name?: string | null
+    cpf?: string | null
+    phone?: string | null
+    code?: string | null
+    email?: string | null
+    role?: string | null
+    authority?: string[]
+}
 const { Control } = components
 
+
+
+
 const validationSchema: ZodType<ProfileSchema> = z.object({
-    firstName: z.string().min(1, { message: 'First name required' }),
-    lastName: z.string().min(1, { message: 'Last name required' }),
+    name: z.string().min(1, { message: 'First name required' }),
+    cph: z.string().min(1, { message: 'Last name required' }),
     email: z
         .string()
         .min(1, { message: 'Email required' })
         .email({ message: 'Invalid email' }),
     dialCode: z.string().min(1, { message: 'Please select your country code' }),
-    phoneNumber: z
+    phone: z
         .string()
         .min(1, { message: 'Please input your mobile number' }),
     country: z.string().min(1, { message: 'Please select a country' }),
     address: z.string().min(1, { message: 'Addrress required' }),
     postcode: z.string().min(1, { message: 'Postcode required' }),
     city: z.string().min(1, { message: 'City required' }),
-    img: z.string(),
+
 })
 
 const CustomSelectOption = (
@@ -80,6 +97,9 @@ const CustomSelectOption = (
 }
 
 const CustomControl = ({ children, ...props }: ControlProps<CountryOption>) => {
+
+    
+
     const selected = props.getValue()[0]
     return (
         <Control {...props}>
@@ -96,7 +116,13 @@ const CustomControl = ({ children, ...props }: ControlProps<CountryOption>) => {
     )
 }
 
+
+
 const SettingsProfile = () => {
+    const [currentUser, setCurrentUser] = useState<User>();
+
+    const { user } = useSessionUser()
+
     const { data, mutate } = useSWR(
         '/api/settings/profile/',
         () => apiGetSettingsProfile<GetSettingsProfileResponse>(),
@@ -107,6 +133,18 @@ const SettingsProfile = () => {
         },
     )
 
+
+
+  
+
+
+    useEffect(() => {
+        if (user) {
+            setCurrentUser(user);
+        }
+    }, [user]); // Atualiza o estado quando 'user' mudar
+
+console.log('currentUser', currentUser?.name)
 
     const typePix = () => {
         return [
@@ -163,6 +201,26 @@ const SettingsProfile = () => {
         resolver: zodResolver(validationSchema),
     })
 
+    const tiposChavesPix = [
+        { label: 'CPF', value: 'cpf' },
+        { label: 'CNPJ', value: 'cnpj' },
+        { label: 'Email', value: 'email' },
+        { label: 'Telefone', value: 'telefone' },
+        { label: 'Chave Aleatória', value: 'aleatoria' },
+        { label: 'Evangélica', value: 'evangelica' }, // Exemplo de chave evangelica
+      ];
+
+      // Interface para os dados do formulário
+            interface FormData {
+                pixKeyType: PixKeyType;
+            }
+            
+            interface MyFormProps {
+                control: any; // O tipo de `control` pode ser ajustado de acordo com o seu uso
+                errors: any; // Ajuste o tipo de erro conforme necessário
+            }
+            
+      
     useEffect(() => {
         if (data) {
             reset(data)
@@ -180,69 +238,22 @@ const SettingsProfile = () => {
     return (
         <>
             <h4 className="mb-8">Informações Pessoais</h4>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-8">
-                    {/* <Controller
-                        name="img"
-                        control={control}
-                        render={({ field }) => (
-                            <div className="flex items-center gap-4">
-                                <Avatar
-                                    size={90}
-                                    className="border-4 border-white bg-gray-100 text-gray-300 shadow-lg"
-                                    icon={<HiOutlineUser />}
-                                    src={field.value}
-                                />
-                                <div className="flex items-center gap-2">
-                                    <Upload
-                                        showList={false}
-                                        uploadLimit={1}
-                                        beforeUpload={beforeUpload}
-                                        onChange={(files) => {
-                                            if (files.length > 0) {
-                                                field.onChange(
-                                                    URL.createObjectURL(
-                                                        files[0],
-                                                    ),
-                                                )
-                                            }
-                                        }}
-                                    >
-                                        <Button
-                                            variant="solid"
-                                            size="sm"
-                                            type="button"
-                                            icon={<TbPlus />}
-                                        >
-                                            Upload Image
-                                        </Button>
-                                    </Upload>
-                                    <Button
-                                        size="sm"
-                                        type="button"
-                                        onClick={() => {
-                                            field.onChange('')
-                                        }}
-                                    >
-                                        Remove
-                                    </Button>
-                                </div>
-                            </div>
-                        )}
-                    /> */}
-                </div>
+           
+           <div className=' mb-8 border-b border-s-slate-700 p-6'>
+              
                 <div className="grid md:grid-cols-2 gap-4">
                     <FormItem
                         label="Nome"
-                        invalid={Boolean(errors.firstName)}
-                        errorMessage={errors.firstName?.message}
+                       
                     >
                         <Controller
-                            name="firstName"
+                            name="name"
                             control={control}
+                            defaultValue={user?.name|| ""}
                             render={({ field }) => (
                                 <Input
                                     type="text"
+                                    disabled={true}
                                     autoComplete="off"
                                     placeholder="Nome"
                                     {...field}
@@ -251,34 +262,47 @@ const SettingsProfile = () => {
                         />
                     </FormItem>
                     <FormItem
-                        label="Sobrenome"
-                        invalid={Boolean(errors.lastName)}
-                        errorMessage={errors.lastName?.message}
+                        label="cpf"
                     >
                         <Controller
-                            name="lastName"
+                            name="cpf"
+                            defaultValue={user?.cpf || ""}
                             control={control}
                             render={({ field }) => (
+
+                                <InputMask
+                                mask="999.999.999-99"
+                                disabled={true}
+                                value={field.value || ""}
+                                onChange={field.onChange}
+                            >
+                                {(inputProps: string[]) => (
                                 <Input
+                                    {...inputProps}
                                     type="text"
+                                    placeholder="CPF"
                                     autoComplete="off"
-                                    placeholder="Sobrenome"
-                                    {...field}
                                 />
+                                )}
+                            </InputMask>
+                              
                             )}
                         />
                     </FormItem>
                 </div>
+            
+                <div className="grid md:grid-cols-2 gap-4">
                 <FormItem
                     label="Email"
-                    invalid={Boolean(errors.email)}
-                    errorMessage={errors.email?.message}
+                  
                 >
                     <Controller
                         name="email"
+                        defaultValue={user?.email || ""}
                         control={control}
                         render={({ field }) => (
                             <Input
+                                disabled={true}
                                 type="email"
                                 autoComplete="off"
                                 placeholder="Email"
@@ -287,107 +311,71 @@ const SettingsProfile = () => {
                         )}
                     />
                 </FormItem>
-                <div className="flex items-end gap-4 w-full mb-6">
+                     
                     <FormItem
-                        invalid={
-                            Boolean(errors.phoneNumber) ||
-                            Boolean(errors.dialCode)
-                        }
+                        className="w-full"
+                     
+                      
                     >
                         <label className="form-label mb-2">Contato</label>
                         <Controller
-                            name="dialCode"
+                            name="phone"
+                            defaultValue={user?.phone || ""}
                             control={control}
                             render={({ field }) => (
-                                <Select<CountryOption>
-                                    options={dialCodeList}
-                                    {...field}
-                                    className="w-[150px]"
-                                    components={{
-                                        Option: (props) => (
-                                            <CustomSelectOption
-                                                variant="phone"
-                                                {...(props as OptionProps<CountryOption>)}
-                                            />
-                                        ),
-                                        Control: CustomControl,
-                                    }}
-                                    placeholder=""
-                                    value={dialCodeList.filter(
-                                        (option) =>
-                                            option.dialCode === field.value,
-                                    )}
-                                    onChange={(option) =>
-                                        field.onChange(option?.dialCode)
-                                    }
-                                />
-                            )}
-                        />
-                    </FormItem>
-                    <FormItem
-                        className="w-full"
-                        invalid={
-                            Boolean(errors.phoneNumber) ||
-                            Boolean(errors.dialCode)
-                        }
-                        errorMessage={errors.phoneNumber?.message}
-                    >
-                        <label className="form-label mb-2">Número</label>
-                        <Controller
-                            name="phoneNumber"
-                            control={control}
-                            render={({ field }) => (
-                                <NumericInput
+                                <InputMask
+                                mask="(99) 99999-9999"
+                                value={field.value || ""}
+                                disabled={true}
+                                onChange={field.onChange}
+                            >
+                                {(inputProps: string[]) => (
+                                <Input
+                                    {...inputProps}
+                                    type="text"
+                                    placeholder="Contato"
                                     autoComplete="off"
-                                    placeholder="Número"
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                    onBlur={field.onBlur}
                                 />
+                                )}
+                            </InputMask>
                             )}
                         />
                     </FormItem>
+                    </div>
                 </div>
-
+                <Form onSubmit={handleSubmit(onSubmit)}>
                 <h4 className="mb-6">Dados Bancários</h4>
 
-                <div className="flex items-end gap-4 w-full mb-6">
-                    <FormItem
-                        invalid={
-                            Boolean(errors.phoneNumber) ||
-                            Boolean(errors.dialCode)
-                        }
-                    >
-                        <label className="form-label mb-2">Tipo Chave</label>
-                        <Controller
-                            name="dialCode"
-                            control={control}
-                            render={({ field }) => (
-                                <Select<CountryOption>
-                                    options={dialCodeList}
-                                    {...field}
-                                    className="w-[150px]"
-                                    components={{
-                                        Option: (props) => (
-                                            <CustomSelectOption
-                                                variant="phone"
-                                                {...(props as OptionProps<CountryOption>)}
-                                            />
-                                        ),
-                                        Control: CustomControl,
-                                    }}
-                                    placeholder=""
-                                    value={dialCodeList.filter(
-                                        (option) =>
-                                            option.dialCode === field.value,
-                                    )}
-                                    onChange={(option) =>
-                                        field.onChange(option?.dialCode)
-                                    }
-                                />
-                            )}
-                        />
-                    </FormItem>
+                <div>
+                    <Alert showIcon type="warning" customIcon={<HiFire />}>
+                        A sua chave PIX deve ser a vinculada ao cpf do cadastro, não sendo não efetuaremos pagamentos.
+                    </Alert>
+                </div>
+
+                <div className="flex items-end gap-4 w-full mb-8  p-6">
+                <FormItem>
+                <label className="form-label mb-2">Tipo</label>
+                <Controller
+                name="pixKeyType" // Nome do campo do formulário
+                control={control}
+                render={({ field }) => (
+                    <Select
+                    options={tiposChavesPix.map((item) => ({
+                        label: item.label,
+                        value: item.value,
+                    }))}
+                    {...field}
+                    className="w-[150px]"
+                    components={{
+                        Control: CustomControl, // Continuamos utilizando CustomControl
+                    }}
+                    placeholder="Tipo"
+                    value={tiposChavesPix.find((option) => option.value === field.value)} // Define o valor selecionado
+                    onChange={(option: PixKeyType) => field.onChange(option)} // Atualiza o valor no formulário
+                    />
+                )}
+                />
+                                </FormItem>
                     <FormItem
                         className="w-full"
                         invalid={
@@ -411,11 +399,27 @@ const SettingsProfile = () => {
                             )}
                         />
                     </FormItem>
+
+                    
                 </div>
 
-
+                <div className="flex justify-end mb-6">
+                    <Button
+                        variant="solid"
+                        type="submit"
+                        loading={isSubmitting}
+                    >
+                       Enviar
+                    </Button>
+                </div>
 
                 <h4 className="mb-6">Endereço</h4>
+                <div className='mb-8'>
+                    <Alert showIcon type="info" customIcon={<HiFire />}>
+                            Mantenha seus dados atualizados, para que nossa equipe possa está lhe enviando, bonificações e brindes.
+                    </Alert>
+                </div>
+
                 <FormItem
                     label="Cidade"
                     invalid={Boolean(errors.country)}
@@ -510,7 +514,7 @@ const SettingsProfile = () => {
                         type="submit"
                         loading={isSubmitting}
                     >
-                        Save
+                        Atualizar
                     </Button>
                 </div>
             </Form>
