@@ -14,7 +14,8 @@ AxiosBase.interceptors.request.use(
     (config) => {
 
          const currentDomain = window.location.hostname;
-      
+
+         console.log('currentDomain', currentDomain)
         config.headers['domain'] = currentDomain;
 
         return AxiosRequestIntrceptorConfigCallback(config)
