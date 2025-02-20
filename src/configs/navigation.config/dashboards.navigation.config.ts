@@ -37,7 +37,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             },
             {
                 key: 'dashboard.auctions',
-                path: `${DASHBOARDS_PREFIX_PATH}/leiloes`,
+                path: '/leiloes',
                 title: 'Leilões',
                 translateKey: 'nav.dashboard.auctions',
                 icon: 'GiThorHammer',
@@ -139,14 +139,25 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 ],
             },
             {
-                key: 'dashboard.Knowledge_center',
-                path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'Aulas',
+                key: 'central-de-conhecimento',
+                path: 'central-de-conhecimento',
+                title: 'Central de Conhecimento',
                 translateKey: 'nav.dashboard.Knowledge_center',
                 icon: 'GiGraduateCap',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [COSTUMER],
-                subMenu: [],
+                subMenu: [
+                    {
+                        key: 'aulas',
+                        path: 'aulas',
+                        title: 'Aulas',
+                        translateKey: 'Aulas',
+                        icon: 'GiGraduateCap',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [COSTUMER],
+                        subMenu: [],
+                    },
+                ],
             },
             {
                 key: 'dashboard.legal',
@@ -156,7 +167,18 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 icon: 'documentation',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [COSTUMER],
-                subMenu: [],
+                subMenu: [
+                    {
+                        key: 'legais',
+                        path: 'legais',
+                        title: 'Aspectos Legais',
+                        translateKey: 'Aspectos Legais',
+                        icon: 'GiGraduateCap',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [COSTUMER],
+                        subMenu: [],
+                    },
+                ],
             },
             {
                 key: 'dashboard.contracts',
@@ -166,7 +188,18 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 icon: 'FaFileContract',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [COSTUMER],
-                subMenu: [],
+                subMenu: [
+                    {
+                        key: 'adesao',
+                        path: 'adesao',
+                        title: 'Adesão',
+                        translateKey: 'Adesão',
+                        icon: 'GiGraduateCap',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [COSTUMER],
+                        subMenu: [],
+                    },
+                ],
             },
            
             // {

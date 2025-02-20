@@ -71,7 +71,7 @@ const InvestmentsScreen = () => {
          <h3 className="text-1xl font-bold mb-4">Meus Investimentos</h3>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {investmentList.map((card, index) => (
           <Card
           

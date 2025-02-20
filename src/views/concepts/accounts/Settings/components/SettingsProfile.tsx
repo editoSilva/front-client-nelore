@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from 'react'
 import Button from '@/components/ui/Button'
-import Upload from '@/components/ui/Upload'
+
 import Input from '@/components/ui/Input'
 import Select, { Option as DefaultOption } from '@/components/ui/Select'
 import Avatar from '@/components/ui/Avatar'
@@ -15,8 +15,7 @@ import useSWR from 'swr'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, Controller } from 'react-hook-form'
 import { z } from 'zod'
-import { HiOutlineUser } from 'react-icons/hi'
-import { TbPlus } from 'react-icons/tb'
+
 import type { ZodType } from 'zod'
 import type { GetSettingsProfileResponse } from '../types'
 
@@ -108,6 +107,27 @@ const SettingsProfile = () => {
         },
     )
 
+
+    const typePix = () => {
+        return [
+            {
+                label: 'CPF',
+                value: 'cpf',
+            },
+            {
+                label: 'E-mail',
+                value: 'email',
+            },
+            {
+                label: 'Telefone',
+                value: 'telefone',
+            },
+            {
+                label: 'Aleatória',
+                value: 'aleatoria',
+            },
+        ]
+    }
     const dialCodeList = useMemo(() => {
         const newCountryList: Array<CountryOption> = JSON.parse(
             JSON.stringify(countryList),
@@ -312,6 +332,7 @@ const SettingsProfile = () => {
                         }
                         errorMessage={errors.phoneNumber?.message}
                     >
+                        <label className="form-label mb-2">Número</label>
                         <Controller
                             name="phoneNumber"
                             control={control}
@@ -327,6 +348,73 @@ const SettingsProfile = () => {
                         />
                     </FormItem>
                 </div>
+
+                <h4 className="mb-6">Dados Bancários</h4>
+
+                <div className="flex items-end gap-4 w-full mb-6">
+                    <FormItem
+                        invalid={
+                            Boolean(errors.phoneNumber) ||
+                            Boolean(errors.dialCode)
+                        }
+                    >
+                        <label className="form-label mb-2">Tipo Chave</label>
+                        <Controller
+                            name="dialCode"
+                            control={control}
+                            render={({ field }) => (
+                                <Select<CountryOption>
+                                    options={dialCodeList}
+                                    {...field}
+                                    className="w-[150px]"
+                                    components={{
+                                        Option: (props) => (
+                                            <CustomSelectOption
+                                                variant="phone"
+                                                {...(props as OptionProps<CountryOption>)}
+                                            />
+                                        ),
+                                        Control: CustomControl,
+                                    }}
+                                    placeholder=""
+                                    value={dialCodeList.filter(
+                                        (option) =>
+                                            option.dialCode === field.value,
+                                    )}
+                                    onChange={(option) =>
+                                        field.onChange(option?.dialCode)
+                                    }
+                                />
+                            )}
+                        />
+                    </FormItem>
+                    <FormItem
+                        className="w-full"
+                        invalid={
+                            Boolean(errors.phoneNumber) ||
+                            Boolean(errors.dialCode)
+                        }
+                        errorMessage={errors.phoneNumber?.message}
+                    >
+                        <label className="form-label mb-2">Chave</label>
+                        <Controller
+                            name="phoneNumber"
+                            control={control}
+                            render={({ field }) => (
+                                <NumericInput
+                                    autoComplete="off"
+                                    placeholder="Número"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    onBlur={field.onBlur}
+                                />
+                            )}
+                        />
+                    </FormItem>
+                </div>
+
+
+
                 <h4 className="mb-6">Endereço</h4>
                 <FormItem
                     label="Cidade"

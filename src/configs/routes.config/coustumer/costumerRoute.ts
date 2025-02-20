@@ -76,7 +76,43 @@ const costumerRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+    {
+        key: 'leiloes',
+        path: '/leiloes',
+        component: lazy(() => import('@/views/costumer/leiloes/')),
+        authority: [COSTUMER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+    {
+        key: 'aulas',
+        path: '/aulas',
+        component: lazy(() => import('@/views/costumer/central_de_conhecimento/aulas/')),
+        authority: [COSTUMER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+    {
+        key: 'legais',
+        path: '/legais',
+        component: lazy(() => import('@/views/costumer/juridico/legais')),
+        authority: [COSTUMER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
 
+    {
+        key: 'adesao',
+        path: '/adesao',
+        component: lazy(() => import('@/views/costumer/contrato/adesao')),
+        authority: [COSTUMER],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
     
 ]
 
