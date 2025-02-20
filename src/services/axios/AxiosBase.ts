@@ -11,12 +11,11 @@ const AxiosBase = axios.create({
 
 AxiosBase.interceptors.request.use(
 
-   
     (config) => {
-        
-        // const currentDomain = window.location.hostname;
-       
-        config.headers['domain'] = 'neloreinvest.com';
+
+         const currentDomain = window.location.hostname;
+      
+        config.headers['domain'] = currentDomain;
 
         return AxiosRequestIntrceptorConfigCallback(config)
     },
