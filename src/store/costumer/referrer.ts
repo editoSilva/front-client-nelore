@@ -72,6 +72,7 @@ export const useReferrerStore = create<ReferrerListState & ReferrerListAction>((
     //States
     ...initialState,
     isLoading: true,
+    
     featchReferrers: async (data, filter) => {
         const response = await apiGetReferrers(data, filter);
         console.log('response', response)

@@ -4,7 +4,7 @@ import Select from '@/components/ui/Select'
 
 const colourOptions = [
     { value: 'cnh', label: 'CNH', color: '#00B8D9' },
-    { value: 'carteiraidentidade', label: 'Carteira Identidade', color: '#0052CC' },
+    { value: 'rg', label: 'RG', color: '#0052CC' },
     { value: 'passaport', label: 'Passaporte', color: '#5243AA' },
   
 ]

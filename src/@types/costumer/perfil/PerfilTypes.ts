@@ -42,7 +42,7 @@ export type PerfilTypes = {
         created_at: string
         update_at: string
         adress: Adress
-        pixKey: Documents
-        documents: PixKey
+        pixKey: PixKey
+        documents: Documents
     }
 }

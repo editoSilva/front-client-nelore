@@ -47,8 +47,6 @@ function AuthProvider({ children }: AuthProviderProps) {
 
     const navigatorRef = useRef<IsolatedNavigatorRef>(null)
 
-    console.log('role', user.role)
-
     const path = '';
 
     const redirect = () => {
@@ -97,9 +95,14 @@ function AuthProvider({ children }: AuthProviderProps) {
             }
             // eslint-disable-next-line  @typescript-eslint/no-explicit-any
         } catch (errors: any) {
+        
             return {
                 status: 'failed',
-                message: errors?.response?.data?.data?.message || errors.toString(),
+                message: errors?.response?.data?.errors
+                ? Object.values(errors.response.data.errors)
+                    .flat() // Junta todos os arrays em um único array
+                    .join("\n") // Converte para uma string separada por vírgulas
+                : errors?.response?.data?.data?.message || errors.toString(),
             }
         }
     }
@@ -107,25 +110,36 @@ function AuthProvider({ children }: AuthProviderProps) {
     const signUp = async (values: SignUpCredential): AuthResult => {
         try {
             const resp = await apiSignUp(values)
-            console.log('res', resp)
-       
-            if (resp) {
-                handleSignIn({ accessToken: resp.data.token }, resp.data.user)
-                redirect()
-                return {
-                    status: 'success',
-                    message: '',
-                }
-            }
+        
+            handleSignIn({ accessToken: resp.data.token }, resp.data.user)
+            redirect()
             return {
-                status: 'failed',
-                message: 'Unable to sign up',
+                status: 'success',
+                message: '',
             }
-            // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+            // if (resp) {
+            //     handleSignIn({ accessToken: resp.data.token }, resp.data.user)
+            //     redirect()
+            //     return {
+            //         status: 'success',
+            //         message: '',
+            //     }
+            // }
+            // return {
+            //     status: 'failed',
+            //     message: 'Unable to sign up',
+            // }
+  
         } catch (errors: any) {
+            console.log('errosSigIn', errors?.response?.data?.errors
+                )
             return {
                 status: 'failed',
-                message: errors?.response?.data?.data?.message || errors.toString(),
+                message: errors?.response?.data?.errors
+                ? Object.values(errors.response.data.errors)
+                    .flat() // Junta todos os arrays em um único array
+                    .join(" | ") // Adiciona quebra de linha entre os erros
+                : errors?.response?.data?.data?.message || errors.toString(),
             }
         }
     }
