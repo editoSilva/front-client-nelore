@@ -73,9 +73,9 @@ const OverviewAfiliate = ({ data }: OverviewAfiliate) => {
                 />
 
                 <StatisticCard
-                    title="Margem Lucros"
-                    className="bg-amber-200 dark:bg-opacity-75"
-                    value={data.rate}
+                    title="Disponível Saque"
+                    className="bg-blue-500 dark:bg-opacity-75"
+                    value={data.withdrawl}
                     icon={<FaPercent />}
                 />
                
