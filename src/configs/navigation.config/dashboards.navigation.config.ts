@@ -48,8 +48,8 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             {
                 key: 'dashboard.investiments',
                 path: `${DASHBOARDS_PREFIX_PATH}/ecommerce`,
-                title: 'Lotes',
-                translateKey: 'nav.dashboard.investiments',
+                title: 'Investimentos',
+                translateKey: 'Investimentos',
                 icon: 'bsCurrencyExchange',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [COSTUMER],
