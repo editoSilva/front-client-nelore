@@ -26,3 +26,5 @@ Please visit our [Online documentation](https://ecme-react.themenate.net/guide/d
 # front-client-nelore
 
  nvm use v20.9.0 s
+
+ horusgpt.online
