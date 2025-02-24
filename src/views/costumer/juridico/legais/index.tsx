@@ -10,10 +10,10 @@ const Legais = () => {
             <Container>
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                    <h1 className="text-xl font-semibold">Aspectos Legais</h1>
+                   
                 </div>
     
-                    <h2>Informação Jurídica sobre a Natureza do Investimento</h2>
+                    <h2 className="text-xl font-semibold">Informação Jurídica sobre a Natureza do Investimento</h2>
 
                     <p>
                     A participação na <strong>Invest Nellore</strong> não configura uma relação de consumo, mas sim um investimento em cotas pecuárias, formalizado por contrato. O investidor não adquire a posse direta dos animais, mas sim uma participação nos resultados da atividade pecuária. O modelo segue as normas jurídicas aplicáveis, garantindo transparência e segurança na gestão do capital investido.
