@@ -54,7 +54,7 @@ const SummarySegment = ({
 const Sumary = ({ data }: SumaryProps) => {
       const { user } = useSessionUser()
     
-      console.log('user-teste2', user.role)
+
       
     return (
         <Card>
