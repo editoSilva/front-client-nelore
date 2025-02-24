@@ -55,6 +55,7 @@ const CardAulas: React.FC<LessonCardsProps> = ({ openLessonHistory }) => {
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       {lessons.map((lesson, index) => (
         <Card
+         className="hover:shadow-lg transition duration-150 ease-in-out dark:border dark:border-gray-600"
           key={index}
           clickable
           onClick={() => console.log("Aula selecionada", lesson.title)}

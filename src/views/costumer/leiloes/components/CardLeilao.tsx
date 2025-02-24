@@ -31,6 +31,7 @@ const CardLeilao = () => {
            {auctions.map((auction, index) => (
         <Card
         key={index}
+        className="hover:shadow-lg transition duration-150 ease-in-out dark:border dark:border-gray-600"
         clickable
         onClick={() => console.log("Leilão selecionado", auction.title)}
         header={{
