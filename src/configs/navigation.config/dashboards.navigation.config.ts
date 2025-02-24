@@ -16,7 +16,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.dashboard.dashboard',
         icon: 'dashboard',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             horizontalMenu: {
                 layout: 'default',
@@ -30,7 +30,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.home',
                 icon: 'home',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [
                     
                 ],
@@ -42,7 +42,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.auctions',
                 icon: 'GiThorHammer',
                 type: NAV_ITEM_TYPE_ITEM,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [],
             },
             {
@@ -52,7 +52,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'Investimentos',
                 icon: 'bsCurrencyExchange',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [
                     {
                         key: 'invest-now',
@@ -61,7 +61,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Invista Agora',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [COSTUMER, SPONSOR],
                         subMenu: [],
                     },
                     {
@@ -71,7 +71,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Meus Investimentos',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [COSTUMER, SPONSOR],
                         subMenu: [],
                     },
                 ],
@@ -83,7 +83,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.transacions',
                 icon: 'transactions',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [
                     {
                         key: 'deposits',
@@ -92,7 +92,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Depósitos',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [COSTUMER, SPONSOR],
                         subMenu: [],
                     },
                     {
@@ -102,7 +102,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'withdrawals',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [COSTUMER, SPONSOR],
                         subMenu: [],
                     },
                 ],
@@ -145,7 +145,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.Knowledge_center',
                 icon: 'GiGraduateCap',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [
                     {
                         key: 'aulas',
@@ -166,7 +166,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.legal',
                 icon: 'documentation',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [
                     {
                         key: 'legais',
@@ -175,7 +175,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Aspectos Legais',
                         icon: 'GiGraduateCap',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [COSTUMER, SPONSOR],
                         subMenu: [],
                     },
                 ],
@@ -187,7 +187,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.contracts',
                 icon: 'FaFileContract',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [COSTUMER],
+                authority: [COSTUMER, SPONSOR],
                 subMenu: [
                     {
                         key: 'adesao',
