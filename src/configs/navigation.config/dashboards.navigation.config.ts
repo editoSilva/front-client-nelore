@@ -123,7 +123,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'Cadastros',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [SPONSOR],
                         subMenu: [],
                     },
                     {
@@ -133,7 +133,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                         translateKey: 'commissions',
                         icon: 'FaNetworkWired',
                         type: NAV_ITEM_TYPE_ITEM,
-                        authority: [COSTUMER],
+                        authority: [SPONSOR],
                         subMenu: [],
                     },
                 ],
