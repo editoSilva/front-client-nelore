@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { ADMIN, USER, COSTUMER } from '@/constants/roles.constant'
+import { ADMIN, USER, COSTUMER, SPONSOR } from '@/constants/roles.constant'
 import type { Routes } from '@/@types/routes'
 
 const costumerRoute: Routes = [
@@ -7,7 +7,7 @@ const costumerRoute: Routes = [
         key: 'dashboard',
         path: '/dashboard',
         component: lazy(() => import('@/views/costumer/dashboard')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -16,7 +16,7 @@ const costumerRoute: Routes = [
         key: 'deposits',
         path: '/deposits',
         component: lazy(() => import('@/views/costumer/transactions/deposit')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -25,7 +25,7 @@ const costumerRoute: Routes = [
         key: 'withdrawals',
         path: '/withdrawals',
         component: lazy(() => import('@/views/costumer/transactions/withdrawal')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -34,7 +34,7 @@ const costumerRoute: Routes = [
         key: 'invest-now',
         path: '/invest-now',
         component: lazy(() => import('@/views/costumer/cattle')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -43,7 +43,7 @@ const costumerRoute: Routes = [
         key: 'invest-now',
         path: '/castle/:id',
         component: lazy(() => import('@/views/costumer/cattle_details')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -53,7 +53,7 @@ const costumerRoute: Routes = [
         key: 'my-invest',
         path: '/my-invest',
         component: lazy(() => import('@/views/costumer/investments/index')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -62,7 +62,7 @@ const costumerRoute: Routes = [
         key: 'reffers',
         path: '/reffers',
         component: lazy(() => import('@/views/costumer/referrer')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -71,7 +71,7 @@ const costumerRoute: Routes = [
         key: 'commissions',
         path: '/commissions',
         component: lazy(() => import('@/views/costumer/commission')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -89,7 +89,7 @@ const costumerRoute: Routes = [
         key: 'aulas',
         path: '/aulas',
         component: lazy(() => import('@/views/costumer/central_de_conhecimento/aulas/')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -98,7 +98,7 @@ const costumerRoute: Routes = [
         key: 'legais',
         path: '/legais',
         component: lazy(() => import('@/views/costumer/juridico/legais')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
@@ -108,7 +108,7 @@ const costumerRoute: Routes = [
         key: 'adesao',
         path: '/adesao',
         component: lazy(() => import('@/views/costumer/contrato/adesao')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
