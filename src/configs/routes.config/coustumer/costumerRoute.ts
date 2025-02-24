@@ -80,7 +80,7 @@ const costumerRoute: Routes = [
         key: 'leiloes',
         path: '/leiloes',
         component: lazy(() => import('@/views/costumer/leiloes/')),
-        authority: [COSTUMER],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             pageContainerType: 'contained',
         },
