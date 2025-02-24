@@ -1,10 +1,6 @@
 import Chart from 'react-apexcharts'
 import { COLOR_1 } from '@/constants/chart.constant'
 import Card from '@/components/ui/Card'
-import dayjs from 'dayjs'
-import 'dayjs/locale/pt-br'
-
-dayjs.locale('pt-br') // Define o locale para português
 
 const CattleWeight = () => {
     const data = [
@@ -19,80 +15,73 @@ const CattleWeight = () => {
     ]
 
     return (
+        <>
         <Card>
-            <div className="flex items-center justify-between">
-                <h4>Boi Gordo</h4>
-            </div>
-            <Chart
-                options={{
-                    chart: {
-                        zoom: {
-                            enabled: false,
-                        },
-                    },
-                    colors: [COLOR_1],
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.7,
-                            opacityTo: 0.9,
-                            stops: [0, 80, 100],
-                        },
-                    },
-                    dataLabels: {
+        <div className="flex items-center justify-between">
+           <h4>Boi Gordo</h4>
+       </div>
+        <Chart
+            options={{
+                chart: {
+                    zoom: {
                         enabled: false,
                     },
-                    stroke: {
-                        curve: 'smooth',
-                        width: 3,
+                },
+                colors: [COLOR_1],
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.9,
+                        stops: [0, 80, 100],
                     },
-                    labels: [
-                        '2017-11-13',
-                        '2017-11-14',
-                        '2017-11-15',
-                        '2017-11-16',
-                        '2017-11-17',
-                        '2017-11-20',
-                        '2017-11-21',
-                        '2017-11-22',
-                        '2017-11-23',
-                        '2017-11-24',
-                        '2017-11-27',
-                        '2017-11-28',
-                        '2017-11-29',
-                        '2017-11-30',
-                        '2017-12-01',
-                        '2017-12-04',
-                        '2017-12-05',
-                        '2017-12-06',
-                        '2017-12-07',
-                        '2017-12-08',
-                    ],
-                    xaxis: {
-                        type: 'datetime',
-                        labels: {
-                            format: 'dd MMM yyyy', // Exemplo: "13 Nov 2017"
-                            datetimeFormatter: {
-                                year: 'yyyy',
-                                month: "MMM 'yy",
-                                day: 'dd MMM',
-                                hour: 'HH:mm',
-                            },
-                        },
-                    },
-                    yaxis: {
-                        opposite: true,
-                    },
-                    legend: {
-                        horizontalAlign: 'left',
-                    },
-                }}
-                type="area"
-                series={data}
-                height={300}
-            />
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 3,
+                },
+                labels: [
+                    '13 Nov 2017',
+                    '14 Nov 2017',
+                    '15 Nov 2017',
+                    '16 Nov 2017',
+                    '17 Nov 2017',
+                    '20 Nov 2017',
+                    '21 Nov 2017',
+                    '22 Nov 2017',
+                    '23 Nov 2017',
+                    '24 Nov 2017',
+                    '27 Nov 2017',
+                    '28 Nov 2017',
+                    '29 Nov 2017',
+                    '30 Nov 2017',
+                    '01 Dec 2017',
+                    '04 Dec 2017',
+                    '05 Dec 2017',
+                    '06 Dec 2017',
+                    '07 Dec 2017',
+                    '08 Dec 2017',
+                ],
+                xaxis: {
+                    type: 'datetime',
+                },
+                yaxis: {
+                    opposite: true,
+                },
+                legend: {
+                    horizontalAlign: 'left',
+                },
+            }}
+            type="area"
+            series={data}
+            height={300}
+        />
         </Card>
+        </>
     )
 }
 
