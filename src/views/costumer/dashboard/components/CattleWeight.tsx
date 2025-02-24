@@ -10,6 +10,8 @@ const CattleWeight = () => {
         8512.9, 8496.25, 8600.65, 8881.1, 9340.85,
     ];
 
+
+
     // Convertendo para preço por arroba (1 arroba = 15kg => 1 tonelada = 1000kg = 66.67 arrobas)
     const pricesPerArroba = pricesPerTon.map(price => parseFloat((price / 33.33).toFixed(2)));
 

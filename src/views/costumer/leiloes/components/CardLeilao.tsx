@@ -21,7 +21,7 @@ const CardLeilao = () => {
           status: "Encerrado",
            image: "https://img.mfleiloes.com.br/api/image?url=https://s3.amazonaws.com/mfleiloes/capas/em-breve-1-leilao-agro-_20250128145130.jpeg&width=620&height=620&strategy=1"
         }
-      ];
+    ];
 
       
 
@@ -71,11 +71,7 @@ const CardLeilao = () => {
    </div>
         </>
       )
-
-
 }
-
-
 
 
 export default CardLeilao;
