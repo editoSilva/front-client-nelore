@@ -10,6 +10,7 @@ import {
 } from 'react-icons/tb'
 import type { ReactNode } from 'react'
 import type { DashboardTypes } from '@/@types/costumer/dashboard/DashboardTypes'
+import { useSessionUser } from '@/store/authStore'
 
 type SumaryProps = {
     data: DashboardTypes
@@ -51,6 +52,10 @@ const SummarySegment = ({
 }
 
 const Sumary = ({ data }: SumaryProps) => {
+      const { user } = useSessionUser()
+    
+      console.log('user-teste2', user.role)
+      
     return (
         <Card>
             <div className="flex items-center justify-between">
@@ -105,6 +110,8 @@ const Sumary = ({ data }: SumaryProps) => {
                     className="border-b border-r-0 md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
                 />
 
+
+{user.role === 'sponsor' &&  
                 <SummarySegment
                     title="Bônus Rede"
                     value={
@@ -119,7 +126,9 @@ const Sumary = ({ data }: SumaryProps) => {
                     icon={<TbNetwork />}
                     iconClass="bg-cyan-200"
                     className="border-b border-r-0 md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
-                />
+                
+
+                />}
 
            
             

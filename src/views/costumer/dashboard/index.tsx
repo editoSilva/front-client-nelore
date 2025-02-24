@@ -14,7 +14,7 @@ const Dashboard = () => {
   const { dashboard, fetchDashboard, isLoading} = useDashboardStore();
   const { user } = useSessionUser()
 
-  console.log('user', user)
+  console.log('user-teste', user.role)
   useEffect(() => {
     fetchDashboard()
 
@@ -27,7 +27,8 @@ const Dashboard = () => {
         <div className="flex flex-col gap-4">
          <HeaderAfiliate data={dashboard}/>
 
-          <SharedLink data={dashboard}/>
+         {user.role === 'sponsor' && <SharedLink data={dashboard} />}
+          {/* <SharedLink data={dashboard}/> */}
            <Sumary data={dashboard} />
          
            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

@@ -28,3 +28,8 @@ Please visit our [Online documentation](https://ecme-react.themenate.net/guide/d
  nvm use v20.9.0 s
 
  horusgpt.online
+
+
+ Reunião diária Nelore Invest as 12:00hs 
+ 🆗 - Édito 
+ 🆗  - Lucas

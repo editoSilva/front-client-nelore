@@ -5,7 +5,7 @@ import {
     NAV_ITEM_TYPE_COLLAPSE
 } from '@/constants/navigation.constant'
 
-import {COSTUMER } from '@/constants/roles.constant'
+import {COSTUMER, SPONSOR, ADMIN } from '@/constants/roles.constant'
 import type { NavigationTree } from '@/@types/navigation'
 
 const dashboardsNavigationConfig: NavigationTree[] = [
@@ -114,7 +114,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 translateKey: 'nav.dashboard.affiliates',
                 icon: 'FaNetworkWired',
                 type: NAV_ITEM_TYPE_COLLAPSE,
-                authority: [COSTUMER],
+                authority: [SPONSOR],
                 subMenu: [
                     {
                         key: 'reffers',
