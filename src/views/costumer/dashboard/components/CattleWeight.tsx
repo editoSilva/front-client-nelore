@@ -67,7 +67,7 @@ const CattleWeight = () => {
                     '08 Dec 2017',
                 ],
                 xaxis: {
-                    type: 'datetime',
+                    type: 'numeric',
                 },
                 yaxis: {
                     opposite: true,
