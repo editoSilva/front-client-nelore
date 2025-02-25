@@ -50,6 +50,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
 
   useEffect(() => {
     if (depositSuccess) {
+      
         intervalRef.current = setInterval(() => {
           setExpirationTime((prevTime) => {
             if (prevTime <= 0) {
