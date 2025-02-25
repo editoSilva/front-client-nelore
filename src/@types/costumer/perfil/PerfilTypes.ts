@@ -6,8 +6,9 @@ export type Adress = {
     neighborhood: string 
     number: string 
     city: string 
-    state: boolean 
+    state: string
     postal_code: string  
+    complement: string
 }
 
 export type Documents = {

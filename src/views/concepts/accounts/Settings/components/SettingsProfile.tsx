@@ -182,10 +182,58 @@ const SettingsProfile = () => {
 
 
     useEffect(() => {
-     
-            featchPerfil();
+        featchPerfil();
         
     }, []); // Atualiza o estado quando 'user' mudar
+
+
+    const {
+        handleSubmit: handleSubmitPix,
+        control: controlPix,
+        formState: { errors: errorsPix },
+        setValue: setValuePix,
+    } = useForm<PixKeySchema>({
+        // resolver: zodResolver(validationSchemaPixKey),
+        defaultValues: {
+            pix_key: "", // Defina um valor padrão inicial
+            key_type: "",
+          },
+    });
+
+    const {
+        handleSubmit: handleSubmitAddress,
+        control: controlAddress,
+        formState: { errors: errorsAddress },
+        control,
+        setValue: setValueAddress
+    } = useForm<AddrressSchema>({
+        defaultValues: {
+            address: "",
+            neighborhood: "",
+            number: "",
+            city: "",
+            state: "",
+            postal_code: "",
+            complement: "",
+          },
+        // resolver: zodResolver(validationSchemaAdress),
+    })
+
+
+
+    useEffect(() => {
+        if (perfil) {
+            setValuePix("key_type", perfil.data.pixKey.key_type);
+            setValuePix("pix_key", perfil.data.pixKey.pix_key);
+            setValueAddress("address", perfil.data.adress.address);
+            setValueAddress("neighborhood", perfil.data.adress.neighborhood);
+            setValueAddress("number", perfil.data.adress.number);
+            setValueAddress("city", perfil.data.adress.city);
+            setValueAddress("state", perfil.data.adress.state);
+            setValueAddress("postal_code", perfil.data.adress.postal_code);
+            setValueAddress("complement", perfil.data.adress.complement);
+        }
+      }, [perfil, setValuePix, setValueAddress]);
 
     useEffect(() => {
         if (user) {
@@ -232,23 +280,8 @@ const SettingsProfile = () => {
     //     return valid
     // }
 
-    const {
-        handleSubmit: handleSubmitAddress,
-        control: controlAddress,
-        formState: { errors: errorsAddress },
-        control,
-    } = useForm<AddrressSchema>({
-        // resolver: zodResolver(validationSchemaAdress),
-    })
-
-
-    const {
-        handleSubmit: handleSubmitPix,
-        control: controlPix,
-        formState: { errors: errorsPix },
-    } = useForm<PixKeySchema>({
-        // resolver: zodResolver(validationSchemaPixKey),
-    });
+  
+  
 
 
       // Função de envio do Formulário de Endereço
@@ -368,24 +401,25 @@ const SettingsProfile = () => {
                     />
                 </FormItem>
                             
-            <FormItem 
-              invalid={Boolean(errorsPix.pix_key)}
-              errorMessage={errorsPix.pix_key?.message}
-            className="w-full sm:w-[80%]">
-                <label className="form-label mb-2">Chave</label>
-                <Controller
-                name="pix_key"
-                control={controlPix}
-                render={({ field }) => (
-                    <NumericInput
-                    autoComplete="off"
-                    placeholder="Ex. 01158478575"
-                    value={""}
-                    onChange={field.onChange}
-                    onBlur={field.onBlur}
+                <FormItem 
+                    invalid={Boolean(errorsPix.pix_key)}
+                    errorMessage={errorsPix.pix_key?.message}
+                    className="w-full sm:w-[80%]"
+                    >
+                    <label className="form-label mb-2">Chave</label>
+                    <Controller
+                        name="pix_key"
+                        control={controlPix}
+                        render={({ field }) => (
+                        <NumericInput
+                            autoComplete="off"
+                            placeholder="Ex. 01158478575"
+                            value={field.value || ''} 
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                        />
+                        )}
                     />
-                )}
-                />
             </FormItem>
             {/* End Form PIX KEY */}
 </div>
@@ -427,6 +461,7 @@ const SettingsProfile = () => {
                                     type="text"
                                     autoComplete="off"
                                     placeholder="Ex. Rua B"
+                                    value={field.value || ''}
                                     {...field}
                                 />
                             )}
@@ -444,6 +479,7 @@ const SettingsProfile = () => {
                             render={({ field }) => (
                                 <Input
                                     type="text"
+                                   
                                     autoComplete="off"
                                     placeholder="Ex. 98"
                                     {...field}
@@ -504,6 +540,26 @@ const SettingsProfile = () => {
                                     type="text"
                                     autoComplete="off"
                                     placeholder="Ex. Goiânia"
+                                    {...field}
+                                />
+                            )}
+                        />
+                    </FormItem>
+
+
+                    <FormItem
+                        label="Estado"
+                        invalid={Boolean(errorsAddress.city)}
+                        errorMessage={errorsAddress.city?.message}
+                    >
+                        <Controller
+                            name="state"
+                            control={controlAddress}
+                            render={({ field }) => (
+                                <Input
+                                    type="text"
+                                    autoComplete="off"
+                                    placeholder="Ex. Goiais"
                                     {...field}
                                 />
                             )}
