@@ -8,9 +8,9 @@ const Contrato = () => {
         
         <AdaptiveCard>
             <Container>
-            <div className="bg-gray-100 p-6 min-h-screen flex items-center justify-center">
-                <div className="max-w-4xl bg-white p-8 shadow-lg rounded-lg">
-                    <h1 className="text-2xl font-bold text-center mb-4">
+            <div className=" p-6 min-h-screen flex items-center justify-center">
+                <div className="max-w-4xl p-8 shadow-lg rounded-lg">
+                    <h1 className="text-2xl font-bold text-center mb-14">
                     CONTRATO DE INVESTIMENTO EM AQUISIÇÕES DE COTAS DE GADO
                     </h1>
                     <p className="text-justify mb-4">
@@ -25,22 +25,26 @@ const Contrato = () => {
 
                     <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-2">1. OBJETO</h2>
+                    <p>O presente contrato tem como objeto a participação do INVESTIDOR no investimento em cotas de gado da EMPRESA, através da aquisição de participação em rebanho da raça Nelore, destinado à produção e comercialização de gado de corte.</p>
                     <p>Aquisição de (10) cotas do grupo (1010-BA), com valor de arroba na data de hoje de R$ 326,90, totalizando o valor de R$ 3.269,00.</p>
                     </section>
 
                     <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-2">2. DO VALOR E PRAZO DE INVESTIMENTO</h2>
                     <p>Prazo de 12 meses, renováveis por outro período igual. Caso o investidor deseje rescisão, terá o prazo de 30 dias para solicitar por escrito.</p>
+                    <p>A resolução do contrato se realizará pelo decurso do prazo ou pela recuperação do capital em dobro, capitalização de 100%.</p>
                     </section>
 
                     <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-2">3. DO RISCO E RESPONSABILIDADE DO INVESTIDOR</h2>
                     <p>O INVESTIDOR reconhece os riscos financeiros e operacionais envolvidos, incluindo variação de preços de mercado, risco sanitário e condições climáticas adversas.</p>
+                    <p>A EMPRESA não se responsabiliza por qualquer perda ou diminuição do valor do investimento, exceto nos casos de dolo ou fraude comprovada.</p>
                     </section>
 
                     <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-2">4. DA RENTABILIDADE E RETORNO DO INVESTIMENTO</h2>
                     <p>O retorno sobre o investimento será proporcional à participação do INVESTIDOR nas cotas do rebanho, ocorrendo conforme a performance do gado e comercialização.</p>
+                    <p>A EMPRESA fornecerá relatórios periódicos trimestrais sobre o andamento do rebanho.</p>
                     </section>
 
                     <section className="mb-6">
@@ -51,6 +55,7 @@ const Contrato = () => {
                     <section className="mb-6">
                     <h2 className="text-xl font-semibold mb-2">6. DAS OBRIGAÇÕES DO INVESTIDOR</h2>
                     <p>O INVESTIDOR compromete-se a efetuar o pagamento acordado e reconhece os riscos inerentes à atividade, incluindo a possibilidade de perdas financeiras.</p>
+                    <p>O INVESTIDOR compromete-se a não interferir na gestão operacional do rebanho.</p>
                     </section>
 
                     <section className="mb-6">
