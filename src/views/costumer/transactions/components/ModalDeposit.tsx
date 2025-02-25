@@ -67,13 +67,16 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   useEffect(() => {
     if (!open) {
       resetDeposit();
-      featchTransactions(tableData, filterData);
       
+      if (tableData.length === 0 || filterData) {
+        featchTransactions(tableData, filterData);
+      }
+
       if (intervalRefs.current) {
         clearInterval(intervalRefs.current);
       }
     }
-  }, [open, tableData, featchTransactions, resetDeposit, filterData]);
+  }, [open, tableData, filterData, resetDeposit]);
 
   useEffect(() => {
     if (open) {
@@ -85,7 +88,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     if (deposit && deposit.data) {
       setDepositSuccess(true);
       setTransaction(deposit.data);
-      setIntervalDeposit(deposit.data); // Inicia a verificação apenas após um depósito bem-sucedido
+      setIntervalDeposit(deposit.data);
     }
   }, [deposit]);
 
@@ -101,13 +104,12 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
       );
 
       if (intervalRefs.current) {
-        clearInterval(intervalRefs.current); // Interrompe a verificação quando pago
+        clearInterval(intervalRefs.current);
       }
     }
   }, [statusDepoist.status, onClose]);
 
   const setIntervalDeposit = (data: Deposit) => {
-    console.log('depositss', data)
     if (!data.success) return;
 
     intervalRefs.current = setInterval(async () => {
@@ -149,11 +151,10 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  // Resetar estados ao fechar o modal
   const handleClose = () => {
     setDepositAmount('');
     setDepositSuccess(false);
-    setExpirationTime(10 * 60); // Resetando o tempo para 10 minutos
+    setExpirationTime(10 * 60);
     onClose();
     resetDeposit();
   };
@@ -162,7 +163,6 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     <Dialog isOpen={open} onClose={handleClose} onRequestClose={handleClose}>
       <div className="p-6">
         {depositSuccess ? (
-          // Exibe mensagem de agradecimento após o sucesso
           <div className="text-center">
             <h3 className="text-lg font-bold mb-4">💰 Falta bem pouco para investir!</h3>
 
@@ -192,10 +192,9 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
           </div>
         ) : (
           <>
-            {/* Exibe as informações de depósito antes do sucesso */}
             <h3 className="text-lg font-bold mb-4 text-center">💰 Realizar Depósito</h3>
             <p className="text-sm text-gray-500 text-center mb-6">
-              Insira o valor desejado para realizar seu depósito. Certifique-se de que as informações estão corretas antes de confirmar.
+              Insira o valor desejado para realizar seu depósito.
             </p>
             <div className="mb-6">
               <label htmlFor="depositAmount" className="block text-sm font-bold mb-2">
