@@ -107,7 +107,8 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   }, [statusDepoist.status, onClose]);
 
   const setIntervalDeposit = (data: Deposit) => {
-    if (!data) return;
+    console.log('depositss', data)
+    if (!data.success) return;
 
     intervalRefs.current = setInterval(async () => {
       await featchStatusDeposit(data);
