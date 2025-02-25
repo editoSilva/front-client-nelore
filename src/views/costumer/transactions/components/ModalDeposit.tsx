@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef, useCallback, MouseEvent, ChangeEvent } from 'react'
 import Dialog from '@/components/ui/Dialog'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
+import { useState, MouseEvent, ChangeEvent, useEffect, useRef } from 'react'
 import ReactQRCode from 'react-qr-code'
 import { useTransactionStore } from "@/store/costumer/transactions";
-import { DepositType, DepositResponse } from '@/@types/costumer/transaction/TransactionTypes'
+import { DepositType } from '@/@types/costumer/transaction/TransactionTypes'
 import Notification from '@/components/ui/Notification';
 import toast from '@/components/ui/toast';
 
@@ -24,11 +24,11 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   const [depositAmount, setDepositAmount] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [depositSuccess, setDepositSuccess] = useState<boolean>(false);
-  const [expirationTime, setExpirationTime] = useState<number>(10 * 60);
+  const [expirationTime, setExpirationTime] = useState<number>(10 * 60); // 10 minutos em segundos
   const [transaction, setTransaction] = useState<Deposit | null>(null);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const statusIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRefs = useRef<NodeJS.Timeout | null>(null);
   const messageShown = useRef(false);
 
   const {
@@ -39,15 +39,15 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     resetDeposit,
     filterData,
     isLoading,
+    isDeposit,
     featchStatusDeposit,
-    statusDepoist
+    statusDepoist,
   } = useTransactionStore();
 
-  // Atualiza o contador de tempo
   useEffect(() => {
     if (depositSuccess) {
       intervalRef.current = setInterval(() => {
-        setExpirationTime(prevTime => {
+        setExpirationTime((prevTime) => {
           if (prevTime <= 0) {
             clearInterval(intervalRef.current!);
             return 0;
@@ -58,72 +58,82 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     }
 
     return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
   }, [depositSuccess]);
 
-  // Resetar estado ao fechar o modal
   useEffect(() => {
     if (!open) {
       resetDeposit();
-      clearInterval(statusIntervalRef.current!);
+      featchTransactions(tableData, filterData);
+      
+      if (intervalRefs.current) {
+        clearInterval(intervalRefs.current);
+      }
+    }
+  }, [open, tableData, featchTransactions, resetDeposit, filterData]);
+
+  useEffect(() => {
+    if (open) {
+      setDepositSuccess(false);
     }
   }, [open, resetDeposit]);
 
-  // Atualiza estado ao mudar `deposit`
   useEffect(() => {
-    if (deposit) {
+    if (deposit && deposit.data) {
       setDepositSuccess(true);
       setTransaction(deposit.data);
-      featchStatusDeposit(deposit.data);
-      startStatusPolling(deposit.data);
+      setIntervalDeposit(deposit.data); // Inicia a verificação apenas após um depósito bem-sucedido
     }
   }, [deposit]);
 
-  // Verifica se o pagamento foi concluído
   useEffect(() => {
     if (statusDepoist.status === 'paid' && !messageShown.current) {
       messageShown.current = true;
-      clearInterval(statusIntervalRef.current!);
+
       onClose();
       toast.push(
         <Notification title="Sucesso!" type="success">
           {`Pagamento efetuado!`}
         </Notification>
       );
+
+      if (intervalRefs.current) {
+        clearInterval(intervalRefs.current); // Interrompe a verificação quando pago
+      }
     }
   }, [statusDepoist.status, onClose]);
 
-  // Função para iniciar o polling do status do pagamento
-  const startStatusPolling = useCallback((data: Deposit) => {
-    if (statusIntervalRef.current) clearInterval(statusIntervalRef.current);
+  const setIntervalDeposit = (data: Deposit) => {
+    if (!data) return;
 
-    statusIntervalRef.current = setInterval(async () => {
+    intervalRefs.current = setInterval(async () => {
       await featchStatusDeposit(data);
     }, 3000);
-  }, [featchStatusDeposit]);
+  };
 
-  // Função para processar o depósito
   const handleDeposit = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault();
     setLoading(true);
 
-    const dataAmount: DepositType = { amount: depositAmount };
-    await featchDeposit(dataAmount);
+    const dataAmount: DepositType = {
+      amount: depositAmount
+    };
 
+    await featchDeposit(dataAmount);
     setDepositAmount('');
-    setLoading(false);
+    setLoading(isLoading);
   };
 
-  // Atualiza o valor do depósito
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setDepositAmount(e.target.value);
   };
 
-  // Copiar link de pagamento
   const handleCopyLink = () => {
-    if (transaction?.content) {
-      navigator.clipboard.writeText(transaction.content);
+    if (deposit?.data?.content) {
+      navigator.clipboard.writeText(deposit.data.content);
       toast.push(
         <Notification title="Sucesso!" type="success">
           {`Link copiado com sucesso!`}
@@ -132,7 +142,6 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     }
   };
 
-  // Formata o tempo para exibição
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -143,7 +152,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   const handleClose = () => {
     setDepositAmount('');
     setDepositSuccess(false);
-    setExpirationTime(10 * 60);
+    setExpirationTime(10 * 60); // Resetando o tempo para 10 minutos
     onClose();
     resetDeposit();
   };
@@ -151,17 +160,30 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   return (
     <Dialog isOpen={open} onClose={handleClose} onRequestClose={handleClose}>
       <div className="p-6">
-        {depositSuccess && transaction ? (
+        {depositSuccess ? (
+          // Exibe mensagem de agradecimento após o sucesso
           <div className="text-center">
             <h3 className="text-lg font-bold mb-4">💰 Falta bem pouco para investir!</h3>
+
             <div className="flex justify-center items-center mb-4">
-              <ReactQRCode value={transaction.content} size={256} />
+              <ReactQRCode value={transaction?.content || ''} size={256} />
             </div>
-            <p className="text-sm text-gray-500 mb-4">Escaneie o QR Code ou copie o link para efetuar o pagamento.</p>
-            <Input value={transaction.content} disabled className="w-full bg-gray-800 border border-gray-600 rounded-md mb-4" />
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md" onClick={handleCopyLink}>
+            <p className="text-sm text-gray-500 mb-4">
+              Escaneie o QR Code ou copie o link para efetuar o pagamento.
+            </p>
+
+            <Input
+              value={transaction?.content || ''}
+              disabled
+              className="w-full bg-gray-800 border border-gray-600 rounded-md mb-4"
+            />
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+              onClick={handleCopyLink}
+            >
               Copiar Link de Pagamento
             </Button>
+
             <div className="mt-4">
               <p className="text-sm text-gray-500">Tempo restante para o pagamento:</p>
               <p className="text-xl font-bold text-green-600">{formatTime(expirationTime)}</p>
@@ -169,6 +191,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
           </div>
         ) : (
           <>
+            {/* Exibe as informações de depósito antes do sucesso */}
             <h3 className="text-lg font-bold mb-4 text-center">💰 Realizar Depósito</h3>
             <p className="text-sm text-gray-500 text-center mb-6">
               Insira o valor desejado para realizar seu depósito. Certifique-se de que as informações estão corretas antes de confirmar.
@@ -177,16 +200,36 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
               <label htmlFor="depositAmount" className="block text-sm font-bold mb-2">
                 Valor do Depósito (R$)
               </label>
-              <Input id="depositAmount" type="number" placeholder="Ex: 300.00" value={depositAmount} className="w-full bg-gray-800 border border-gray-600 rounded-md" onChange={handleInputChange} />
+              <Input
+                id="depositAmount"
+                type="number"
+                placeholder="Ex: 300.00"
+                value={depositAmount}
+                className="w-full bg-gray-800 border border-gray-600 rounded-md"
+                onChange={handleInputChange}
+              />
             </div>
-            <div className="flex justify-center items-center space-x-4">
-              <Button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md" onClick={handleClose}>
-                Cancelar
-              </Button>
-              <Button className={`px-4 py-2 rounded-md ${depositAmount ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-400 text-gray-700 cursor-not-allowed'}`} onClick={handleDeposit} disabled={!depositAmount || loading}>
-                Confirmar Depósito
-              </Button>
-            </div>
+
+            {loading ? (
+              <div className="flex justify-center items-center mb-4">
+                <div className="w-12 h-12 border-4 border-t-4 border-gray-600 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : (
+              <div className="flex justify-center items-center space-x-4">
+                <Button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md" onClick={handleClose}>
+                  Cancelar
+                </Button>
+                <Button
+                  className={`px-4 py-2 rounded-md ${
+                    depositAmount ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                  }`}
+                  onClick={handleDeposit}
+                  disabled={!depositAmount || loading}
+                >
+                  Confirmar Depósito
+                </Button>
+              </div>
+            )}
           </>
         )}
       </div>
