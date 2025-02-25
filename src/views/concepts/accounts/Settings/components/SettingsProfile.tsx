@@ -472,7 +472,7 @@ const SettingsProfile = () => {
                         type="submit"
                         loading={isSubmittingPix}
                     >
-                       Enviar
+                       Atualizar
                     </Button>
                 </div>
                 </Form>
