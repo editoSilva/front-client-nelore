@@ -13,6 +13,8 @@ export type EndpointConfig = {
     commisions: string
     countLink: string
     perfil: string
+    chatCattleWigt: string
+    investmentChart: string
 }
 
 const endpointConfig: EndpointConfig = {
@@ -27,7 +29,9 @@ const endpointConfig: EndpointConfig = {
     referrers: base.baseUrl+'/costumer/referrals',
     commisions: base.baseUrl+'/costumer/commissions',
     countLink: base.baseUrl+'/costumer/count-link',
-    perfil: base.baseUrl+'/authenticate/perfil'
+    perfil: base.baseUrl+'/authenticate/perfil',
+    chatCattleWigt: base.baseUrl+'/costumer/chat-cattle-wigt',
+    investmentChart: base.baseUrl+'/costumer/chat-investiment'
 }
 
 export default endpointConfig;

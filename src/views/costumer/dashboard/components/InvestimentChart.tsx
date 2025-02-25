@@ -1,10 +1,27 @@
 import Chart from 'react-apexcharts'
 import { COLOR_2 } from '@/constants/chart.constant'
 import Card from '@/components/ui/Card'
+import { useChartStore } from '@/store/costumer/charts';
+import { useEffect } from "react";
 
 const InvestimentChart = () => {
+
+     const { investmentchart, fetchInvestChart } = useChartStore();
+
+
+     useEffect(() => {
+        fetchInvestChart(); // Busca os dados sempre que o componente for montado
+         }, []);
+     
+         useEffect(() => {
+             console.log("Store atualizada:", investmentchart);
+             // Aqui você pode forçar um reload ou atualizar algum estado da interface se necessário
+         }, [investmentchart]); // Dispara sempre que os dados da store forem alterados
+     
+
+
     // Retorno dos investimentos em porcentagem por dia da semana
-    const investmentReturns = [2.5, 3.1, 1.2, 4.8, 5.6, 0.5, 2.3]; // Exemplo de valores (%)
+    const investmentReturns = investmentchart.percentages; // Exemplo de valores (%)
 
     const data = [
         {
@@ -13,7 +30,7 @@ const InvestimentChart = () => {
         },
     ];
 
-    const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const daysOfWeek = investmentchart.labels;
 
     return (
         <>
