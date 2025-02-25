@@ -69,7 +69,7 @@ const InvestmentsScreen = () => {
     <>
 
     {investments.data.length === 0 ? (
-      <div className="bg-gray-100 p-6 min-h-screen flex items-center justify-center">
+      <div className="p-6 min-h-screen flex items-center justify-center">
       <div className="max-w-md  p-8 shadow-lg rounded-lg text-center">
         <HiCheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
         <h1 className="text-2xl font-bold mb-2">Nenhum Investimento Encontrado</h1>
