@@ -1,8 +1,6 @@
 import { AdaptiveCard, Container } from "@/components/shared"
 
-
 const Contrato = () => {
-
 
     return(
         
