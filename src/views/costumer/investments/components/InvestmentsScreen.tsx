@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Button from '@/components/ui/Button'
 import Table from '@/components/ui/Table'
 import Tag from '@/components/ui/Tag'
-import { AlertCircle } from "lucide-react";
+
 import { Investment, YieldHistory } from '@/@types/costumer/investiment/InvestMentTypes'
 
 
@@ -71,7 +71,7 @@ const InvestmentsScreen = () => {
     {investments.data.length === 0 ? (
       <div className="bg-gray-100 p-6 min-h-screen flex items-center justify-center">
       <div className="max-w-md bg-white p-8 shadow-lg rounded-lg text-center">
-        <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+        <HiCheckCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
         <h1 className="text-2xl font-bold mb-2">Nenhum Investimento Encontrado</h1>
         <p className="text-gray-600">Você ainda não possui investimentos cadastrados.</p>
       </div>
