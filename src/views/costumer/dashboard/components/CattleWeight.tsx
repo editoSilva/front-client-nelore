@@ -19,10 +19,6 @@ const CattleWeight = () => {
     }, [cattleweight]); // Dispara sempre que os dados da store forem alterados
 
 
-    // Preços originais por tonelada (R$/ton)
-    // const pricesPerTon = cattleweight.prices;
-
-
 
     // Convertendo para preço por arroba (1 arroba = 15kg => 1 tonelada = 1000kg = 66.67 arrobas)
     const pricesPerArroba = cattleweight.prices

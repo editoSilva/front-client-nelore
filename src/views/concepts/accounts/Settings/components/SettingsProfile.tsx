@@ -18,10 +18,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, Controller } from 'react-hook-form'
 import { z } from 'zod'
 
+import Notification from '@/components/ui/Notification';
+import toast from '@/components/ui/toast';
+
 import type { ZodType } from 'zod'
 import type { GetSettingsProfileResponse } from '../types'
 import { useSessionUser } from '@/store/authStore'
 import { usePerfilSotre } from '@/store/costumer/perfil';
+import { Adress, PixKey } from '@/@types/costumer/perfil/PerfilTypes';
 
 type ProfileSchema = {
     name: string
@@ -163,7 +167,7 @@ const CustomControl = ({ children, ...props }: ControlProps<CountryOption>) => {
 
 const SettingsProfile = () => {
     const [currentUser, setCurrentUser] = useState<User>();
-    const { featchPerfil, perfil } = usePerfilSotre();
+    const { featchPerfil, perfil, insertPix, isLoading, isLoadingAddress, isLoadingPix, statusPixSend, statusAddressSend, insertAdress} = usePerfilSotre();
 
     const [isSubmittingAddress, setSubmittingAddress] = useState<boolean>(false)
     const [isSubmittingPix, setSubmittingPix] = useState<boolean>(false)
@@ -181,6 +185,28 @@ const SettingsProfile = () => {
 
 
 
+      useEffect(() => {
+        if (isLoadingPix) {
+            setSubmittingPix(true)
+          // Aqui você pode realizar alguma ação enquanto o carregamento está em andamento
+        } else {
+            setSubmittingPix(false)
+          // Aqui você pode realizar ações após o carregamento ser concluído
+        }
+      }, [isLoadingPix]);  // O efeito será disparado toda vez que isLoading mudar
+
+
+      useEffect(() => {
+        if (isLoadingAddress) {
+            setSubmittingAddress(true)
+          // Aqui você pode realizar alguma ação enquanto o carregamento está em andamento
+        } else {
+            setSubmittingAddress(false)
+          // Aqui você pode realizar ações após o carregamento ser concluído
+        }
+      }, [isLoadingAddress]);  // O efeito será disparado toda vez que isLoading mudar
+
+      
     useEffect(() => {
         featchPerfil();
         
@@ -279,39 +305,53 @@ const SettingsProfile = () => {
 
     //     return valid
     // }
-
   
-  
+    if (statusPixSend) {
+        toast.push(
+       <Notification title="Sucesso!" type="success">
+           {`Dados Bancários Atualizados!`}
+       </Notification>,
+       )
+   }
 
 
-      // Função de envio do Formulário de Endereço
-      const onSubmitAddress = (data: AddrressSchema) => {
+     
+   if (statusAddressSend) {
+    toast.push(
+   <Notification title="Sucesso!" type="success">
+       {`Endereço Atualizado!`}
+   </Notification>,
+   )
+}
 
-        setSubmittingAddress(true);
-        console.log("Endereço enviado:", data);
-    };
+
+        // Função de envio do Formulário de Endereço
+        const onSubmitAddress = (data: Adress) => {
+
+            insertAdress(data)
+        };
 
       // Função de envio do Formulário de PIX
-      const onSubmitPix = (data: AddrressSchema) => {
+        const onSubmitPix = (data: PixKey) => {
 
-        setSubmittingPix(true)
-        console.log("PIX enviado:", data);
-    };
+            insertPix(data)
+      
+        };
 
 
     const tiposChavesPix = [
         { label: 'CPF', value: 'cpf' },
         { label: 'CNPJ', value: 'cnpj' },
         { label: 'Email', value: 'email' },
-        { label: 'Telefone', value: 'telefone' },
-        { label: 'Chave Aleatória', value: 'aleatoria' },
+        { label: 'Telefone', value: 'phone' },
+        { label: 'Chave Aleatória', value: 'random' },
       ];
             
 
 
     return (
-        <>
-            
+        <> 
+     
             <h4 className="mb-8">Informações Pessoais</h4>
            
                 <div className=' mb-8 border-b border-s-slate-700 p-6'>
@@ -395,7 +435,7 @@ const SettingsProfile = () => {
                         }}
                         placeholder="Tipo"
                         value={tiposChavesPix.find((option) => option.value === field.value)} // Define o valor selecionado
-                        onChange={(option: PixKeyType) => field.onChange(option)} // Atualiza o valor no formulário
+                        onChange={(option: PixKeyType) => field.onChange(option.value)} // Atualiza o valor no formulário
                         />
                     )}
                     />

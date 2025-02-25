@@ -15,6 +15,8 @@ export type EndpointConfig = {
     perfil: string
     chatCattleWigt: string
     investmentChart: string
+    sendPix: string
+    sendAddress: string
 }
 
 const endpointConfig: EndpointConfig = {
@@ -31,7 +33,9 @@ const endpointConfig: EndpointConfig = {
     countLink: base.baseUrl+'/costumer/count-link',
     perfil: base.baseUrl+'/authenticate/perfil',
     chatCattleWigt: base.baseUrl+'/costumer/chat-cattle-wigt',
-    investmentChart: base.baseUrl+'/costumer/chat-investiment'
+    investmentChart: base.baseUrl+'/costumer/chat-investiment',
+    sendPix: base.baseUrl+'/costumer/store-pixkey',
+    sendAddress: base.baseUrl+'/authenticate/store-update-adress',
 }
 
 export default endpointConfig;
