@@ -1,12 +1,12 @@
 
 import Upload from '@/components/ui/Upload'
 import Select from '@/components/ui/Select'
+import Alert from '@/components/ui/Alert'
 
 const colourOptions = [
     { value: 'cnh', label: 'CNH', color: '#00B8D9' },
     { value: 'rg', label: 'RG', color: '#0052CC' },
     { value: 'passaport', label: 'Passaporte', color: '#5243AA' },
-  
 ]
 
 const SettingsBilling = () => {
@@ -19,7 +19,7 @@ const SettingsBilling = () => {
         let valid: string | boolean = true
 
         const allowedFileType = ['image/jpeg', 'image/png']
-        const maxFileSize = 500000
+        const maxFileSize = 1000000
 
         if (fileList.length >= maxUploadFront) {
             return `You can only upload ${maxUploadFront} file(s)`
@@ -32,7 +32,7 @@ const SettingsBilling = () => {
                 }
 
                 if (f.size >= maxFileSize) {
-                    valid = 'Upload image cannot more then 500kb!'
+                    valid = 'Upload image cannot more then 1000kb!'
                 }
             }
         }
@@ -40,12 +40,14 @@ const SettingsBilling = () => {
         return valid
     }
 
-    const tip = <p className="mt-2">Envie apenas jpeg ou png (max 500kb)</p>
+    const tip = <p className="mt-2">Envie apenas jpeg ou png (max 1000kb)</p>
   
-  
- 
     return (
         <div>
+            <Alert showIcon className="mb-12">
+               Ative a sua conta, enviando a documentação!
+            </Alert>
+
             <h4 className="mb-4">Documentos</h4>
 
             <div className="bg-gray-100 dark:bg-gray-700 rounded-xl mb-5 p-6">

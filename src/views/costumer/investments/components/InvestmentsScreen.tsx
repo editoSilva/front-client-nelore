@@ -33,8 +33,6 @@ const InvestmentsScreen = () => {
         console.log('YieldHistories', data)
     }
 
-    console.log('yieldHistoriessss', yieldHistories)
-
     useEffect(() => {
       handleInvestmentUpdate();
     }, [investments]);
@@ -67,7 +65,6 @@ const InvestmentsScreen = () => {
 
   return (
     <>
-
     {investments.data.length === 0 ? (
       <div className="p-6 min-h-screen flex items-center justify-center">
       <div className="max-w-md  p-8 shadow-lg rounded-lg text-center">
