@@ -31,7 +31,7 @@ const CardLeilao = () => {
           <div className="w-full h-full flex items-center justify-center">
             <iframe
               className="w-full h-full"
-              src="https://www.youtube.com/embed/cfiPY3w9rPI"
+              src="https://www.youtube.com/embed/cfiPY3w9rPI?autoplay=1"
               title="Leilão ao Vivo"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
