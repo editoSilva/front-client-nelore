@@ -27,26 +27,19 @@ const CardLeilao = () => {
 
       return (
         <>
-          <div className="p-6 min-h-screen flex items-center justify-center">
-      <div className="max-w-md p-8 shadow-lg rounded-lg text-center">
-        <HiCheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h1 className="text-2xl font-bold mb-2">Nenhum Leilão Encontrado</h1>
-        <p className="text-gray-600 mb-4">Em breve leilões exclusivos para você.</p>
-
-        {/* Vídeo do YouTube incorporado */}
-        <div className="relative w-full h-64">
-          <iframe
-            className="w-full h-full rounded-lg"
-            src="https://www.youtube.com/embed/cfiPY3w9rPI"
-            title="Leilão ao Vivo"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <div className="w-full h-screen flex items-center justify-center bg-black">
+          <div className="w-full h-full flex items-center justify-center">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/cfiPY3w9rPI"
+              title="Leilão ao Vivo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
-      </div>
-    </div>
-    
+
           {/* <div className="p-6 min-h-screen flex items-center justify-center">
               <div className="max-w-md  p-8 shadow-lg rounded-lg text-center">
                 <HiCheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
