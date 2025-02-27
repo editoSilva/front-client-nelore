@@ -216,7 +216,7 @@ const SettingsBilling = () => {
                         >
                              {isLoading ? (
                                 <span className="flex items-center">
-                                    <HiOutlineCloudUpload className="mr-2 animate-spin" /> Enviando...
+                                    Enviando...
                                 </span>
                             ) : (
                                 "Enviar"
