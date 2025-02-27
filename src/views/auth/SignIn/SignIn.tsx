@@ -10,9 +10,6 @@ type SignInProps = {
     forgetPasswordUrl?: string
     disableSubmit?: boolean
 }
-const apiUrl = import.meta.env.VITE_BASE_URL_DEV;
-
-console.log('.env', apiUrl);
 
 export const SignInBase = ({
     signUpUrl = '/sign-up',

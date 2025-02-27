@@ -17,6 +17,7 @@ export type EndpointConfig = {
     investmentChart: string
     sendPix: string
     sendAddress: string
+    sendDocuments: string
 }
 
 const endpointConfig: EndpointConfig = {
@@ -36,6 +37,7 @@ const endpointConfig: EndpointConfig = {
     investmentChart: base.baseUrl+'/costumer/chat-investiment',
     sendPix: base.baseUrl+'/costumer/store-pixkey',
     sendAddress: base.baseUrl+'/authenticate/store-update-adress',
+    sendDocuments: base.baseUrl+'/costumer/documents'
 }
 
 export default endpointConfig;

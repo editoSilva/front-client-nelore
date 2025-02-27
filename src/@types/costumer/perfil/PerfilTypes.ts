@@ -15,7 +15,7 @@ export type Documents = {
     document_type: string
     document_file_path: string
     document_file_path_verse: string
-    status: boolean
+    status: string
     selfie_file_path: string
 }
 export type PixKey = {
