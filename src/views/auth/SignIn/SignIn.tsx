@@ -36,7 +36,7 @@ export const SignInBase = ({
             <div className="mb-10">
                 <h2 className="mb-2">Seja bem vindo!</h2>
                 <p className="font-semibold heading-text">
-                    A maior plataforna do agro investimento!
+                    A maior plataforma do agro investimento!
                 </p>
             </div>
             {message && (
