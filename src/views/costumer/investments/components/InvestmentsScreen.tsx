@@ -116,7 +116,7 @@ const InvestmentsScreen = () => {
         
          <div className="grid grid-cols-2 gap-2 mb-5">
              <p className="p-2 break-words whitespace-pre-wrap">Criação</p>
-             <p className="p-2 break-words whitespace-pre-wrap">{card.days}</p>
+             <p className="p-2 break-words whitespace-pre-wrap"><b>{card.days}</b></p>
          </div>
          
          <div>
