@@ -80,7 +80,7 @@ const TransactionsList = () => {
     // Buscar transações na montagem do componente
     useEffect(() => {
         feathTransactionsWithDrawal(tableData, filterData);
-    }, [filterData, tableData, featchTransactions]);
+    }, [filterData, tableData, feathTransactionsWithDrawal]);
   
     // Atualizar a lista de transações quando o estado `transactions` mudar
     useEffect(() => {
