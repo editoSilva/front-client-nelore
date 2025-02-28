@@ -50,3 +50,14 @@ export type TransactionsResponse = {
         
     }
 }
+
+export type WithdrawalType = {
+    amount: string
+}
+
+export type WithDrawalResponse = {
+        data: {
+            success: boolean
+            message: string
+        }
+}

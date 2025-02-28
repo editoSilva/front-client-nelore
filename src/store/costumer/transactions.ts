@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { apiGetTransactions, ApiPostDeposit, ApiPostStatusDeposit } from '@/services/costumer/transaction/ApiTransaction';
-import { DepositResponse, DepositType, StatusDepositType, TransactionsResponse } from '@/@types/costumer/transaction/TransactionTypes';
+import { apiGetTransactions, ApiPostDeposit, ApiPostStatusDeposit, ApiPostWithdrwal } from '@/services/costumer/transaction/ApiTransaction';
+import { DepositResponse, DepositType, StatusDepositType, TransactionsResponse, WithDrawalResponse, WithdrawalType } from '@/@types/costumer/transaction/TransactionTypes';
 import { TableQueries } from '@/@types/common';
 import dayjs from 'dayjs';
 
@@ -10,9 +10,12 @@ export type Filter = {
     status: string
 }
 
+
+
 export const DepositInitial: DepositType = {
        amount: '0.0'
 }
+
 
 
 export const initialTableData: TableQueries = {
@@ -34,6 +37,9 @@ export const initialFilterData = {
 
 export type TransactionListState = {
     tableData: TableQueries
+    message: string
+    statusWithDrawal: boolean
+    errorWithDrawal: boolean
     filterData: Filter
     isLoading: boolean
     transactions: TransactionsResponse
@@ -52,6 +58,7 @@ type TransactionListAction = {
     featchDeposit:  (payload: DepositType) => void
     resetDeposit:   () => void
     featchStatusDeposit: (payload: StatusDepositType) => void
+    featchWithdrawal: (payload: WithdrawalType) => void
 }
 
 const initialState: TransactionListState = {
@@ -59,6 +66,9 @@ const initialState: TransactionListState = {
     filterData: initialFilterData,
     isLoading: true,
     isDeposit: false,
+    statusWithDrawal: false,
+    errorWithDrawal: false,
+    message: '',
     statusDepoist: {
         status: 'pending'
     },
@@ -110,6 +120,47 @@ export const useTransactionStore = create<TransactionListState & TransactionList
     setTableData: (payload) => set(() => ({ tableData: payload })),
     resetDeposit: () => {
         set({deposit: initialState.deposit, isDeposit: false})
+    },
+    //Saque
+    featchWithdrawal: async (data) => {
+        set({
+            isLoading: true
+        })
+        try {
+            const response = await ApiPostWithdrwal(data);
+            if(response.data.success) {
+                set({
+                    statusWithDrawal: true,
+                    errorWithDrawal: false,
+                    message: response.data?.message || "Operação realizada com sucesso.",
+                    isLoading: false,
+                });
+            } else {
+                set({
+                    statusWithDrawal: false,
+                    errorWithDrawal: true,
+                    message: response.data?.message || "Operação realizada com sucesso.",
+                    isLoading: false,
+                });
+            }
+            
+    
+        } catch (error) {
+            console.log('eerros', error)
+            
+           set({
+                isLoading: false,
+            }); 
+        } finally {
+           console.log('fim')
+           setTimeout(() => {
+            set({
+                statusWithDrawal: false,
+                errorWithDrawal: false,
+                message: "",
+            });
+        }, 2000);
+        }
     }
 
 }));

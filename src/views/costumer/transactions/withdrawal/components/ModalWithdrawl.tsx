@@ -4,7 +4,7 @@ import Input from '@/components/ui/Input'
 import { useState, MouseEvent, ChangeEvent, useEffect,  useRef } from 'react'
 import ReactQRCode from 'react-qr-code'
 import {useTransactionStore } from "@/store/costumer/transactions";
-import { DepositResponse, DepositType} from '@/@types/costumer/transaction/TransactionTypes'
+import { DepositResponse, DepositType, WithdrawalType} from '@/@types/costumer/transaction/TransactionTypes'
 import Notification from '@/components/ui/Notification';
 import toast from '@/components/ui/toast';
 import { number } from 'zod'
@@ -23,7 +23,7 @@ interface Deposit  {
 }
 
 const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
-  const [depositAmount, setDepositAmount] = useState<string>('')
+  const [withDrawalAmount, setWithDrawalAmount] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [depositSuccess, setDepositSuccess] = useState<boolean>(false)
   const [expirationTime, setExpirationTime] = useState<number>(10 * 60) // 10 minutos em segundos
@@ -32,10 +32,8 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const intervalRefs = useRef<NodeJS.Timeout | null>(null);
 
-  const messageShown = useRef(false);
 
   const { 
-    featchDeposit, 
     deposit, 
     featchTransactions, 
     tableData, 
@@ -43,8 +41,11 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     filterData,
     isLoading, 
     isDeposit, 
+    message,
     featchStatusDeposit,
-    statusDepoist
+    errorWithDrawal,
+    featchWithdrawal,
+    statusWithDrawal
   } = useTransactionStore();
 
 
@@ -106,21 +107,19 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
         setDepositSuccess(true);
         setTransaction(deposit.data)
         featchStatusDeposit(deposit.data)
-        setIntervalDesposit(deposit.data)
+
       }
   }, [deposit, transaction]);
 
 
   useEffect(() => {
-    if (statusDepoist.status === 'paid' && !messageShown.current) {
+    if (statusWithDrawal) {
 
-        messageShown.current = true; 
-
-        onClose()
+   
         // resetDeposit()
         toast.push(
           <Notification title="Sucesso!" type="success">
-          {`Pagamento efetuado!`}
+          {message}
           </Notification>
         );
 
@@ -132,47 +131,32 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
         
         return 
     }
-  }, [statusDepoist.status, onClose])
-
-const setIntervalDesposit = (data: Deposit) => {
- 
-  intervalRefs.current = setInterval(async () => {
-      await featchStatusDeposit(data)
-  }, 3000);
+  }, [statusWithDrawal])
 
 
-    // Apenas inicia o intervalo se o status ainda não for "paid"
+  useEffect(() => {
+    if (errorWithDrawal) {
 
-    // if()
-    // intervalRefs.current = setInterval(async () => {
-    //   try {
-    //     if (statusDepoist.status === 'paid') {
+   
+        // resetDeposit()
+        toast.push(
+          <Notification title="Sucesso!" type="warning">
+          {message}
+          </Notification>
+        );
 
-    //       if (intervalRefs.current) {
-    //         clearInterval(intervalRefs.current); // Limpa o intervalo
-    //       }
-    //       return;
-    //     } else {
+        // return () => {
+        //   if (intervalRefs.current) {
+        //     clearInterval(intervalRefs.current);
+        //   }
+        // };
         
-    //       await featchStatusDeposit(data) //handleStatusDeposit(transaction); // Atualiza o status na store
-     
-    //     }
-    //   } catch (error) {
-    //     console.error('Erro ao verificar o status do depósito:', error);
+        return 
+    }
+  }, [errorWithDrawal])
+
   
-    //     if (intervalRefs.current) {
-    //       clearInterval(intervalRefs.current); // Limpa o intervalo em caso de erro
-    //     }
-    //   }
-    // }, 3000);
-  
-    // // Limpa o intervalo ao desmontar o componente ou quando a dependência muda
-    // return () => {
-    //   if (intervalRefs.current) {
-    //     clearInterval(intervalRefs.current);
-    //   }
-    // };
-}
+
 
 // useEffect(() => {
 //   console.log('deposito', statusDepoist);
@@ -196,25 +180,25 @@ const setIntervalDesposit = (data: Deposit) => {
 
 
 
-  const handleDeposit = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
+  const handleWithDrawal = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.preventDefault()
     setLoading(true)
 
-    const dataAmount: DepositType = {
-        amount: depositAmount
+    const dataAmount: WithdrawalType = {
+        amount: withDrawalAmount
     }
 
-    await featchDeposit(dataAmount) 
+    await featchWithdrawal(dataAmount) 
 
     
 
-    setDepositAmount('') 
+    setWithDrawalAmount('') 
     setLoading(isLoading) 
 
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setDepositAmount(e.target.value)
+    setWithDrawalAmount(e.target.value)
   }
 
   const handleCopyLink = () => {
@@ -240,7 +224,7 @@ const setIntervalDesposit = (data: Deposit) => {
 
   // Resetar estados ao fechar o modal
   const handleClose = () => {
-    setDepositAmount('')
+    setWithDrawalAmount('')
     setDepositSuccess(false)
     setExpirationTime(10 * 60) // Resetando o tempo para 10 minutos
     onClose()
@@ -252,35 +236,7 @@ const setIntervalDesposit = (data: Deposit) => {
   return (
     <Dialog isOpen={open} onClose={handleClose} onRequestClose={handleClose}>
       <div className="p-6">
-        {depositSuccess ? (
-          // Exibe mensagem de agradecimento após o sucesso
-          <div className="text-center">
-            <h3 className="text-lg font-bold mb-4">💰 Falta bem puco para seu saque!</h3>
-
-            <div className="flex justify-center items-center mb-4">
-              <ReactQRCode value={deposit.data.content} size={256} />
-            </div>
-            <p className="text-sm text-gray-500 mb-4">Escaneie o QR Code ou copie o link para efetuar o pagamento.</p>
-
-            <Input
-              value={deposit.data.content}
-              disabled
-              className="w-full bg-gray-800  border border-gray-600 rounded-md mb-4"
-            />
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
-              onClick={handleCopyLink}
-            >
-              Copiar Link de Pagamento
-            </Button>
-
-            <div className="mt-4">
-              <p className="text-sm text-gray-500">Tempo restante para o pagamento:</p>
-              
-              <p className="text-xl font-bold text-green-600">{formatTime(expirationTime)}</p>
-            </div>
-          </div>
-        ) : (
+     
           <>
             {/* Exibe as informações de depósito antes do sucesso */}
             <h3 className="text-lg font-bold mb-4 text-center">💰 Realizar Saque</h3>
@@ -295,7 +251,7 @@ const setIntervalDesposit = (data: Deposit) => {
                 id="depositAmount"
                 type="number"
                 placeholder="Ex: 300.00"
-                value={depositAmount}
+                value={withDrawalAmount}
                 className="w-full bg-gray-800  border border-gray-600 rounded-md"
                 onChange={handleInputChange}
               />
@@ -316,19 +272,19 @@ const setIntervalDesposit = (data: Deposit) => {
                 </Button>
                 <Button
                   className={`px-4 py-2 rounded-md ${
-                    depositAmount
+                    withDrawalAmount
                       ? 'bg-green-600 hover:bg-green-700 text-white'
                       : 'bg-gray-400 text-gray-700 cursor-not-allowed'
                   }`}
-                  onClick={handleDeposit}
-                  disabled={!depositAmount || loading}
+                  onClick={handleWithDrawal}
+                  disabled={!withDrawalAmount || loading}
                 >
                   Confirmar Saque
                 </Button>
               </div>
             )}
           </>
-        )}
+        
       </div>
     </Dialog>
   )

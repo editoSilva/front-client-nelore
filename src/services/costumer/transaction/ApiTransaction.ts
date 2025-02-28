@@ -1,5 +1,5 @@
 import ApiService from '@/services/ApiService'
-import { DepositResponse, DepositType, StatusDepositResponse, StatusDepositType, TransactionsResponse } from '@/@types/costumer/transaction/TransactionTypes'
+import { DepositResponse, DepositType, StatusDepositResponse, StatusDepositType, TransactionsResponse, WithDrawalResponse, WithdrawalType } from '@/@types/costumer/transaction/TransactionTypes'
 
 import endpointConfig from '@/configs/costumer/endpointConfig'
 import { TableQueries } from '@/@types/common'
@@ -45,4 +45,10 @@ export async function ApiPostStatusDeposit(data: StatusDepositType) {
     })
 }
 
-
+export async function ApiPostWithdrwal(data: WithdrawalType) {
+    return ApiService.fetchDataWithAxios<WithDrawalResponse>({
+        url: endpointConfig.withdrawal,
+        method: 'post',
+        data,
+    })
+}
