@@ -19,6 +19,7 @@ const InvestmentsScreen = () => {
     const { investments, fetchInvestments } = useInvestmentStore();
     const [investmentList, setInvestmentList] = useState<Array<Investment>>([]);
     const [yieldHistories, setYieldHistories] = useState<Array<YieldHistory>>([])
+    const [investCode, sentInvestCode]  = useState<string>('')
 
 
     const handleInvestmentUpdate = () => {
@@ -28,8 +29,9 @@ const InvestmentsScreen = () => {
       }
     };
 
-    const handleYieldHistories = (data: YieldHistory[]) => {
+    const handleYieldHistories = (data: YieldHistory[], investCode: string) => {
       setYieldHistories(data)
+      sentInvestCode(investCode)
         console.log('YieldHistories', data)
     }
 
@@ -130,7 +132,7 @@ const InvestmentsScreen = () => {
                icon={<HiFire />}
                onClick={() => {
                  openDialog();
-                 handleYieldHistories(card.yieldHistories);
+                 handleYieldHistories(card.yieldHistories, card.investment_code);
              }}
                >
                    Histórico Investimento
@@ -150,7 +152,7 @@ const InvestmentsScreen = () => {
              onClose={onDialogClose}
              onRequestClose={onDialogClose}
          >
-             <h5 className="mb-4">INVG5614022025</h5>
+             <h5 className="mb-4">{investCode}</h5>
 
              <Table compact>
              <THead>
