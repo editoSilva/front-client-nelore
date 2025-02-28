@@ -34,8 +34,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
 
 
   const { 
-    deposit, 
-    featchTransactions, 
+    deposit,     
     tableData, 
     resetDeposit, 
     filterData,
@@ -45,7 +44,8 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     featchStatusDeposit,
     errorWithDrawal,
     featchWithdrawal,
-    statusWithDrawal
+    statusWithDrawal,
+    feathTransactionsWithDrawal,
   } = useTransactionStore();
 
 
@@ -72,7 +72,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   useEffect(() => {
     if (!open) {
       resetDeposit();
-      featchTransactions(tableData, filterData)
+      feathTransactionsWithDrawal(tableData, filterData)
 
       return () => {
         if (intervalRefs.current) {
@@ -80,7 +80,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
         }
       };
     }
-  }, [open, tableData, featchTransactions, resetDeposit, filterData]);
+  }, [open, tableData, feathTransactionsWithDrawal, resetDeposit, filterData]);
 
   useEffect(()=> {
     if(isDeposit) {
@@ -97,9 +97,9 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
   useEffect(() => {
     if (depositSuccess) {
         // handleStatusDeposit()
-        featchTransactions(tableData, filterData)
+        feathTransactionsWithDrawal(tableData, filterData)
     }
-  }, [depositSuccess, deposit, tableData, featchTransactions, filterData]);
+  }, [depositSuccess, deposit, tableData, feathTransactionsWithDrawal, filterData]);
 
   useEffect(() => {
     
@@ -168,7 +168,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
 //     }
 
 //     // Executa as ações necessárias
-//     featchTransactions(tableData, filterData);
+//     feathTransactionsWithDrawal(tableData, filterData);
 //     onClose();
 
 //     toast.push(

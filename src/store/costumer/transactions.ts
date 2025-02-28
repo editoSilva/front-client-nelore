@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { apiGetTransactions, ApiPostDeposit, ApiPostStatusDeposit, ApiPostWithdrwal } from '@/services/costumer/transaction/ApiTransaction';
+import { apiGetTransactions, apiGetTransactionWithDrawal, ApiPostDeposit, ApiPostStatusDeposit, ApiPostWithdrwal } from '@/services/costumer/transaction/ApiTransaction';
 import { DepositResponse, DepositType, StatusDepositType, TransactionsResponse, WithDrawalResponse, WithdrawalType } from '@/@types/costumer/transaction/TransactionTypes';
 import { TableQueries } from '@/@types/common';
 import dayjs from 'dayjs';
@@ -55,6 +55,7 @@ type TransactionListAction = {
     setFilterData: (payload: Filter) => void
     setTableData: (payload: TableQueries) => void
     featchTransactions: (payload: TableQueries, data: Filter) => void
+    feathTransactionsWithDrawal: (payload: TableQueries, data: Filter) => void
     featchDeposit:  (payload: DepositType) => void
     resetDeposit:   () => void
     featchStatusDeposit: (payload: StatusDepositType) => void
@@ -104,6 +105,10 @@ export const useTransactionStore = create<TransactionListState & TransactionList
     isLoading: true,
     featchTransactions: async (data, filter) => {
         const response = await apiGetTransactions(data, filter);
+        set({transactions: response, isLoading:false})
+    },
+    feathTransactionsWithDrawal: async (data, filter) => {
+        const response = await apiGetTransactionWithDrawal(data, filter);
         set({transactions: response, isLoading:false})
     },
     featchDeposit: async(data) => {
@@ -164,4 +169,8 @@ export const useTransactionStore = create<TransactionListState & TransactionList
     }
 
 }));
+
+function apiGetTransactionsWithDrawal(data: TableQueries, filter: Filter) {
+    throw new Error('Function not implemented.');
+}
 
