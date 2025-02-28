@@ -19,11 +19,13 @@ export type EndpointConfig = {
     sendAddress: string
     sendDocuments: string
     withdrawal: string
+    transactionsWithdrawal: string
 }
 
 const endpointConfig: EndpointConfig = {
     dashboard: base.baseUrl+'/costumer/dashboard',
-    transactions: base.baseUrl+'/costumer/deposits',
+    transactions: base.baseUrl+'/costumer/deposits?transaction_type=deposit',
+    transactionsWithdrawal: base.baseUrl+'/costumer/deposits?transaction_type=withdrawal',
     deposit: base.baseUrl+'/costumer/deposit',
     depositStatus: base.baseUrl+'/costumer/show-transaction',
     cattes: base.baseUrl+'/costumer/suggested-investments?type=cattle',
