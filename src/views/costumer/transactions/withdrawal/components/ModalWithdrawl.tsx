@@ -140,7 +140,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
    
         // resetDeposit()
         toast.push(
-          <Notification title="Sucesso!" type="warning">
+          <Notification title="Alerta!" type="warning">
           {message}
           </Notification>
         );
