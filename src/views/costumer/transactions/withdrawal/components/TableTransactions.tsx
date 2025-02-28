@@ -99,17 +99,17 @@ const columns: ColumnDef<Transaction>[] = [
 const { Tr, Th, Td, THead, TBody, Sorter } = Table;
 
 const TableTransactions = () => {
-    const { transactions, isLoading, featchTransactions } = useTransactionStore();
+    const { transactions, isLoading, feathTransactionsWithDrawal , transactionsWithdrawals } = useTransactionStore();
     const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
     const [sorting, setSorting] = useState<ColumnSort[]>([]);
 
     useEffect(() => {
-        featchTransactions();
+        feathTransactionsWithDrawal();
     }, []);
 
     useEffect(() => {
-        if (Array.isArray(transactions?.data)) {
-            setTransactionsList(transactions.data);
+        if (Array.isArray(transactionsWithdrawals?.data)) {
+            setTransactionsList(transactionsWithdrawals.data);
         }
     }, [transactions]);
 

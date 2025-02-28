@@ -43,6 +43,7 @@ export type TransactionListState = {
     filterData: Filter
     isLoading: boolean
     transactions: TransactionsResponse
+    transactionsWithdrawals: TransactionsResponse
     deposit: DepositResponse
     isDeposit: boolean
     statusDepoist: {
@@ -83,6 +84,19 @@ const initialState: TransactionListState = {
           
       
     },
+    transactionsWithdrawals: {
+        data: [],
+        links: '',
+        meta: {
+            current_page: 1,
+            total: 0,
+            from: 1,
+            patth: '',
+            per_page: 0,
+            to: 0,
+            
+        }
+    },
     transactions: {
         data: [],
         links: '',
@@ -109,7 +123,7 @@ export const useTransactionStore = create<TransactionListState & TransactionList
     },
     feathTransactionsWithDrawal: async (data, filter) => {
         const response = await apiGetTransactionWithDrawal(data, filter);
-        set({transactions: response, isLoading:false})
+        set({transactionsWithdrawals: response, isLoading:false})
     },
     featchDeposit: async(data) => {
             const response = await ApiPostDeposit(data);     

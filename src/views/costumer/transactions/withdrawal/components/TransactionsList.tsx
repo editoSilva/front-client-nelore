@@ -65,29 +65,30 @@ type Transaction = {
 
 const TransactionsList = () => {
     
-    const { transactions, isLoading, featchTransactions, tableData, setTableData, filterData, setFilterData} = useTransactionStore();
+    const { transactions, isLoading, featchTransactions, transactionsWithdrawals, feathTransactionsWithDrawal, tableData, setTableData, filterData, setFilterData} = useTransactionStore();
 
     const [transactionsList, setTransactionsList] = useState<Array<TransactionsTypes>>([]);
   
     // Função para atualizar a lista de transações
     const handleTransactionsUpdate = () => {
-      if (transactions?.data) {
+      if (transactionsWithdrawals?.data) {
 
-        setTransactionsList(transactions.data);
+        setTransactionsList(transactionsWithdrawals.data);
       }
     };
   
     // Buscar transações na montagem do componente
     useEffect(() => {
-      featchTransactions(tableData, filterData);
+        feathTransactionsWithDrawal(tableData, filterData);
     }, [filterData, tableData, featchTransactions]);
   
     // Atualizar a lista de transações quando o estado `transactions` mudar
     useEffect(() => {
       handleTransactionsUpdate();
-    }, [transactions]);
+    }, [transactionsWithdrawals]);
 
-    console.log('isLoading', isLoading)
+
+
    
     const columns = useMemo<ColumnDef<Transaction>[]>(
         () => [
@@ -147,7 +148,7 @@ const TransactionsList = () => {
     const handleSetTableData = (data: TableQueries, filter: Filter) => {
         setTableData(data)
         setFilterData(filter)
-        featchTransactions(data, filter)
+        feathTransactionsWithDrawal(data, filter)
     }
 
     const handlePaginationChange = (page: number) => {
@@ -185,7 +186,7 @@ const TransactionsList = () => {
                 loading={isLoading}
           
                 pagingData={{
-                    total: transactions.meta.total,
+                    total: transactionsWithdrawals.meta.total,
                     pageIndex: tableData.pageIndex as number,
                     pageSize: tableData.pageSize as number,
                 }}

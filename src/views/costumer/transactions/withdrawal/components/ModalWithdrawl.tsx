@@ -45,6 +45,7 @@ const ModalDeposit = ({ open, onClose }: ModalDepositProps) => {
     errorWithDrawal,
     featchWithdrawal,
     statusWithDrawal,
+
     feathTransactionsWithDrawal,
   } = useTransactionStore();
 

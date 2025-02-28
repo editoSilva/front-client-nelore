@@ -8,7 +8,7 @@ import ModalDeposit from './ModalWithdrawl';
 
 const TransactionListActionTools = () => {
   
-    const { transactions } = useTransactionStore();
+    const { transactions, transactionsWithdrawals } = useTransactionStore();
 
     const [depositoIsOpen, setdepositoIsOpen] = useState(false)
 
@@ -29,7 +29,7 @@ const TransactionListActionTools = () => {
             <CSVLink
                 className="w-full"
                 filename="customerList.csv"
-                data={transactions.data}
+                data={transactionsWithdrawals.data}
             >
                 <Button
                     icon={<TbCloudDownload className="text-xl" />}
