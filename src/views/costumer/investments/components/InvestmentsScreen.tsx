@@ -157,7 +157,7 @@ const InvestmentsScreen = () => {
                  <Tr>
                      <Th>Data</Th>
                      <Th>Total Investido</Th>
-                     <Th>Retorno</Th>
+                     <Th>Ganho do Dia</Th>
                      <Th>%</Th>
                  </Tr>
              </THead>
