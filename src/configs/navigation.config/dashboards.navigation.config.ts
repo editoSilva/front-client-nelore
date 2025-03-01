@@ -51,13 +51,32 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             {
                 key: 'dashboard',
                 path: '/admin/users',
-                title: 'Clientes',
-                translateKey: 'Clientes',
+                title: 'Usuários',
+                translateKey: 'Usuários',
                 icon: 'customers',
-                type: NAV_ITEM_TYPE_ITEM,
+                type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN],
                 subMenu: [
-                    
+                    {
+                        key: 'sponsor',
+                        path: '/admin/deposits',
+                        title: 'Duplicadores',
+                        translateKey: 'Duplicadores',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'costumer',
+                        path: '/admin/withdrawals',
+                        title: 'Clientes',
+                        translateKey: 'Clientes',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
                 ],
             },
             {
