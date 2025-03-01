@@ -91,7 +91,7 @@ const SettingsBilling = () => {
 
     const beforeUploadFront = (files: FileList | null, fileList: File[]): string | true => {
         const allowedFileType = ['image/jpeg', 'image/png']
-        const maxFileSize = 1000000
+        const maxFileSize = 1000000000000000
 
         if (fileList.length >= maxUploadFront) {
             return `Você só pode enviar ${maxUploadFront} arquivo(s)`
@@ -102,9 +102,9 @@ const SettingsBilling = () => {
                 if (!allowedFileType.includes(f.type)) {
                     return 'Envie apenas arquivos .jpeg ou .png!'
                 }
-                if (f.size >= maxFileSize) {
-                    return 'A imagem não pode ter mais de 1000kb!'
-                }
+                // if (f.size >= maxFileSize) {
+                //     return 'A imagem não pode ter mais de 1000kb!'
+                // }
             }
         }
 

@@ -7,7 +7,7 @@ const costumerRoute: Routes = [
         key: 'dashboard',
         path: '/dashboard',
         component: lazy(() => import('@/views/costumer/dashboard')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR, ADMIN],
         meta: {
             pageContainerType: 'contained',
         },

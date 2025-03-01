@@ -5,6 +5,7 @@ import { useSessionUser, useToken } from '@/store/authStore'
 import { apiSignIn, apiSignOut, apiSignUp } from '@/services/AuthService'
 import { REDIRECT_URL_KEY } from '@/constants/app.constant'
 import { useNavigate } from 'react-router-dom'
+
 import type {
     SignInCredential,
     SignUpCredential,
@@ -13,6 +14,7 @@ import type {
     User,
     Token,
 } from '@/@types/auth'
+
 import type { ReactNode } from 'react'
 import type { NavigateFunction } from 'react-router-dom'
 
@@ -48,19 +50,38 @@ function AuthProvider({ children }: AuthProviderProps) {
     const navigatorRef = useRef<IsolatedNavigatorRef>(null)
 
     const path = '';
-
+  
     const redirect = () => {
+
         const search = window.location.search
         const params = new URLSearchParams(search)
         const redirectUrl = params.get(REDIRECT_URL_KEY)
 
-        // if(user.role === 'costumer') {
-        //     navigatorRef.current?.navigate(
-        //         redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath,
-        // )
         navigatorRef.current?.navigate(
             redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath,
         )
+        // if(user.role === 'costumer' || user.role === 'sponsor') {
+        //     const search = window.location.search
+        //     const params = new URLSearchParams(search)
+        //     const redirectUrl = params.get(REDIRECT_URL_KEY)
+    
+        //     navigatorRef.current?.navigate(
+        //         redirectUrl ? redirectUrl : appConfig.authenticatedEntryPath,
+        //     )
+        // }
+        // if(user.role === 'admin') {
+        //     console.log('rota admin',appConfig.authenticatedEntryAdminPath)
+        //     const search = window.location.search
+        //     const params = new URLSearchParams(search)
+        //     const redirectUrl = params.get(REDIRECT_URL_KEY)
+
+        //     console.log('redirectUrl', redirectUrl)
+    
+        //     navigatorRef.current?.navigate(
+        //         redirectUrl ? redirectUrl : appConfig.authenticatedEntryAdminPath
+        //     )
+        // }
+       
     }
 
     const handleSignIn = (tokens: Token, user?: User) => {

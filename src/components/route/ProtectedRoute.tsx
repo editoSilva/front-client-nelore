@@ -6,9 +6,12 @@ import { useAuth } from '@/auth'
 const { unAuthenticatedEntryPath } = appConfig
 
 const ProtectedRoute = () => {
-    const { authenticated } = useAuth()
+    const { authenticated} = useAuth()
+
 
     const { pathname } = useLocation()
+
+
 
     const getPathName =
         pathname === '/' ? '' : `?${REDIRECT_URL_KEY}=${location.pathname}`

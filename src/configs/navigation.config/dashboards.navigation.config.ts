@@ -16,13 +16,121 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.dashboard.dashboard',
         icon: 'dashboard',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR, ADMIN],
         meta: {
             horizontalMenu: {
                 layout: 'default',
             },
         },
         subMenu: [
+            //Admin
+            {
+                key: 'dashboard',
+                path: '/admin/dashboard',
+                title: 'Home',
+                translateKey: 'nav.dashboard.home',
+                icon: 'home',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Clientes',
+                translateKey: 'Clientes',
+                icon: 'customers',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Arrobas',
+                translateKey: 'Valor Arrobas',
+                icon: 'luatsign',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Adiquirentes',
+                translateKey: 'Adiquirentes',
+                icon: 'sicontactlesspayment',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            
+            {
+                key: 'admin.transactions',
+                path: '',
+                title: 'Transações',
+                translateKey: 'nav.dashboard.transacions',
+                icon: 'transactions',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN],
+                subMenu: [
+                    {
+                        key: 'deposits',
+                        path: '/admin/deposits',
+                        title: 'Depósitos',
+                        translateKey: 'Depósitos',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                    {
+                        key: 'withdrawals',
+                        path: '/admin/withdrawals',
+                        title: 'Saques',
+                        translateKey: 'withdrawals',
+                        icon: 'FaNetworkWired',
+                        type: NAV_ITEM_TYPE_ITEM,
+                        authority: [ADMIN],
+                        subMenu: [],
+                    },
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Fazendas',
+                translateKey: 'Fazendas',
+                icon: 'farm',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Animais',
+                translateKey: 'Animais',
+                icon: 'cow',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+           
+
+            //Costumer & sponsor
             {
                 key: 'dashboard',
                 path: 'dashboard',

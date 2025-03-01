@@ -86,17 +86,18 @@ import {
     PiShareNetworkDuotone,
     PiToolboxDuotone,
     PiCodeDuotone,
+    PiFarmDuotone 
    
 } from 'react-icons/pi'
 
+
 import { FaHome, FaNetworkWired} from "react-icons/fa";
 import { FaMoneyBillTrendUp, FaBoxesStacked, FaFileContract} from "react-icons/fa6";
-import { GiGraduateCap, GiThorHammer } from "react-icons/gi";
+import { GiGraduateCap, GiThorHammer, GiCow } from "react-icons/gi";
 import { BsCurrencyExchange } from "react-icons/bs";
 import { GrTransaction } from "react-icons/gr";
-
-
-
+import { LuAtSign } from "react-icons/lu";
+import { SiContactlesspayment } from "react-icons/si";
 
 
 export type NavigationIcons = Record<string, JSX.Element>
@@ -105,6 +106,10 @@ const navigationIcon: NavigationIcons = {
     uiComponents: <PiPuzzlePieceDuotone />,
     transactions: <GrTransaction/>,
     common: <PiSwatchesDuotone />,
+    farm: <PiFarmDuotone />,
+    luatsign: <LuAtSign />,
+    cow: <GiCow />,
+    sicontactlesspayment: <SiContactlesspayment />,
     bsCurrencyExchange: <BsCurrencyExchange/>,
     uiCommonButton: <PiCursorClickDuotone />,
     uiCommonGrid: <PiGridFourDuotone />,

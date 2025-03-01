@@ -52,8 +52,6 @@ const StatisticCard = ({
 const OverviewAfiliate = ({ data }: OverviewAfiliate) => {
 
 const { user } = useSessionUser()
-
-console.log('user-role', user.role)
     return (
         <Card>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 rounded-2xl mt-4">

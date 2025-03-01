@@ -7,6 +7,7 @@ import guideRoute from './guideRoute'
 import othersRoute from './othersRoute'
 import costumerRoute from '@/configs/routes.config/coustumer/costumerRoute'
 import type { Routes } from '@/@types/routes'
+import adminRoute from './admin/adminRoute'
 
 export const publicRoutes: Routes = [...authRoute]
 
@@ -17,5 +18,6 @@ export const protectedRoutes: Routes = [
     ...authDemoRoute,
     ...guideRoute,
     ...othersRoute,
-    ...costumerRoute
+    ...costumerRoute,
+    ...adminRoute
 ]
