@@ -98,6 +98,11 @@ import { BsCurrencyExchange } from "react-icons/bs";
 import { GrTransaction } from "react-icons/gr";
 import { LuAtSign } from "react-icons/lu";
 import { SiContactlesspayment } from "react-icons/si";
+import { MdVideoChat, MdSettingsSuggest } from "react-icons/md";
+
+
+import { AiOutlineStock } from "react-icons/ai";
+
 
 
 export type NavigationIcons = Record<string, JSX.Element>
@@ -106,9 +111,12 @@ const navigationIcon: NavigationIcons = {
     uiComponents: <PiPuzzlePieceDuotone />,
     transactions: <GrTransaction/>,
     common: <PiSwatchesDuotone />,
+    settings: <MdSettingsSuggest />,
     farm: <PiFarmDuotone />,
     luatsign: <LuAtSign />,
     cow: <GiCow />,
+    investment: <AiOutlineStock />,
+    lessons: <MdVideoChat />,
     sicontactlesspayment: <SiContactlesspayment />,
     bsCurrencyExchange: <BsCurrencyExchange/>,
     uiCommonButton: <PiCursorClickDuotone />,

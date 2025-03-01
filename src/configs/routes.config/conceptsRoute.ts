@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 import { CONCEPTS_PREFIX_PATH } from '@/constants/route.constant'
-import { COSTUMER, SPONSOR } from '@/constants/roles.constant'
+import { ADMIN, COSTUMER, SPONSOR } from '@/constants/roles.constant'
 import type { Routes } from '@/@types/routes'
 
 const conceptsRoute: Routes = [
@@ -8,7 +8,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.ai.chat',
         path: `${CONCEPTS_PREFIX_PATH}/ai/chat`,
         component: lazy(() => import('@/views/concepts/ai/Chat')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -17,7 +17,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.ai.image',
         path: `${CONCEPTS_PREFIX_PATH}/ai/image`,
         component: lazy(() => import('@/views/concepts/ai/Image')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',
@@ -29,7 +29,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/customers/CustomerList'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
     },
     {
         key: 'concepts.customers.customerEdit',
@@ -37,7 +37,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/customers/CustomerEdit'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: 'Edit customer',
@@ -54,7 +54,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/customers/CustomerCreate'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: 'Create customer',
@@ -71,7 +71,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/customers/CustomerDetails'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -80,13 +80,13 @@ const conceptsRoute: Routes = [
         key: 'concepts.products.productList',
         path: `${CONCEPTS_PREFIX_PATH}/products/product-list`,
         component: lazy(() => import('@/views/concepts/products/ProductList')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
     },
     {
         key: 'concepts.products.productEdit',
         path: `${CONCEPTS_PREFIX_PATH}/products/product-edit/:id`,
         component: lazy(() => import('@/views/concepts/products/ProductEdit')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: 'Edit product',
@@ -103,7 +103,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/products/ProductCreate'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: 'Create product',
@@ -118,7 +118,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.projects.scrumBoard',
         path: `${CONCEPTS_PREFIX_PATH}/projects/scrum-board`,
         component: lazy(() => import('@/views/concepts/projects/ScrumBoard')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -127,7 +127,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.projects.projectList',
         path: `${CONCEPTS_PREFIX_PATH}/projects/project-list`,
         component: lazy(() => import('@/views/concepts/projects/ProjectList')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',
@@ -139,7 +139,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/projects/ProjectDetails'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',
@@ -149,7 +149,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.projects.projectTasks',
         path: `${CONCEPTS_PREFIX_PATH}/projects/tasks`,
         component: lazy(() => import('@/views/concepts/projects/Tasks')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -158,7 +158,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.projects.projectIssue',
         path: `${CONCEPTS_PREFIX_PATH}/projects/tasks/:id`,
         component: lazy(() => import('@/views/concepts/projects/Issue')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -167,7 +167,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.orders.orderList',
         path: `${CONCEPTS_PREFIX_PATH}/orders/order-list`,
         component: lazy(() => import('@/views/concepts/orders/OrderList')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -176,7 +176,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.orders.orderEdit',
         path: `${CONCEPTS_PREFIX_PATH}/orders/order-edit/:id`,
         component: lazy(() => import('@/views/concepts/orders/OrderEdit')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: 'Edit order',
@@ -190,7 +190,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.orders.orderCreate',
         path: `${CONCEPTS_PREFIX_PATH}/orders/order-create`,
         component: lazy(() => import('@/views/concepts/orders/OrderCreate')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: 'Create order',
@@ -205,7 +205,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.orders.orderDetails',
         path: `${CONCEPTS_PREFIX_PATH}/orders/order-details/:id`,
         component: lazy(() => import('@/views/concepts/orders/OrderDetails')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 contained: true,
@@ -229,7 +229,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.account.settings',
         path: `${CONCEPTS_PREFIX_PATH}/account/settings`,
         component: lazy(() => import('@/views/concepts/accounts/Settings')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             header: {
                 title: '',
@@ -241,7 +241,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.account.activityLog',
         path: `${CONCEPTS_PREFIX_PATH}/account/activity-log`,
         component: lazy(() => import('@/views/concepts/accounts/ActivityLog')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -252,7 +252,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/accounts/RolesPermissions'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',
@@ -262,7 +262,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.account.pricing',
         path: `${CONCEPTS_PREFIX_PATH}/account/pricing`,
         component: lazy(() => import('@/views/concepts/accounts/Pricing')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
         },
@@ -273,7 +273,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/help-center/SupportHub'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'gutterless',
             pageBackgroundType: 'plain',
@@ -283,7 +283,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.helpCenter.article',
         path: `${CONCEPTS_PREFIX_PATH}/help-center/article/:id`,
         component: lazy(() => import('@/views/concepts/help-center/Article')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',
@@ -295,7 +295,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/help-center/EditArticle'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageBackgroundType: 'plain',
             footer: false,
@@ -307,7 +307,7 @@ const conceptsRoute: Routes = [
         component: lazy(
             () => import('@/views/concepts/help-center/ManageArticle'),
         ),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageBackgroundType: 'plain',
             footer: false,
@@ -317,7 +317,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.calendar',
         path: `${CONCEPTS_PREFIX_PATH}/calendar`,
         component: lazy(() => import('@/views/concepts/calendar/Calendar')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',
@@ -327,7 +327,7 @@ const conceptsRoute: Routes = [
         key: 'concepts.fileManager',
         path: `${CONCEPTS_PREFIX_PATH}/file-manager`,
         component: lazy(() => import('@/views/concepts/files/FileManager')),
-        authority: [COSTUMER, SPONSOR],
+        authority: [COSTUMER, SPONSOR , ADMIN],
         meta: {
             pageContainerType: 'contained',
             pageBackgroundType: 'plain',

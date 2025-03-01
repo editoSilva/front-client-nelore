@@ -38,10 +38,34 @@ const dashboardsNavigationConfig: NavigationTree[] = [
             },
             {
                 key: 'dashboard',
+                path: '/admin/dashboard',
+                title: 'Configurações',
+                translateKey: 'Configurações',
+                icon: 'settings',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
                 path: '/admin/users',
                 title: 'Clientes',
                 translateKey: 'Clientes',
                 icon: 'customers',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Investimentos',
+                translateKey: 'Investimentos',
+                icon: 'investment',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN],
                 subMenu: [
@@ -122,6 +146,18 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 title: 'Animais',
                 translateKey: 'Animais',
                 icon: 'cow',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN],
+                subMenu: [
+                    
+                ],
+            },
+            {
+                key: 'dashboard',
+                path: '/admin/users',
+                title: 'Aulas',
+                translateKey: 'Aulas',
+                icon: 'lessons',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN],
                 subMenu: [
