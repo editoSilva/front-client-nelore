@@ -107,16 +107,16 @@ const SettingsBilling = () => {
             return `Você só pode enviar ${maxUploadFront} arquivo(s)`
         }
 
-        if (files) {
-            for (const f of files) {
-                if (!allowedFileType.includes(f.type)) {
-                    return 'Envie apenas arquivos .jpeg ou .png!'
-                }
-                if (f.size >= maxFileSize) {
-                    return 'A imagem não pode ter mais de 1000kb!'
-                }
-            }
-        }
+        // if (files) {
+        //     for (const f of files) {
+        //         // if (!allowedFileType.includes(f.type)) {
+        //         //     return 'Envie apenas arquivos .jpeg ou .png!'
+        //         // }
+        //         // if (f.size >= maxFileSize) {
+        //         //     return 'A imagem não pode ter mais de 1000kb!'
+        //         // }
+        //     }
+        // }
 
         return true
     }
