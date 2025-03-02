@@ -69,7 +69,16 @@ const SettingsBilling = () => {
     // }
 
     const handleSubmitDocuments = async () => {
-        if (!typeDocument || !documentFront || !documentBack || !selfie) return;
+        if (!typeDocument || !documentFront || !documentBack || !selfie) {
+            console.warn("Preencha todos os campos antes de enviar.");
+            return;
+        }
+    
+        // Verifica se os arquivos são do tipo File (caso venham de um input type="file")
+        if (!(documentFront instanceof File) || !(documentBack instanceof File) || !(selfie instanceof File)) {
+            console.error("Os documentos devem ser arquivos válidos.");
+            return;
+        }
     
         const formData = new FormData();
         formData.append("document_type", typeDocument);
@@ -78,8 +87,9 @@ const SettingsBilling = () => {
         formData.append("selfie_file_path", selfie);
     
         try {
-            await fetchDocumentments(formData); // Aguarda o envio dos documentos
-            await featchPerfil(); // Atualiza o perfil após o envio ser concluído
+            await fetchDocumentments(formData); // Envia os documentos
+            await featchPerfil(); // Atualiza o perfil após o envio
+            console.log("Documentos enviados com sucesso!");
         } catch (error) {
             console.error("Erro ao enviar documentos:", error);
         }
@@ -102,9 +112,9 @@ const SettingsBilling = () => {
                 if (!allowedFileType.includes(f.type)) {
                     return 'Envie apenas arquivos .jpeg ou .png!'
                 }
-                // if (f.size >= maxFileSize) {
-                //     return 'A imagem não pode ter mais de 1000kb!'
-                // }
+                if (f.size >= maxFileSize) {
+                    return 'A imagem não pode ter mais de 1000kb!'
+                }
             }
         }
 
