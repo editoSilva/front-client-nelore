@@ -115,6 +115,7 @@ const TopCard = (data: CardTop) => {
                  
                     value={
                         <NumericFormat 
+                            prefix="R$"
                             displayType="text"
                             value={data.investments}
                             thousandSeparator={true}
