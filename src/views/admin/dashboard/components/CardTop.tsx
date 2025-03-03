@@ -77,9 +77,10 @@ const TopCard = (data: CardTop) => {
 
                 <SummarySegment
                     title="Depósitos"
-                 
+              
                     value={
                         <NumericFormat 
+                            prefix="R$"
                             displayType="text"
                             value={data.deposits}
                             thousandSeparator={true}
@@ -97,6 +98,7 @@ const TopCard = (data: CardTop) => {
                  
                     value={
                         <NumericFormat 
+                        prefix="R$"
                             displayType="text"
                             value={data.withdrawal}
                             thousandSeparator={true}
