@@ -12,6 +12,16 @@ const adminRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+
+    {
+        key: 'admin.settings',
+        path: '/admin/settings',
+        component: lazy(() => import('@/views/admin/settings')),
+        authority: [ADMIN],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
     // {
     //     key: 'deposits',
     //     path: '/deposits',

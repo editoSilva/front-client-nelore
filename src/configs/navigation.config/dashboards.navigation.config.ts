@@ -16,7 +16,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         translateKey: 'nav.dashboard.dashboard',
         icon: 'dashboard',
         type: NAV_ITEM_TYPE_TITLE,
-        authority: [COSTUMER, SPONSOR, ADMIN],
+        authority: [COSTUMER, SPONSOR],
         meta: {
             horizontalMenu: {
                 layout: 'default',
@@ -25,7 +25,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
         subMenu: [
             //Admin
             {
-                key: 'dashboard',
+                key: 'admin.dashboard',
                 path: '/admin/dashboard',
                 title: 'Home',
                 translateKey: 'nav.dashboard.home',
@@ -37,8 +37,8 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 ],
             },
             {
-                key: 'dashboard',
-                path: '/admin/dashboard',
+                key: 'admin.settings',
+                path: '/admin/settings',
                 title: 'Configurações',
                 translateKey: 'Configurações',
                 icon: 'settings',
@@ -49,7 +49,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 ],
             },
             {
-                key: 'dashboard',
+                key: 'admin.users',
                 path: '/admin/users',
                 title: 'Usuários',
                 translateKey: 'Usuários',
@@ -199,7 +199,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 ],
             },
             {
-                key: 'dashboard.auctions',
+                key: 'leiloes',
                 path: '/leiloes',
                 title: 'Leilões',
                 translateKey: 'nav.dashboard.auctions',
