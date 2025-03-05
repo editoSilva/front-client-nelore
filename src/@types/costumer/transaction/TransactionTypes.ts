@@ -13,6 +13,8 @@ export type TransactionsTypes = {
     paymented_at: string
 
 }
+
+
 export type  DepositResponse = {
         data: {
             transaction_id: string,

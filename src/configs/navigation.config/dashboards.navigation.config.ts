@@ -59,7 +59,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                 subMenu: [
                     {
                         key: 'sponsor',
-                        path: '/admin/deposits',
+                        path: '/admin/users/sponsor',
                         title: 'Duplicadores',
                         translateKey: 'Duplicadores',
                         icon: 'FaNetworkWired',
@@ -69,7 +69,7 @@ const dashboardsNavigationConfig: NavigationTree[] = [
                     },
                     {
                         key: 'costumer',
-                        path: '/admin/withdrawals',
+                        path: '/admin/users/costumer',
                         title: 'Clientes',
                         translateKey: 'Clientes',
                         icon: 'FaNetworkWired',

@@ -22,6 +22,29 @@ const adminRoute: Routes = [
             pageContainerType: 'contained',
         },
     },
+
+    {
+        key: 'admin.users',
+        path: 'admin/users/:role',
+        component: lazy(() => import('@/views/admin/users')),
+        authority: [ADMIN],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+    {
+        key: 'admin.users',
+        path: 'admin/user/:id',
+        component: lazy(() => import('@/views/admin/users/deatils')),
+        authority: [ADMIN],
+        meta: {
+            pageContainerType: 'contained',
+        },
+    },
+
+
+    
     // {
     //     key: 'deposits',
     //     path: '/deposits',
