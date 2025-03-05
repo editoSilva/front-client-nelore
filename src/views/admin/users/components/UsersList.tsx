@@ -42,6 +42,8 @@ const UsersList = () => {
     const { role } = useParams();
     const { users, isLoading, featchUsers, tableData, setTableData, filterData, setFilterData } = useStoreuser();
 
+    console.log('total user', users.meta.total)
+
     // Memorizar `featchTransactions` para evitar re-renderizações desnecessárias
     const featchTransactionsMemoized = useCallback(() => {
         featchUsers(tableData, filterData, role);
