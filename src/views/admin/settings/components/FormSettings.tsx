@@ -51,12 +51,9 @@ const FormSettings = () => {
     };
 
         
-    // useEffect(() => {
-        
-    // })
    if (isMessageSuccess) {
     toast.push(
-   <Notification title="Sucesso!" type="success" duration={4000}>
+   <Notification title="Sucesso!" type="success" duration={3000}>
        {message}
    </Notification>,
    )

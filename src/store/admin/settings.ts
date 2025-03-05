@@ -61,7 +61,6 @@ export const  useStoreSettings = create<SettingsState & SettingsActions>((set) =
                 isLoading: true
             })
 
-       
                 try {
                         const response = await apiUpdateSettings(data);
                 
@@ -72,8 +71,7 @@ export const  useStoreSettings = create<SettingsState & SettingsActions>((set) =
                             isMessageSuccess: true,
                             message: 'Atualizado com sucesso'
                         })
-           
-                
+                        
                 } catch (error) {
 
                     set({
@@ -83,7 +81,8 @@ export const  useStoreSettings = create<SettingsState & SettingsActions>((set) =
                     })
                     console.log('error', error)
                 } finally {
-                    setInterval(() => {
+
+                    setTimeout(() => {
                         set({
                             isMessageSuccess: false
                         })
