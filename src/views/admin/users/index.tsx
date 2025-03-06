@@ -4,6 +4,8 @@ import { AdaptiveCard, Container } from '@/components/shared';
 import UsersList from './components/UsersList';
 import { useParams } from 'react-router-dom';
 import { useStoreuser } from '@/store/admin/users';
+import UserListActionTools from './components/UserListActionTools';
+import UserListTableTools from './components/UserListTableTools';
 
 const Users = () => {
 
@@ -21,7 +23,8 @@ const Users = () => {
                         
                         </div>
                         </div>
-
+                        <UserListActionTools/>
+                        <UserListTableTools />
                         <UsersList />
                 </AdaptiveCard>
             </Container>

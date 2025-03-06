@@ -10,12 +10,12 @@ export async function apiGetUsers(data: TableQueries, filter: Filter, role: stri
     const {sort, pageSize, pageIndex, query} = data;
     const {date, status} = filter;
     console.log('filtrando', date[0].toISOString().split('T')[0])
-
+    console.log('query', query)
     const params  = {
         'created_at': sort?.order,
         'per_page':   pageSize,
         'page'    :   pageIndex,
-        'transaction_id': query,
+        'name'      : query,
         'startDate':      date[0].toISOString().split('T')[0],
         'endDate':  date[1].toISOString().split('T')[0],
         'role': role 
