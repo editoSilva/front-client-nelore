@@ -5,11 +5,10 @@ const Settings = () => {
         return (
             <>
               <h4 className="mb-8">Configurações</h4>
-           <AdaptiveCard className="w-full  flex  justify-center">
-          
-        <div className="w-full h-full flex">
+           <AdaptiveCard className="w-full">
+     
             <FormSettings  />
-        </div>
+      
     </AdaptiveCard>
 
             </>
