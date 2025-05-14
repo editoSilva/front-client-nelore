@@ -61,7 +61,7 @@ const Sumary = ({ data }: SumaryProps) => {
             <div className="flex items-center justify-between">
                 <h4>Dashboard</h4>
             </div>
-            <div className="bg-gray-700 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
                 <SummarySegment
                     title="Saldo"
                     value={
@@ -74,7 +74,7 @@ const Sumary = ({ data }: SumaryProps) => {
                     }
              
                     icon={<TbWallet />}
-                    iconClass="bg-gray-700"
+                    iconClass="bg-green-200"
                     className="border-b border-r-0 md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
                 />
 
@@ -90,7 +90,7 @@ const Sumary = ({ data }: SumaryProps) => {
                     }
 
                     icon={<TbTransactionDollar />}
-                    iconClass="bg-gray-700"
+                    iconClass="bg-yellow-200"
                     className="border-b border-r-0 md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
                 />
 
