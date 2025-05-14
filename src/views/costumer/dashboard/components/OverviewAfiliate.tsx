@@ -57,7 +57,7 @@ const { user } = useSessionUser()
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 rounded-2xl mt-4">
                 <StatisticCard
                     title="Preço Boi Gordo R$"
-                    className="bg-amber-400 dark:bg-opacity-75"
+                    className=" dark:bg-opacity-75"
                     value={data.dailyPrice}
                     icon={<TbArrowAutofitContentFilled />}
                 />
@@ -66,7 +66,7 @@ const { user } = useSessionUser()
                 <>
                                 <StatisticCard
                                     title="Visitas"
-                                    className="bg-orange-300 dark:bg-opacity-75"
+                                    className=" dark:bg-opacity-75"
                                     value={data.visited}
                                     icon={<TbExternalLink />}
                                 />
@@ -84,7 +84,7 @@ const { user } = useSessionUser()
 
                                 <StatisticCard
                                     title="Disponível Saque"
-                                    className="bg-blue-500 dark:bg-opacity-75"
+                                    className=" dark:bg-opacity-75"
                                     value={data.withdrawl}
                                     icon={<FaPercent />}
                                 />
