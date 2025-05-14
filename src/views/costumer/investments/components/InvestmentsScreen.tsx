@@ -148,8 +148,10 @@ const InvestmentsScreen = () => {
  </div>
 
       <Dialog
+          width={1000}
           isOpen={dialogIsOpen}
           onClose={onDialogClose}
+         
           onRequestClose={onDialogClose}
       >
           <h5 className="mb-4">{investCode}</h5>
