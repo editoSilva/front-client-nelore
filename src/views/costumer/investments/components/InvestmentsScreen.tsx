@@ -159,6 +159,7 @@ const InvestmentsScreen = () => {
               <Table compact>
                   <THead>
                       <Tr>
+                        <th>#</th>
                           <Th>Data</Th>
                           <Th>Total Investido</Th>
                           <Th>Ganho do Dia</Th>
@@ -168,6 +169,7 @@ const InvestmentsScreen = () => {
                   <TBody>
                       {yieldHistories.map((card, index) => (
                           <Tr key={index}>
+                            <td>{index + 1}</td>
                               <Td>{card.yield_date}</Td>
                               <Td>R$ {card.total_investment}</Td>
                               <Td>R$ {card.yield}</Td>
