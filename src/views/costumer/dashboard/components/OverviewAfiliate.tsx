@@ -66,13 +66,13 @@ const { user } = useSessionUser()
                 <>
                                 <StatisticCard
                                     title="Visitas"
-                                    className="bg-gray- dark:bg-opacity-75"
+                                    className="bg-gray-700 dark:bg-opacity-75"
                                     value={data.visited}
                                     icon={<TbExternalLink />}
                                 />
                                 <StatisticCard
                                     title="Indicados"
-                                    className="bg-teal-500 dark:bg-opacity-75"
+                                    className="bg-gray-700 dark:bg-opacity-75"
                                     value={data.total_network}
                                     icon={<TbUsers />}
                                 />
@@ -84,7 +84,7 @@ const { user } = useSessionUser()
 
                                 <StatisticCard
                                     title="Disponível Saque"
-                                    className="bg-blue-500 dark:bg-opacity-75"
+                                    className="bg-gray-700 dark:bg-opacity-75"
                                     value={data.withdrawl}
                                     icon={<FaPercent />}
                                 />
