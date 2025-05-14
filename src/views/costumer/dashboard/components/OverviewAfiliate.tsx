@@ -84,7 +84,7 @@ const { user } = useSessionUser()
 
                                 <StatisticCard
                                     title="Disponível Saque"
-                                    className="bg-gray-400 dark:bg-opacity-75"
+                                    className="bg-sky-100 dark:bg-opacity-75"
                                     value={data.withdrawl}
                                     icon={<FaPercent />}
                                 />
