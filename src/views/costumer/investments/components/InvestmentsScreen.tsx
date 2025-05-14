@@ -147,39 +147,41 @@ const InvestmentsScreen = () => {
  </div>
  </div>
 
-         <Dialog
-             isOpen={dialogIsOpen}
-             onClose={onDialogClose}
-             onRequestClose={onDialogClose}
-         >
-             <h5 className="mb-4">{investCode}</h5>
+      <Dialog
+          isOpen={dialogIsOpen}
+          onClose={onDialogClose}
+          onRequestClose={onDialogClose}
+      >
+          <h5 className="mb-4">{investCode}</h5>
 
-             <Table compact>
-             <THead>
-                 <Tr>
-                     <Th>Data</Th>
-                     <Th>Total Investido</Th>
-                     <Th>Ganho do Dia</Th>
-                     <Th>%</Th>
-                 </Tr>
-             </THead>
-             <TBody>
-             {yieldHistories.map((card, index) => (
-               <Tr key={index}>
-                 <Td>{card.yield_date}</Td> {/* Substitua por propriedades reais de `card` */}
-                 <Td>R$ {card.total_investment}</Td> {/* Substitua por propriedades reais de `card` */}
-                 <Td>R$ {card.yield}</Td> {/* Substitua por propriedades reais de `card` */}
-                 <Td>
-                   <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 p-2 dark:text-emerald-100 border-0 rounded">
-                     {card.rate}%
-                   </Tag>
-                 </Td>
-               </Tr>
-             ))}
-             </TBody>
-         </Table>
-       
-         </Dialog>
+          {/* Adiciona scroll interno aqui */}
+          <div className="max-h-[400px] overflow-y-auto pr-2">
+              <Table compact>
+                  <THead>
+                      <Tr>
+                          <Th>Data</Th>
+                          <Th>Total Investido</Th>
+                          <Th>Ganho do Dia</Th>
+                          <Th>%</Th>
+                      </Tr>
+                  </THead>
+                  <TBody>
+                      {yieldHistories.map((card, index) => (
+                          <Tr key={index}>
+                              <Td>{card.yield_date}</Td>
+                              <Td>R$ {card.total_investment}</Td>
+                              <Td>R$ {card.yield}</Td>
+                              <Td>
+                                  <Tag className="bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 p-2 dark:text-emerald-100 border-0 rounded">
+                                      {card.rate}%
+                                  </Tag>
+                              </Td>
+                          </Tr>
+                      ))}
+                  </TBody>
+              </Table>
+          </div>
+      </Dialog>
          </>
     )}
 

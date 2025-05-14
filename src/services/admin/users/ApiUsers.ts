@@ -3,14 +3,13 @@ import ApiService from '@/services/ApiService'
 import endpointConfig from '@/configs/admin/endpointConfig'
 import { TableQueries } from '@/@types/common';
 import { Filter } from '@/store/admin/users';
-import { UserDetailResponse, UsersResponse, UserType } from '@/@types/admin/users/UsersTypes';
+import { UserDetailResponse, UsersResponse} from '@/@types/admin/users/UsersTypes';
 import { FormSchema } from '@/views/admin/users/deatils';
 
 export async function apiGetUsers(data: TableQueries, filter: Filter, role: string | undefined) {
     const {sort, pageSize, pageIndex, query} = data;
-    const {date, status} = filter;
-    console.log('filtrando', date[0].toISOString().split('T')[0])
-    console.log('query', query)
+    const { date } = filter;
+
     const params  = {
         'created_at': sort?.order,
         'per_page':   pageSize,
