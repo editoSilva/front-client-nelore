@@ -4,6 +4,7 @@ export type YieldHistory = {
     total_investment: number
     yield_date: string
     rate: number
+    status: string
   }
   
   export type  Investment =  {
