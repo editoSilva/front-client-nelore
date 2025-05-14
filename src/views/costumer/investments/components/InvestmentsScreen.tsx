@@ -159,11 +159,12 @@ const InvestmentsScreen = () => {
               <Table compact>
                   <THead>
                       <Tr>
-                        <th>#</th>
+                          <Th>#</Th>
                           <Th>Data</Th>
                           <Th>Total Investido</Th>
                           <Th>Ganho do Dia</Th>
                           <Th>%</Th>
+                          <Th>Status</Th>
                       </Tr>
                   </THead>
                   <TBody>
