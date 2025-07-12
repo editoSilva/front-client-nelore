@@ -13,6 +13,8 @@ export default defineConfig({
     },
   },
   server: {
+    port: 3005,
+    allowedHosts: ['app.neloresolucoes.com'],
     proxy: {
       '/api': {
         target: 'http://localhost:3005',
