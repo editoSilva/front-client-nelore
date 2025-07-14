@@ -50,7 +50,7 @@ const SignInForm = (props: SignInFormProps) => {
         defaultValues: {
             email: '',
             password: '',
-            domain: 'neloresolucoes.com'
+            domain: 'app.neloresolucoes.com'
 
         },
         mode: 'onChange',
