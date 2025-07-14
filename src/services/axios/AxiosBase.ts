@@ -15,7 +15,7 @@ AxiosBase.interceptors.request.use(
 
         const currentDomain = window.location.hostname;
 
-        config.headers['domain'] = window.location.hostname === 'localhost::5173' ? 'app.neloreinvest.com' : currentDomain;
+        config.headers['domain'] = window.location.hostname === 'localhost::5173' ? 'app.neloresolucoes.com' : currentDomain;
 
         return AxiosRequestIntrceptorConfigCallback(config)
     },
